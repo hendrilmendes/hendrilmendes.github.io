@@ -121,7 +121,6 @@ span.ds-department{ color: #373737; font-weight: 500; font-size: 18px; padding-b
 .ds-copyright a:hover{ color: #0000ff; }
 
 
-
 /*-------------------------------------------------------------------------------
  Responsive XS Style @media (max-width: 767px) 
 -------------------------------------------------------------------------------*/
@@ -165,7 +164,6 @@ span.ds-department{ color: #373737; font-weight: 500; font-size: 18px; padding-b
 
 @media (min-width: 992px) and (max-width: 1199px) {
 	.ds-banner section{ padding-right: 0; }
-	.ds-work-list section{ padding-right: 30px; padding-bottom:60px; }
-
+	.ds-work-list section{ padding-right: 30px; padding-bottom:60px; 
 
 }
