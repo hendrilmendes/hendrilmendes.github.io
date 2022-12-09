@@ -1,202 +1,536 @@
-<!doctype html>
+
+<!DOCTYPE html>
 <html lang="pt-BR">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" type="image/png" href="/favicon.png">
-      <!-- Google Fots -->
-     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-      <!-- Remixicon Icon -->
-      <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-      <!-- Remixicon Icon -->
-      <!-- Bootstrap CSS -->
-      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-      <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-      <!-- Main CSS -->
-      <link href="assets/css/main.css" rel="stylesheet">
-
-      
-    <title>Portfólio - Hendril Mendes </title>
-  </head>
-  <body>
-   
-    <!-- header -->
-    <header class="ds-header" id="site-header">
-        <div class="container">
-            <div class="ds-header-inner">
-              <!-- logo -->
-              <a href="index.html" class="ds-logo">
-                <span>H</span>Hendril Mendes
-              </a>
-              <!-- logo -->
-              <!-- social -->
-              <ul class="ds-social">
-                <li><a href="https://github.com/hendrilmendes" target="_blank"><i class="ri-github-fill"></i></a></li>
-                <li><a href="https://instagram.com/hendril_mendes" target="_blank"><i class="ri-instagram-fill"></i></a></li>
-                <li><a href="https://www.linkedin.com/in/hendril-mendes" target="_blank"><i class="ri-linkedin-fill"></i></a></li>
-              </ul>
-              <!-- social -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Willy Wonkas - Personal Portfolio Website Template" />
+	<meta name="keywords" content="blog, business card, creative, creative portfolio, cv theme, online resume, personal, portfolio, professional cv, responsive portfolio, resume, resume theme, vcard" />
+	<meta name="author" content="willy wonka" />
+    <title>Hendril Mendes - Portfolio Pessoal</title>
+  <!--favicon-img--> 
+   <link rel="icon" type="image/png" href="images/favicon.png">
+   <!--favicon-img-->
+   <!--main css file should not be removed -->
+    <link rel="stylesheet" href="css/index.css">
+    <!--main css file-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.2.6/gsap.min.js"></script>
+</head>
+<body>
+    <!--contains all the div-->
+    <div id="all">
+    <!--mouse  follower-->
+        <div class="cursor"></div>
+    <!--mouse  follower-->
+    <!--loader-->
+        <div id="loader">
+            <span class="color">Hendril</span>Mendes
+        </div>
+    <!--loader-end-->
+    <!--link-screen-->
+        <div id="breaker">
+        </div>
+        <div id="breaker-two">
+        </div>
+    <!--link-screen-->
+        <!--Main-Section-->
+        <!--Navigator-fullscreen-->
+        <div id="navigation-content">
+            
+            <div class="navigation-close">
+                <span class="close-first"></span>
+                <span class="close-second"></span>
+            </div>
+            <div class="navigation-links">
+                <a href="#" data-text="HOME" id="home-link" >HOME</a>
+                <a href="#" data-text="SOBRE" id="about-link" >SOBRE</a>
+                <a href="#" data-text="BLOG" id="blog-link" >BLOG</a>
+                <a href="#" data-text="PORTFOLIO" id="portfolio-link" >PORTFOLIO</a>
+                <a href="#" data-text="CONTATO" id="contact-link" >CONTATO</a>
             </div>
         </div>
-    </header>
-    <!-- header -->
-    <!-- banner -->
-    <div class="ds-banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-            <figure>
-              <img src="assets/images/profile-image.jpg">
-            </figure>
-          </div>
-          <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-            <section>
-                <h1>
-                  <span>OLÁ :)</span>
-                  Me chamo Hendril Mendes<br> e atualmente trabalho como Técnico em Informática em Jauru-MT.
-                </h1>
-                <ul class="ds-numbervalulist">
-                  <li>
-                    <strong>1</strong>
-                    <span>Experiência</span>
-                  </li>
-                  <li>
-                    <strong>1</strong>
-                    <span>Projeto</span>
-                  </li>
-                  <li>
-                    <strong>999+</strong>
-                    <span>Clientes Felizes</span>
-                  </li>
-                </ul>
-            </section>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- banner -->
-
-    <!-- about -->
-    <div class="ds-about-section">
-      <div class="container">
-        <section>
-            <h2 class="ds-heading">Sobre Mim</h2>
-            <p>Tenho 22 anos e a mais de 4 anos atuo como Técnico em Informática, desde criança sou apaixonado pela área de tecnologia e busco sempre aprender tudo ao meu redor. Às vezes com parafuso a menos rsrsrsrs, mas pronto para o que der e vier.</p>
-            <div class="ds-button-sec text-center">
-                <a href="/assets/files/curriculum.pdf" class="ds-button">Baixar Curriculum</a>
-            </div>
-        </section>
-      </div>
-    </div>
-    <!-- about -->
-
-    <!--  Skills -->
-    <div class="ds-skills-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-             <h2 class="ds-heading">Principais Habilidades</h2>
-             <ul class="ds-skills-list">
-               <li>Manutenção e Montagem de Computadores</li>
-               <li>Manutenção e Montagem de Redes</li>
-               <li>Digitação</li>
-               <li>Windows 7 e Windows 8</li>
-               <li>Microsoft Office</li>
-               <li>Tecnologia da Informação e Comunicação</li>
-             </ul>
-          </div>
-          <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-            <h2 class="ds-heading">Outras Habilidades</h2>
-            <ul class="ds-skills-list">
-              <li>CorelDraw x7</li>
-              <li>PhotoShop CC</li>
-              <li>HTML</li>
-              <li>CSS</li>
-              <li>JavaScript</li>
-              <li>Conhecimento Básico VMWare</li>
-              <li>Conhecimento Básico Android</li>
-              <li>Conhecimento Básico Firebase</li>
-              <li>Conhecimento Intermediário Linux</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--  Skills -->
-
-   <!-- Experience -->
-   <div class="ds-experience-section">
-     <div class="container">
-        <h2 class="ds-heading">Experiência de trabalho</h2>
-        <div class="row ds-experience-list">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 col-xxl-6">
-              <section>
-                <span class="ds-year">2018 - Presente</span>
-                <h3 class="ds-officename">NetSYS Internet & Informática</h3>
-                <span class="ds-department">Técnico em Informática</span>
-                <p>Manutenção e reparação de micro computadores, notebooks, impressoras, nobreaks.</p>
-                <p>Manutenção e reparação em redes.</p>
-                <ul>
-                  <li>Possui atividades secundárias como:</li>
-                  <li>Atendimento ao cliente, suporte técnico remoto e presencial,suporte a sistema de automação, administração de servidores, virtualização VMWare</li>
-                </ul>
-              </section>
+        <!--Navigator-Fullscreen END-->
+          <!--Home Page-->
+        <!--Menubar-->
+        <div id="navigation-bar">
+            
+            <div class="menubar">
+                <span class="first-span"></span>
+                <span class="second-span"></span>
+                <span class="third-span"></span>
             </div>
         </div>
-     </div>
-   </div>
-    <!-- Experience -->
+        <!--Menubar End-->
+          <!--Header-->
+        <div id="header">
+            <div id="particles"></div>
+              <!--Social Media Links-->
+            <div class="social-media-links">
+               <a href="https://instagram.com/hendril_mendes"><img src="images/instagram logo.png" class="social-media" alt="instagram-logo"></a><!--Your instagram homepage link inser in place of "#"-->
+                <a href="#"><img src="images/facebook logo.png" class="social-media" alt="facebook-logo"></a>
+                <a href="https://www.linkedin.com/in/hendril-mendes"><img src="images/linkedin logo.png" class="social-media" alt="linkedin-logo"></a>
+                <a href="#"><img src="images/twitter logo.png" class="social-media" alt="twitter-logo"></a>
 
-   <!--  Work -->
-   <div class="ds-work-section">
-     <div class="container">
-          <h2 class="ds-heading">Últimos projetos</h2>
-          <div class="ds-work-list-section">
-            <div class="ds-work-list">
-              <div class="row">
-                  <div class="col-12 col-sm-12 col-md-7 col-lg-7 col-xl-7 col-xxl-7">
-                      <section>
-                          <h3 class="ds-work-tilte">News-Droid</h3>
-                          <p>Primeiro app mobile de notícias feito totalmente do zero. </p>
-                          <a href="works-setails.html" class="ds-button">Detalhes</a>
-                      </section>
+            </div>
+            <!--Social Media Links end-->
+            <div class="header-content">
+                <div class="header-content-box">
+                <div class="firstline"><span class="color">Hendril </span>Mendes</div>
+                <div class="secondline">
+                Eu sou
+            <span class="txt-rotate color" data-period="1200"data-rotate='[ " Técnico em Informática.", " Técnico em Redes.", " Futuro Programador." ]'></span>
+            <span class="slash">|</span>
+        </div>
+                    <div class="contact">
+                <a href="Mailto:hendrilmendes2015@gmail.com"><img src="images/mail.png" alt="email-pic" class="contactpic"></a><!--Your email Id write in place of "#"-->
+                <a href="Tel:+5565993611847"><img src="images/call.png" alt="phone-pic" class="contactpic"></a><!--Your telephone number Id write in place of "#"-->
+                    </div>    
+            </div>
+            </div>
+            <!--header image-->
+            <div class="header-image">
+            <img src="images/man.jpg" alt="logo">
+            </div>
+            <!--header image end-->
+        </div>
+           <!--Header End-->
+        <!--HomePage End-->
+        <!--Main-Section End-->
+        <!--about-->
+        <div id="about">
+            <div class="color-changer">
+            <div class="color-panel">
+                <img src="images/gear.png" alt="">
+            </div>
+            <div class="color-selector">
+                <div class="heading">Alterar cores</div>
+                <div class="colors">
+                    <ul >
+                    <li>
+                        <a href="#0" class="color-red " title="color-red"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-purple" title="color-purple"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-malt" title="color-malt"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-green" title="color-green"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-blue" title="color-blue"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-orange" title="color-orange"></a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+            <!--about content-->
+            <div id="about-content">
+                <div class="about-header">
+                    Sobre <span class="color">Mim</span>
+                    <span class ="header-caption">Um pouco sobre <span class="color"> minha história.</span></span>
+                </div>
+                <div class="about-main">
+            <div class="about-first-paragraph wow">
+            <!--about description-->
+               <span class="about-first-line">
+                    Eu sou 
+                    <span class="color">Técnico em Informática</span>
+                     em Jauru - MT, BRASIL </span>
+                     <br>
+               <span class="about-second-line"> Meu nome e Hendril Mendes Ribeiro, tenho 22 anos e a mais de 4 anos atuo como Técnico em Informática. Ao logo desse tempo adquiri as habilidades e conhecimentos necessários para me tornar um profissional mais capacitado possível, desde criança sou apaixonado pela área de tecnologia e busco sempre aprender tudo ao meu redor. Eu aprecio cada aprendizado e conquistas enquanto trabalho.</span>
+               <div class="cv">
+                <a href="/files/curriculum.pdf"><button>Baixar <span class="colors">Curriculum</span></button></a>
+            </div>
+            </div>
+            <!--about picture-->
+            <div class="about-img">
+                <img src="images/about.jpg" alt="Your Image">
+            </div>
+            </div>
+    
+            </div>
+            <!--services start-->
+            <div id="services">
+                <div class="color-changer">
+                    <div class="color-panel">
+                        <img src="images/gear.png" alt="">
+                    </div>
+                    <div class="color-selector">
+                        <div class="heading">Alterar cores</div>
+                        <div class="colors">
+                            <ul >
+                            <li>
+                                <a href="#0" class="color-red " title="color-red"></a>
+                            </li>
+                            <li>
+                                <a href="#0" class="color-purple" title="color-purple"></a>
+                            </li>
+                            <li>
+                                <a href="#0" class="color-malt" title="color-malt"></a>
+                            </li>
+                            <li>
+                                <a href="#0" class="color-green" title="color-green"></a>
+                            </li>
+                            <li>
+                                <a href="#0" class="color-blue" title="color-blue"></a>
+                            </li>
+                            <li>
+                                <a href="#0" class="color-orange" title="color-orange"></a>
+                            </li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+            <!--services header-->
+                    <div class="services-heading wow">
+                        <span class="color">Meus</span> Serviços
+                    </div>
+            <!--services header end-->
+            <!--services content-->
+                    <div class="services-content">
+                           <div class="service-one service wow">
+                               <div class="service-img">
+                               <img src="images/coding.png" alt="service-one">
+                               </div>
+                               <div class="service-description">
+                                <h2>Web Designing</h2>
+                                <p>Ainda em construção...</p>
+                               </div>
+                           </div>
+                           <div class="service-two service wow">
+                               <div class="service-img">
+                               <img src="images/suporte.png" alt="service-two">
+                               </div>
+                               <div class="service-description">
+                                <h2>Suporte Técnico</h2>
+                                <p>Especialista em suporte técnico seja doméstico ou empresarial</p>
+                               </div>
+                           </div>
+                           <div class="service-three service wow">
+                            <div class="service-img">
+                               <img src="images/desenvolvedor.png" alt="service-three">
+                            </div>
+                            <div class="service-description">
+                                <h2>Desenvolvedor</h2>
+                                <p>Ainda em construção, mas quase lá...</p>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <!--services content end-->
+            <!--services end-->
+            <div id="skills">
+                <div class="skills-header">
+                     Minhas <span class="color"> Habilidades</span>
+                </div>
+                <div class="skills-content " style="text-align: center;">
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        Windows
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="windows-progress wow">100%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                      Linux
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="linux wow">51%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        Microsoft Office
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="office wow">100%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        VmWare
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="vmware wow">42%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        HTML/CSS/JavaScript
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="html-css wow">44%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        Python
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="python wow">34%</div>
+                    </div>
+                    </div>
+                    <div class="skill-html skill">
+                        <div class="skill-text">
+                    <div class="html">
+                        Firebase
+                    </div>
+                        </div>
+                    <div class="html-prog wow prog">
+                 <div class="firebase wow">24%</div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    <!--copyright-section You Can Remove After Downloading-->
+            <div class="footer">
+             <div class="footer-text">
+                 <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Hendril Mendes
+             </div>
+            </div>
+    <!--copyright-section-->
+        </div>
+        <!--about end-->
+        <!--portfolio-->
+        <div id="portfolio">
+            <div class="color-changer">
+                <div class="color-panel">
+                    <img src="images/gear.png" alt="">
+                </div>
+                <div class="color-selector">
+                    <div class="heading">Alterar cores</div>
+                    <div class="colors">
+                        <ul >
+                        <li>
+                            <a href="#0" class="color-red " title="color-red"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-purple" title="color-purple"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-malt" title="color-malt"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-green" title="color-green"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-blue" title="color-blue"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-orange" title="color-orange"></a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+            <div class="portfolio-header"> <span class="color"> Meu </span> Portfolio
+            <span class ="header-caption"> Alguns dos meus <span class="color"> Projetos</span></span></div>
+             <div id="portfolio-content">
+                 <div class="portfolio portfolio-first">
+                     <div class="portfolio-image">
+                        <img src="images/portfolio-first.jpg" alt="portfolio-first">
+                     </div>
+                     <div class="portfolio-text">
+                         <h2>Primeiro app Android</h2>
+                         <p>Em 2017 tive a ideia de fazer um app, entao resolvi fazer um de noticias (estava sem criatividade na hora rsrs) utilizando webview. Foi nesse mesmo ano que resolvi colocar essa ideia em prática e aos poucos foi tomando forma, com tutoriais do youtube e muita pesquisa consegui concluir. Demorou um pouco rsrs, mas consegui :).</p>
+                         <div class="button"><a href="https://github.com/hendrilmendes/News-Droid"><button><span class="index"> Ver Projeto<i class="gg-arrow-right"></i></span></button></a></div>
+                     </div>
+                 </div>
+                 </div>
+                    <!--copyright-section You Can Remove After Downloading-->
+            <div class="footer">
+                <div class="footer-text">
+                    <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Hendril Mendes
+                </div>
+               </div>
+       <!--copyright-section-->
+             </div>
+        <!--portfolio end-->
+        <!--blog-->
+        <div id="blog">
+            <div class="color-changer">
+                <div class="color-panel">
+                    <img src="images/gear.png" alt="">
+                </div>
+                <div class="color-selector">
+                    <div class="heading">Alterar cores</div>
+                    <div class="colors">
+                        <ul >
+                        <li>
+                            <a href="#0" class="color-red " title="color-red"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-purple" title="color-purple"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-malt" title="color-malt"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-green" title="color-green"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-blue" title="color-blue"></a>
+                        </li>
+                        <li>
+                            <a href="#0" class="color-orange" title="color-orange"></a>
+                        </li>
+                        </ul>
+                    </div>
+                </div>
+                </div>
+        <div class="blog-header"> Blogs</span>
+            <span class ="header-caption"> Minhas últimas <span class="color"> postagens.</span></span></div>
+            <div class="blog-content">
+                 <div class="blogs">
+                     <a href="#">
+                     <div class="img">
+                        <img src="images/post-one.jpg" alt="blog-one">
+                        <div class="blog-date">09/12/2022</div>
+                     </div>
+                     <div class="blog-text">
+                         <h3>Nova história</h3>
+                         <p>As poucos devemos rescrever nossa hístoria quando algo que queremos parece estar tão distante, mas temos que ter algo em mente sempre: Foco e Determinação.</p>
+                     </div></a>
+                 </div>           
+            </div>
+               <!--copyright-section You Can Remove After Downloading-->
+               <div class="footer">
+                <div class="footer-text">
+                    <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Hendril Mendes
+                </div>
+               </div>
+       <!--copyright-section-->
+        </div>
+        <!--blog end-->
+        <!--contact-->
+     <div id="contact">
+        <div class="color-changer">
+            <div class="color-panel">
+                <img src="images/gear.png" alt="">
+            </div>
+            <div class="color-selector">
+                <div class="heading">Alterar cores</div>
+                <div class="colors">
+                    <ul >
+                    <li>
+                        <a href="#0" class="color-red " title="color-red"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-purple" title="color-purple"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-malt" title="color-malt"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-green" title="color-green"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-blue" title="color-blue"></a>
+                    </li>
+                    <li>
+                        <a href="#0" class="color-orange" title="color-orange"></a>
+                    </li>
+                    </ul>
+                </div>
+            </div>
+            </div>
+         <div class="contact-header">Cont<span class="color">ato </span>
+        <div class="contact-header-caption"> <span class="color"> Entre em</span> contato comigo.</div></div>
+        <div class="contact-content">
+            <!--Contact form-->
+             <div class="contact-form">
+                 <div class="form-header">
+                     Me envie uma mensagem
+                 </div>
+                 <form id="myForm" action="#">
+                    <div class="input-line">
+                        <input  id="name" type="text" placeholder="Nome" class="input-name">
+                        <input id="email" type="email" placeholder="Email"  class="input-name">
+                    </div>
+                    <input type="text" id="subject" placeholder="Assunto" class="input-subject">
+                    <textarea id ="body" class="input-textarea" placeholder="Texto"></textarea>
+                    <button type="button" id ="submit" value="send">Enviar</button>
+                 </form>
+               
+             </div>
+            <!--Contact form-->
+            <!--Contact information-->
+             <div class="contact-info">
+                <div class="contact-info-header">
+                    Informações de Contato
+                </div>
+                <div class="contact-info-content">
+                <div class="contect-info-content-line">
+                    <img src="./images/icon-name.png" class="icon" alt="name-icon">
+                    <div class="contact-info-icon-text">
+                        <h6>Nome</h6>
+                        <p>Hendril Mendes</p>
                   </div>
-                  <div class="col-12 col-sm-12 col-md-5 col-lg-5 col-xl-5 col-xxl-5">
-                      <figure><img src="assets/images/work.jpg"></figure>
-                  </div>
+                </div>
+                <div class="contect-info-content-line">
+                  <img src="./images/icon-location.png" class="icon" alt="location-icon">
+                  <div class="contact-info-icon-text">
+                      <h6>Localização</h6>
+                      <p>Jauru - MT, Brasil</p>
+                </div>
               </div>
-          </div>
-          </div>
+              <div class="contect-info-content-line">
+                  <img src="./images/icon-phone.png" class="icon" alt="phone-icon">
+                  <div class="contact-info-icon-text">
+                      <h6>Telefone</h6>
+                      <p>+55(65)99361-1847</p>
+                </div>
+              </div>
+              
+              <div class="contect-info-content-line">
+                  <img src="./images/icon-email.png" class="icon" alt="email-icon">
+                  <div class="contact-info-icon-text">
+                      <h6>Email</h6>
+                      <p>hendrilmendes2015@gmail.com</p>
+                </div>
+              </div>
+                </div>
+            <!--Contact information end-->
+           </div>
+        </div>
+                    <!--copyright-section You Can Remove After Downloading-->
+                    <div class="footer">
+                        <div class="footer-text">
+                            <img src="./images/copyright.png" alt="copyright-img" class="images" height="14px"> Hendril Mendes
+                        </div>
+                       </div>
+               <!--copyright-section-->
      </div>
-   </div>
-   <!--  Work -->
+        <!--contact end-->
+    </div>
+    <!--all the divisions-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/particles.min.js"></script>
+    <script src="js/index.js"></script>
+    <!--particles script-->
+    <script>
+  particlesJS("particles", {"particles":{"number":{"value":40,"density":{"enable":true,"value_area":800}},"color":{"value":"#ffffff"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000000"},"polygon":{"nb_sides":5},"image":{"src":"img/github.svg","width":100,"height":100}},"opacity":{"value":0.5,"random":false,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":3,"random":true,"anim":{"enable":false,"speed":40,"size_min":0.1,"sync":false}},"line_linked":{"enable":true,"distance":150,"color":"#ffffff","opacity":0.4,"width":1},"move":{"enable":true,"speed":6,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":true,"mode":"repulse"},"onclick":{"enable":true,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});
+    </script>
 
-   <!--  footer -->
-   <footer class="ds-footer text-center">
-     <div class="container">
-        <section>
-          <span>Contato</span>
-          <h4>Pronto para conversarmos?</h4>
-          <p>Sinta-se livre para entrar em contato :)</p>
-          <a href="mailto:hendrilmendes2015@gmail.com" class="ds-button">Vamos conversar</a>
-        </section>
-        <span class="ds-copyright">© 2022 All rights reserved. Free minimal bootstrap template by <a href="https://designstub.com/" target="_blank">Designstub</a>.</span>
-     </div>
-   </footer>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <!-- Option 1: Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-    -->
-    <script src="assets/js/main.js"></script>
-  </body>
+</body>
 </html>
