@@ -73486,7 +73486,7 @@ $.avb=null
 $.av5=null
 $.av6=null
 $.av7=null
-$.Ba=A.a(["HTML/CSS/JavaScript","Dart/Flutter(10%)","PHP(10%)","Python"],t.s)
+$.Ba=A.a(["HTML/CSS/JavaScript","Dart/Flutter (10%)","Python"],t.s)
 $.aA5=A.aV(["dark",B.ab,"light",B.bU],t.N,A.a7("qj"))
 $.a2R=null
 $.ash=A.y(t.S,A.a7("aBd"))})();(function lazyInitializers(){var s=hunkHelpers.lazyFinal,r=hunkHelpers.lazy
