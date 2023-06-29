@@ -122,11 +122,11 @@ amM(a){var s,r,q,p=new Float32Array(16)
 for(s=0;s<4;++s)for(r=s*4,q=0;q<4;++q)p[q*4+s]=a[r+q]
 return p},
 aAa(a){var s,r,q=new Float32Array(9)
-for(s=0;s<9;++s){r=B.kq[s]
+for(s=0;s<9;++s){r=B.kp[s]
 if(r<16)q[s]=a[r]
 else q[s]=0}return q},
 amN(a){var s,r,q,p=new Float32Array(9)
-for(s=a.length,r=0;r<9;++r){q=B.kq[r]
+for(s=a.length,r=0;r<9;++r){q=B.kp[r]
 if(q<s)p[r]=a[q]
 else p[r]=0}return p},
 amO(a){var s=new Float32Array(2)
@@ -1933,7 +1933,7 @@ s.o1()
 return s},
 am4(){var s=$.abB
 if(s==null){s=t.jQ
-s=$.abB=new A.jL(A.afS(u.K,937,B.kp,s),B.aE,A.y(t.S,s),t.MX)}return s},
+s=$.abB=new A.jL(A.afS(u.K,937,B.ko,s),B.aE,A.y(t.S,s),t.MX)}return s},
 asg(a){if(self.Intl.v8BreakIterator!=null)return new A.a53(A.alY(),a)
 return new A.VC(a)},
 alM(a,b){var s,r,q,p,o,n,m,l,k,j,i,h=A.a([],t._f)
@@ -1965,7 +1965,7 @@ a.a=r
 if(s!=null&&s>65535){q.$2(B.l,-1)
 p=++a.f}s=A.B8(a1,p)
 p=$.abB
-r=(p==null?$.abB=new A.jL(A.afS(u.K,937,B.kp,n),B.aE,A.y(m,n),l):p).mC(s)
+r=(p==null?$.abB=new A.jL(A.afS(u.K,937,B.ko,n),B.aE,A.y(m,n),l):p).mC(s)
 i=a.a
 j=i===B.e7?j+1:0
 if(i===B.cW||i===B.e5){q.$2(B.bv,5)
@@ -67730,17 +67730,17 @@ A.D5.prototype={
 G(a){var s,r,q=null,p=A.x8(1,1),o=$.e7
 o.toString
 s=$.bf
-r=new A.eF(B.ks,t.tm)
+r=new A.eF(B.kr,t.tm)
 return A.bS(q,A.dB(A.a([B.jP,B.jQ,o,A.Jv(B.dO,r.gcv(r).d3(0,new A.TL(),t.a7).cg(0),B.w_,s*10*0.77+10,0)],t.p),B.ah,B.q,B.t),q,q,q,q,p,q)}}
 A.TL.prototype={
 $1(a){var s=null,r=a.b,q=a.a,p=B.kz[q]
-return new A.nG(A.a_V(s,B.kr[q],s,r,s,p),s)},
+return new A.nG(A.a_V(s,B.kq[q],s,r,s,p),s)},
 $S:422}
 A.D6.prototype={
 G(a){return A.dB(A.a([B.jP,B.jQ,A.adK(new A.TM(),3,A.adJ(!0,B.bd,B.aN,B.fO,!1,!0,$.bf*90*0.77+90,0.8))],t.p),B.ah,B.q,B.t)}}
 A.TM.prototype={
-$3(a,b,c){var s=null,r=B.ks[c],q=B.kz[c]
-return new A.bG(B.k2,A.a_V(s,B.kr[c],s,r,s,q),s)},
+$3(a,b,c){var s=null,r=B.kr[c],q=B.kz[c]
+return new A.bG(B.k2,A.a_V(s,B.kq[c],s,r,s,q),s)},
 $S:61}
 A.EL.prototype={
 G(a){return B.GF}}
@@ -67868,8 +67868,8 @@ $2(a,b){return B.CJ[b]},
 $S:424}
 A.Mv.prototype={
 G(a){var s,r=null,q=A.ej(a,!0,t.R),p=A.ej(a,!0,t.At),o=q.a===B.ab,n=o?B.bq:B.i,m=$.bY.a
-o=A.a([B.yr,B.jX,A.air(A.mx(B.Al,m,r),B.Mx,A.ajN(m,B.eo,new A.a8r(q),o)),B.jX],t.p)
-m=new A.eF(B.ko,t.ly)
+o=A.a([B.yr,B.jX,A.air(A.mx(B.Al,m,r),B.Mw,A.ajN(m,B.eo,new A.a8r(q),o)),B.jX],t.p)
+m=new A.eF(B.kn,t.ly)
 B.b.K(o,m.gcv(m).d3(0,new A.a8s(p,a),t.l7))
 m=$.bY.a
 s=m.a
@@ -67901,7 +67901,7 @@ A.ME.prototype={
 G(a){var s,r,q,p=null,o=A.ej(a,!0,t.R),n=A.x8(0.5,p),m=o.a===B.ab?B.k:B.i,l=$.af0
 l.toString
 l=A.a([B.hC,l],t.p)
-s=new A.eF(B.ko,t.ly)
+s=new A.eF(B.kn,t.ly)
 B.b.K(l,s.gcv(s).d3(0,new A.a8I(),t.l7))
 s=$.bY.a
 r=s.a
@@ -67964,7 +67964,7 @@ p=A.dQ(100)
 o=$.bY.a
 return A.bS(n,A.dB(A.a([B.jO,B.jR,s,r,A.bP(A.hc(A.bm("Veja Mais",$.rP,n),n,n,n,n,new A.a94(),new A.c_(p,new A.by(o,1,B.M,-1)),n),q*14*0.77+14,q*50*0.77+50)],t.p),B.ah,B.q,B.t),n,n,n,n,m,n)}}
 A.a93.prototype={
-$1(a){var s=a.b,r=a.a,q=B.kB[r],p=B.kn[r],o=B.kL[r]
+$1(a){var s=a.b,r=a.a,q=B.kB[r],p=B.ks[r],o=B.kL[r]
 return A.a_V(s,B.kI[r],q,null,p,o)},
 $S:427}
 A.a94.prototype={
@@ -67978,7 +67978,7 @@ r=A.dQ(100)
 q=$.bY.a
 return A.dB(A.a([B.jO,B.jR,o,n,A.bP(A.hc(A.bm("Veja Mais",$.rP,p),p,p,p,p,new A.a_I(),new A.c_(r,new A.by(q,1,B.M,-1)),p),s*14*0.77+14,s*50*0.77+50)],t.p),B.ah,B.q,B.t)}}
 A.a_H.prototype={
-$3(a,b,c){var s=B.kB[c],r=B.kn[c],q=B.kL[c]
+$3(a,b,c){var s=B.kB[c],r=B.ks[c],q=B.kL[c]
 return new A.bG(B.zK,A.a_V(null,B.kI[c],s,null,r,q),null)},
 $S:61}
 A.a_I.prototype={
@@ -68053,7 +68053,7 @@ q=A.pr(r,!0)
 return q.v4(A.aqH(null,B.x,!0,null,new A.aa_(r),r,null,s,B.vP,!0,t.z))},
 $S:0}
 A.aa_.prototype={
-$1(a){var s,r,q=null,p=A.bm("Me Contrate",$.rO,q),o=t.p,n=A.a([new A.IQ(new A.a9X(this.a),q,q,q,q,B.w,q,!1,q,B.My,q)],o),m=$.q5
+$1(a){var s,r,q=null,p=A.bm("Me Contrate",$.rO,q),o=t.p,n=A.a([new A.IQ(new A.a9X(this.a),q,q,q,q,B.w,q,!1,q,B.Mx,q)],o),m=$.q5
 m.toString
 m=A.hc(A.cF(A.a([B.Av,m,A.bm("WhatsApp",$.fo.dl(B.i),q)],o),B.q,B.aR),B.yP,40,q,q,new A.a9Y(),q,q)
 s=$.fE
@@ -68113,7 +68113,7 @@ G(a){return A.bm(this.c,$.fo.iy("OpenSans"),null)}}
 A.Es.prototype={
 G(a){var s=null,r=t.w,q=A.b2(a,s,r).w.a.b
 r=A.b2(a,s,r).w
-return A.bS(s,A.Ce(A.cF(A.a([B.Mz,A.mA(!1,s,!0,B.Mv,s,!0,s,s,s,s,s,s,s,s,s,new A.Wd(),s,s,s,s),B.Mw],t.p),B.q,B.aR),s,s),s,s,q*0.07,new A.aQ(0,q*0.05,0,0),s,r.a.a)}}
+return A.bS(s,A.Ce(A.cF(A.a([B.My,A.mA(!1,s,!0,B.Mv,s,!0,s,s,s,s,s,s,s,s,s,new A.Wd(),s,s,s,s),B.MA],t.p),B.q,B.aR),s,s),s,s,q*0.07,new A.aQ(0,q*0.05,0,0),s,r.a.a)}}
 A.Wd.prototype={
 $0(){return A.iX(A.e8("https://flutter.dev",0,null))},
 $S:0}
@@ -71468,8 +71468,8 @@ B.yK=new A.J(4279060385)
 B.EE=new A.bF([50,B.jB,100,B.jz,200,B.fD,300,B.yS,400,B.yQ,500,B.jw,600,B.fA,700,B.ju,800,B.yN,900,B.yK],t.pl)
 B.bO=new A.uZ(B.EE,4280391411)
 B.Ax=new A.jf(B.Aj,null,B.bO,null)
-B.MA=new A.hx("CURRICULUM",null,null,null,null)
-B.B_=new A.uK(B.Ax,B.MA,null,null)
+B.Mz=new A.hx("CURRICULUM",null,null,null,null)
+B.B_=new A.uK(B.Ax,B.Mz,null,null)
 B.B0=A.a(s([0,1]),t.c)
 B.B1=A.a(s([0,6,12,18]),t.t)
 B.Cc=A.a(s([137,80,78,71,13,10,26,10]),t.Z)
@@ -71498,20 +71498,20 @@ B.Ah=new A.cQ(59124,"MaterialIcons",null)
 B.Ak=new A.cQ(61190,"MaterialIcons",null)
 B.Ao=new A.cQ(62062,"MaterialIcons",null)
 B.BC=A.a(s([B.kd,B.Am,B.Ah,B.Ak,B.Ao]),t.G1)
-B.kn=A.a(s(["https://github.com/hendrilmendes/News-Droid","https://github.com/hendrilmendes/SystemOS","https://github.com/hendrilmendes/DELL-LATITUDE-E7270-OPENCORE"]),t.s)
 B.ha=A.a(s(["https://www.cruzeirodosul.edu.br/","https://www.netsysinternet.com/"]),t.s)
-B.ko=A.a(s(["HOME","SOBRE","SERVI\xc7OS","PORTFOLIO","CONTATO"]),t.s)
-B.kp=A.a(s([B.fX,B.e2,B.cW,B.e5,B.e9,B.ce,B.km,B.h7,B.aE,B.ea,B.bK,B.cT,B.cU,B.e3,B.cV,B.fY,B.bx,B.fZ,B.h_,B.kk,B.aD,B.e4,B.cX,B.cY,B.h0,B.h1,B.h2,B.h3,B.kl,B.h4,B.h5,B.e6,B.cZ,B.d_,B.h6,B.e7,B.e8]),A.a7("w<bk>"))
+B.kn=A.a(s(["HOME","SOBRE","SERVI\xc7OS","PORTFOLIO","CONTATO"]),t.s)
+B.ko=A.a(s([B.fX,B.e2,B.cW,B.e5,B.e9,B.ce,B.km,B.h7,B.aE,B.ea,B.bK,B.cT,B.cU,B.e3,B.cV,B.fY,B.bx,B.fZ,B.h_,B.kk,B.aD,B.e4,B.cX,B.cY,B.h0,B.h1,B.h2,B.h3,B.kl,B.h4,B.h5,B.e6,B.cZ,B.d_,B.h6,B.e7,B.e8]),A.a7("w<bk>"))
 B.BE=A.a(s(["https://img.icons8.com/ios-filled/100/telegram.png","https://img.icons8.com/ios-filled/100/instagram-new--v1.png","https://img.icons8.com/ios-filled/100/twitter.png","https://img.icons8.com/ios-filled/100/linkedin.png","https://img.icons8.com/ios-filled/100/github.png"]),t.s)
 B.BF=A.a(s([B.ff,B.fg]),A.a7("w<rR>"))
-B.kq=A.a(s([0,4,12,1,5,13,3,7,15]),t.t)
+B.kp=A.a(s([0,4,12,1,5,13,3,7,15]),t.t)
 B.hb=A.a(s(["assets/servicos/ti.png","assets/servicos/code.png","assets/servicos/design.png"]),t.s)
 B.BG=A.a(s(["pointerdown","pointermove","pointerleave","pointerup","pointercancel","touchstart","touchend","touchmove","touchcancel","mousedown","mousemove","mouseleave","mouseup","keyup","keydown"]),t.s)
-B.kr=A.a(s(["Jauru - MT, Brasil","+55 (65) 99361-1847","hendrilmendes2015@gmail.com"]),t.s)
+B.kq=A.a(s(["Jauru - MT, Brasil","+55 (65) 99361-1847","hendrilmendes2015@gmail.com"]),t.s)
 B.BN=A.a(s([0,0,0,0,1,0,0,0,0,1,0,0,0,0,1,0,0,0,1,0]),t.c)
 B.Ap=new A.cQ(62096,"MaterialIcons",null)
 B.Af=new A.cQ(58308,"MaterialIcons",null)
-B.ks=A.a(s([B.kd,B.Ap,B.Af]),t.G1)
+B.kr=A.a(s([B.kd,B.Ap,B.Af]),t.G1)
+B.ks=A.a(s(["https://github.com/hendrilmendes/News-Droid","https://github.com/hendrilmendes/SystemOS","https://github.com/hendrilmendes/Dell-Latitude-E7270"]),t.s)
 B.CY=new A.kP("en","US")
 B.kt=A.a(s([B.CY]),t.ss)
 B.eb=A.a(s([0,0,24576,1023,65534,34815,65534,18431]),t.t)
@@ -73123,11 +73123,11 @@ B.Mt=new A.dU(B.L8,B.Mc,B.LY,B.JQ,B.LT,B.L2,B.Mg,B.Kg,B.KL,B.LN,B.JJ,B.LZ,B.LR,B
 B.Mu=new A.J_(1,"longestLine")
 B.LP=new A.t(!0,B.bO,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null)
 B.Mv=new A.hx("Flutter",null,B.LP,null,null)
-B.Mw=new A.hx(" - v1.0.4",null,null,null,null)
-B.Mx=new A.hx("Modo Escuro",null,null,null,null)
-B.My=new A.hx("Voltar",null,null,null,null)
-B.Mz=new A.hx("Desenvolvido  com \ud83d\udc99 em ",null,null,null,null)
+B.Mw=new A.hx("Modo Escuro",null,null,null,null)
+B.Mx=new A.hx("Voltar",null,null,null,null)
+B.My=new A.hx("Desenvolvido  com \ud83d\udc99 em ",null,null,null,null)
 B.i5=new A.hx("Curriculum",null,null,null,null)
+B.MA=new A.hx(" - v1.0.5",null,null,null,null)
 B.MB=new A.qj(0,"system")
 B.bU=new A.qj(1,"light")
 B.ab=new A.qj(2,"dark")
