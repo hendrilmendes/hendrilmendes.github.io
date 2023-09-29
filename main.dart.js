@@ -178,7 +178,7 @@ r=(r==null?$.bN=A.ea(self.window.flutterConfiguration):r).b
 if(r==null)s=null
 else{r=r.canvasKitVariant
 if(r==null)r=null
-s=r}r=A.azG(A.as9(B.CE,s==null?"auto":s))
+s=r}r=A.azG(A.as9(B.CF,s==null?"auto":s))
 return new A.ad(r,new A.ac2(),A.aa(r).h("ad<1,q>"))},
 ayQ(a,b){return b+a},
 Re(){var s=0,r=A.Z(t.e),q,p
@@ -22988,7 +22988,7 @@ $1(a){var s=$.bN
 s=(s==null?$.bN=A.ea(self.window.flutterConfiguration):s).b
 if(s==null)s=null
 else{s=s.canvasKitBaseUrl
-if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/1ac611c64eadbd93c5f5aba5494b8fc3b35ee952/":s)+a},
+if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/bd986c5ed20a62dc34b7718c50abc782beae4c33/":s)+a},
 $S:79}
 A.acf.prototype={
 $1(a){this.a.remove()
@@ -69384,7 +69384,7 @@ A.a9c.prototype={
 $1(a){var s,r=null,q=$.bU.a,p=q.a
 p=A.M(70,p>>>16&255,p>>>8&255,p&255)
 s=A.dt(100)
-return new A.bF(B.e0,A.f0(A.af3(A.kB(B.CF[a.a],q,r),A.be(a.b,$.eM,r),r),r,r,r,p,new A.a9a(this.a,a,this.b),new A.bz(s,B.n),r),r)},
+return new A.bF(B.e0,A.f0(A.af3(A.kB(B.CG[a.a],q,r),A.be(a.b,$.eM,r),r),r,r,r,p,new A.a9a(this.a,a,this.b),new A.bz(s,B.n),r),r)},
 $S:85}
 A.a9a.prototype={
 $0(){var s,r,q=this.b.a
@@ -69679,7 +69679,7 @@ A.a07.prototype={
 $0(){this.a.d=!1},
 $S:0}
 A.If.prototype={
-H(a){var s=A.ee(a,!0,t.R),r=$.bd,q=new A.ew(B.CH,t.ly)
+H(a){var s=A.ee(a,!0,t.R),r=$.bd,q=new A.ew(B.CD,t.ly)
 return A.Jg(B.dR,q.gcB(q).d7(0,new A.a3q(a,s),t.iF).cJ(0),B.wE,r*10*0.77+10,0)}}
 A.a3q.prototype={
 $1(a){var s,r,q,p,o,n=null,m=this.a,l=t.w
@@ -73004,25 +73004,25 @@ B.C6=A.a(s([255,216,255]),t.Z)
 B.BB=new A.jd(B.C6,"image/jpeg")
 B.CN=A.a(s([82,73,70,70,null,null,null,null,87,69,66,80]),t.Z)
 B.BD=new A.jd(B.CN,"image/webp")
-B.CD=A.a(s([66,77]),t.Z)
-B.BC=new A.jd(B.CD,"image/bmp")
+B.CE=A.a(s([66,77]),t.Z)
+B.BC=new A.jd(B.CE,"image/bmp")
 B.Ct=A.a(s([B.BA,B.BE,B.BF,B.BB,B.BD,B.BC]),A.ag("x<jd>"))
 B.Cu=A.a(s([4,9,14,19]),t.t)
 B.hh=A.a(s([0,0,65498,45055,65535,34815,65534,18431]),t.t)
+B.CD=A.a(s(["https://img.icons8.com/ios-filled/100/telegram.png","https://img.icons8.com/ios-filled/100/instagram-new--v1.png","https://img.icons8.com/ios-filled/100/linkedin.png","https://img.icons8.com/ios-filled/100/github.png"]),t.s)
 B.yY=new A.oc(0,"auto")
 B.yZ=new A.oc(1,"full")
 B.z_=new A.oc(2,"chromium")
-B.CE=A.a(s([B.yY,B.yZ,B.z_]),A.ag("x<oc>"))
+B.CF=A.a(s([B.yY,B.yZ,B.z_]),A.ag("x<oc>"))
 B.kS=new A.cK(61703,"MaterialIcons",null)
 B.Bp=new A.cK(61504,"MaterialIcons",null)
 B.Bk=new A.cK(59124,"MaterialIcons",null)
 B.Bn=new A.cK(61190,"MaterialIcons",null)
 B.Br=new A.cK(62062,"MaterialIcons",null)
-B.CF=A.a(s([B.kS,B.Bp,B.Bk,B.Bn,B.Br]),t.G1)
+B.CG=A.a(s([B.kS,B.Bp,B.Bk,B.Bn,B.Br]),t.G1)
 B.hi=A.a(s(["https://www.cruzeirodosul.edu.br/","https://www.netsysinternet.com/"]),t.s)
 B.hj=A.a(s([80,50]),t.up)
 B.l1=A.a(s([B.h5,B.e9,B.cX,B.ec,B.eg,B.cg,B.l_,B.hg,B.aG,B.eh,B.bM,B.cU,B.cV,B.ea,B.cW,B.h6,B.bt,B.h7,B.h8,B.kY,B.aF,B.eb,B.cY,B.cZ,B.h9,B.ha,B.hb,B.hc,B.kZ,B.hd,B.he,B.ed,B.d_,B.d0,B.hf,B.ee,B.ef]),A.ag("x<bi>"))
-B.CH=A.a(s(["https://img.icons8.com/ios-filled/100/telegram.png","https://img.icons8.com/ios-filled/100/instagram-new--v1.png","https://img.icons8.com/ios-filled/100/twitter.png","https://img.icons8.com/ios-filled/100/linkedin.png","https://img.icons8.com/ios-filled/100/github.png"]),t.s)
 B.ei=A.a(s([B.dS,B.fm,B.j9,B.ja,B.fn]),t.QP)
 B.CI=A.a(s([B.dS]),t.QP)
 B.CJ=A.a(s([B.fo,B.fp]),A.ag("x<rI>"))
@@ -73139,7 +73139,7 @@ B.qq=new A.f4(6,"scrollLockModifier")
 B.qr=new A.f4(7,"functionModifier")
 B.FW=new A.f4(8,"symbolModifier")
 B.lm=A.a(s([B.df,B.dg,B.dh,B.di,B.qo,B.qp,B.qq,B.qr,B.FW]),A.ag("x<f4>"))
-B.DH=A.a(s(["https://t.me/hendril_mendes","https://instagram.com/hendril_mendes","https://twitter.com/mendes_hendril","https://linkedin.com/in/hendril-mendes","https://github.com/hendrilmendes"]),t.s)
+B.DH=A.a(s(["https://t.me/hendril_mendes","https://instagram.com/hendril_mendes","https://linkedin.com/in/hendril-mendes","https://github.com/hendrilmendes"]),t.s)
 B.iq=new A.dn(1,"fuchsia")
 B.ir=new A.dn(3,"linux")
 B.is=new A.dn(5,"windows")
@@ -74231,8 +74231,8 @@ B.HN=new A.pB(1,"doNotPop")
 B.HO=new A.pB(2,"bubble")
 B.vt=new A.hh(null,null)
 B.Jk=new A.Il(null)
-B.CG=A.a(s([B.ki,B.Jk,B.kh]),t.p)
-B.HP=new A.wo(B.ak,B.u,B.x,B.am,null,B.aJ,null,B.CG,null)
+B.CH=A.a(s([B.ki,B.Jk,B.kh]),t.p)
+B.HP=new A.wo(B.ak,B.u,B.x,B.am,null,B.aJ,null,B.CH,null)
 B.HQ=new A.Hv(null,null)
 B.cs=new A.n7(0,"idle")
 B.HR=new A.n7(1,"transientCallbacks")
