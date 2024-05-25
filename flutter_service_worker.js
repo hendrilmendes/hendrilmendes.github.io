@@ -3,18 +3,18 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.bin": "66905620598d99dfe8b74a8ea408258a",
-"assets/AssetManifest.bin.json": "9d08c6801b1792c5a732c24d1e9e3879",
-"assets/AssetManifest.json": "90848bf49d4564ec66d92be3644d875c",
+const RESOURCES = {"assets/AssetManifest.bin": "52a50af324727635cd5e6e8cabb034c7",
+"assets/AssetManifest.bin.json": "62f8010fa2536671dbf69a197d66aa52",
+"assets/AssetManifest.json": "513ecc47eaa7d1e4b2d187d64c4bc599",
 "assets/assets/hi.gif": "cad5918d86b6a7e83f1fb4acead70e4c",
 "assets/assets/photos/black-white.png": "1c9ccd7ba050c7d14e49bb69a9399ed5",
 "assets/assets/photos/colored.png": "9f25b12967e11e40110015ca7d07520e",
-"assets/assets/projects/finder.png": "1f414aed43e844d0df3b0723702dbb6f",
-"assets/assets/projects/hackintosh.png": "5b80f35a2eaa1f9d4acbb34951ea95b9",
-"assets/assets/projects/newsdroid.png": "50dc8cb06f450c33f213786d35eea161",
+"assets/assets/projects/calculadora.png": "ed42d61470956a4fb88d0a29667d23ba",
+"assets/assets/projects/calculadora_logo.webp": "f5de7692d4ef91451cf81263571781bb",
+"assets/assets/projects/newsdroid.png": "fcccd3d02335e9789649ff98d86ce41f",
 "assets/assets/projects/newsdroid_logo.png": "0707b64801b1003cc7ca3807f71dd1aa",
-"assets/assets/projects/systemos.png": "5499bb94050b571575a8004da52faccc",
-"assets/assets/projects/systemos_logo.png": "2ec77a909b158c3186ebd45f635e14bd",
+"assets/assets/projects/tarefas.png": "f7502a57e1c34763275e7bb988ced578",
+"assets/assets/projects/tarefas_logo.png": "514653a72700bc645c733df0b7a1981d",
 "assets/assets/services/code.png": "f63f143a3ff051b369528d7161079b47",
 "assets/assets/services/design.png": "d98e1b24b8f730a16da4f2ffa19d7169",
 "assets/assets/services/ti.png": "0bb6f480c0cbbf292d6f540617a36268",
@@ -22,7 +22,7 @@ const RESOURCES = {"assets/AssetManifest.bin": "66905620598d99dfe8b74a8ea408258a
 "assets/assets/work/netsys.png": "c047153cc298350a24637a308d26c185",
 "assets/FontManifest.json": "eb13a0d169d41e78994c5d6eb9075409",
 "assets/fonts/agustina/agustina.otf": "7b9833076716a8d14eec0cf885a3153c",
-"assets/fonts/MaterialIcons-Regular.otf": "e6894c353299dc67afa7fa4c54022b1b",
+"assets/fonts/MaterialIcons-Regular.otf": "bcedcf8ac843f678aee35d20c811f8d4",
 "assets/fonts/montserrat/montserrat.ttf": "ee6539921d713482b8ccd4d0d23961bb",
 "assets/fonts/poppins/Poppins-Bold.ttf": "a3e0b5f427803a187c1b62c5919196aa",
 "assets/fonts/poppins/Poppins-Italic.ttf": "5e956c44060a7b3c0e39819ae390ab15",
@@ -69,13 +69,13 @@ const RESOURCES = {"assets/AssetManifest.bin": "66905620598d99dfe8b74a8ea408258a
 "canvaskit/skwasm.worker.js": "bfb704a6c714a75da9ef320991e88b03",
 "favicon.png": "450b3bac35ef9a7a66b6ddb65b5eca8a",
 "flutter.js": "383e55f7f3cce5be08fcf1f3881f585c",
-"flutter_bootstrap.js": "356418331c95b9848df4fb750e13db08",
+"flutter_bootstrap.js": "e194ac1dc1fe6c14ea8384539a1e5744",
 "icons/Icon-192.png": "a3ca8b4ccca9e45be1ec22ee6fc6051f",
 "index.html": "db5544da1597ba872b40103cd0d55c92",
 "/": "db5544da1597ba872b40103cd0d55c92",
-"main.dart.js": "93afda21d4d229c277f90941e463d43a",
+"main.dart.js": "1e97883be34fb132c39674da25873902",
 "manifest.json": "16ad31d65684729be989e5246058439c",
-"version.json": "008cf6c93508b8ae9bbc4c8fa78a175c"};
+"version.json": "3fec9d0332a3f1465ac4cdec1b2dcbe8"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
