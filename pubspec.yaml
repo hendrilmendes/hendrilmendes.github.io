@@ -3,40 +3,35 @@ description: Live portfolio developed in flutter 3.0.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.12+14
+version: 1.0.14+16
 
 environment:
-  sdk: '>=3.4.0 <4.0.0'
+  sdk: '>=3.5.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
 
-  # github
-  github: ^9.24.0
+# Animations
+  animations: ^2.0.11
 
-  # web related
-  flutter_html: ^2.2.1
-  url_strategy: ^0.2.0
-  universal_html: ^2.2.4
+# Cached Network
+  cached_network_image: ^3.4.0    
 
-  # http
-  http: ^1.2.1
+# Google Maps
+  google_maps_flutter: ^2.9.0
 
-  # utils
-  mailto: ^2.0.0
-  flip_card: ^0.7.0
+# Material Icons
+  material_design_icons_flutter: 5.0.5955-rc.1
+
+# Shared Preferences
+  shared_preferences: ^2.2.2
+
+# Shimer
+  shimmer: ^3.0.0
+
+# Url Launcher
   url_launcher: ^6.3.0
-  cupertino_icons: ^1.0.6
-  carousel_slider: ^4.2.1
-  animated_text_kit: ^4.2.2
-  font_awesome_flutter: ^10.7.0
-
-  # Provider
-  provider: ^6.1.1
-
-  # Shared Preferences
-  shared_preferences: ^2.2.3
 
 dev_dependencies:
   flutter_test:
@@ -48,32 +43,3 @@ flutter:
 
   uses-material-design: true
 
-  # To add assets to your application, add an assets section, like this:
-  assets:
-    - assets/
-    - assets/work/
-    - assets/photos/
-    - assets/services/
-    - assets/projects/
-
-  fonts:
-    - family: Agustina
-      fonts:
-        - asset: fonts/agustina/agustina.otf
-    
-    - family: Montserrat
-      fonts:
-        - asset: fonts/montserrat/montserrat.ttf
-    
-    - family: Poppins
-      fonts:
-        - asset: fonts/poppins/Poppins-Regular.ttf
-        - asset: fonts/poppins/Poppins-Light.ttf
-        - asset: fonts/poppins/Poppins-Bold.ttf
-          weight: 900
-        - asset: fonts/poppins/Poppins-Medium.ttf
-          weight: 300
-        - asset: fonts/poppins/Poppins-SemiBold.ttf
-          weight: 500
-        - asset: fonts/poppins/Poppins-Italic.ttf
-          style: italic
