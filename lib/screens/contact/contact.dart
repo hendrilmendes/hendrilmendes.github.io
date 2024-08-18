@@ -11,7 +11,7 @@ class ContactScreen extends StatelessWidget {
       scheme: 'mailto',
       path: 'hendrilmendes2015@gmail.com',
       query: Uri.encodeFull(
-          'subject=Olá%20Hendril,%20tudo%20bem?%20Vi%20o%20seu%20portfolio%20e%20tenho%20interesse%20em...'),
+          'subject=Olá Hendril, tudo bem? Vi seu portfolio e tenho interesse em...'),
     );
 
     if (await canLaunchUrl(emailUri)) {
@@ -105,7 +105,7 @@ class ContactScreen extends StatelessWidget {
             ),
 
             const SizedBox(width: 16),
-            
+
             // Card para o mapa
             Card(
               elevation: 5,
