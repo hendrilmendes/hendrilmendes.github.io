@@ -67239,7 +67239,7 @@ A.HT.prototype={}
 A.up.prototype={
 pY(){var s=0,r=A.C(t.H),q
 var $async$pY=A.y(function(a,b){if(a===1)return A.z(b,r)
-while(true)switch(s){case 0:q=A.tb(null,"hendrilmendes2015@gmail.com",A.BX(B.ec,"subject=Ol\xe1%20Hendril,%20tudo%20bem?%20Vi%20o%20seu%20portfolio%20e%20tenho%20interesse%20em...",B.J,!1),null,"mailto")
+while(true)switch(s){case 0:q=A.tb(null,"hendrilmendes2015@gmail.com",A.BX(B.ec,"subject=Ol\xe1 Hendril, tudo bem? Vi seu portfolio e tenho interesse em...",B.J,!1),null,"mailto")
 s=5
 return A.F(A.Cw(q),$async$pY)
 case 5:s=b?2:4
