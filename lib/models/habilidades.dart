@@ -16,35 +16,44 @@ class Habilidade {
 
 final List<Habilidade> habilidades = [
   Habilidade(
-      nome: 'Flutter',
-      nivel: 0.50,
-      descricao: 'Desenvolvimento mobile e web com Flutter.',
-      icone: Icons.phone_android),
+    nome: 'Flutter',
+    nivel: 0.50,
+    descricao:
+        'Flutter é um framework de UI da Google para construir aplicativos nativos de alta performance '
+        'para mobile, web e desktop a partir de uma única base de código.',
+    icone: Icons.phone_android,
+  ),
   Habilidade(
       nome: 'Dart',
       nivel: 0.50,
-      descricao: 'Linguagem de programação usada com Flutter.',
+      descricao:
+          'Dart é uma linguagem de programação otimizada para desenvolvimento de aplicativos móveis, desktop e web, '
+          'com suporte a uma sintaxe moderna e uma execução rápida.',
       icone: Icons.code),
   Habilidade(
       nome: 'JavaScript',
       nivel: 0.60,
-      descricao: 'Linguagem de programação para desenvolvimento web.',
+      descricao:
+          'JavaScript é uma linguagem de programação essencial para o desenvolvimento web, '
+          'permitindo a criação de interatividade e dinamismo em páginas e aplicativos.',
       icone: Icons.web),
   Habilidade(
       nome: 'HTML',
       nivel: 0.85,
-      descricao: 'Linguagem de marcação para criar estruturas de páginas web.',
+      descricao:
+          'HTML é uma linguagem de marcação usada para estruturar e criar o conteúdo de páginas web.',
       icone: Icons.language),
   Habilidade(
       nome: 'CSS',
       nivel: 0.85,
       descricao:
-          'Linguagem de estilo para definir a aparência das páginas web.',
+          'CSS é uma linguagem de estilo usada para definir a aparência e o layout de páginas web.',
       icone: Icons.palette),
   Habilidade(
       nome: 'Python',
       nivel: 0.60,
       descricao:
-          'Linguagem de programação versátil usada em diversos tipos de aplicações.',
+          'Python é uma linguagem de programação de alto nível conhecida por sua sintaxe simples e legibilidade,'
+          'amplamente usada para desenvolvimento web, análise de dados e automação.',
       icone: Icons.memory),
 ];

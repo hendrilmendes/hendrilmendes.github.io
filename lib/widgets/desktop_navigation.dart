@@ -40,18 +40,29 @@ class _DesktopNavigationContainerState
         actions: [
           ElevatedButton(
             onPressed: () => _onItemTapped(0),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _currentIndex == 0 ? Colors.blue : null,
+            ),
             child: const Text('Home'),
           ),
           ElevatedButton(
             onPressed: () => _onItemTapped(1),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _currentIndex == 1 ? Colors.blue : null,
+            ),
             child: const Text('Projetos'),
           ),
           ElevatedButton(
             onPressed: () => _onItemTapped(2),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: _currentIndex == 2 ? Colors.blue : null,
+            ),
             child: const Text('Skills'),
           ),
           ElevatedButton(
             onPressed: () => _onItemTapped(3),
+            style: ElevatedButton.styleFrom(
+                backgroundColor: _currentIndex == 3 ? Colors.blue : null),
             child: const Text('Contato'),
           ),
         ],
@@ -73,13 +84,13 @@ class _DesktopNavigationContainerState
         child: _pages[_currentIndex],
       ),
       bottomNavigationBar: BottomAppBar(
-        height: 70,
+        height: 40,
         child: Center(
           child: Text(
             '© $currentYear Hendril Mendes. Todos os direitos reservados.',
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 14,
+              fontSize: 10,
             ),
           ),
         ),

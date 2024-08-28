@@ -65,7 +65,7 @@ class ProjetoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 4.0,
+      elevation: 5,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -73,44 +73,49 @@ class ProjetoCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ClipRRect(
-            borderRadius:
-                const BorderRadius.vertical(top: Radius.circular(10.0)),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(10.0),
+            ),
             child: CachedNetworkImage(
               imageUrl: projeto.imagemUrl,
               width: double.infinity,
-              height: 150.0,
+              height: 120.0,
               fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
+              placeholder: (context, url) => const Center(
+                child: CircularProgressIndicator.adaptive(),
+              ),
               errorWidget: (context, url, error) => const Icon(Icons.error),
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              projeto.titulo,
-              style: const TextStyle(
-                fontSize: 20.0,
-                fontWeight: FontWeight.bold,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  projeto.titulo,
+                  style: const TextStyle(
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 8.0),
+                Text(
+                  projeto.descricao,
+                  maxLines: 3,
+                  style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
+                ),
+                const SizedBox(height: 8.0),
+                Center(
+                  child: FilledButton(
+                    onPressed: () => _abrirProjeto(projeto.urlProject),
+                    child: const Text('Ver Projeto'),
+                  ),
+                ),
+              ],
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
-            child: Text(
-              projeto.descricao,
-              style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Center(
-              child: ElevatedButton(
-                onPressed: () => _abrirProjeto(projeto.urlProject),
-                child: const Text('Abrir Projeto'),
-              ),
-            ),
-          ),
+          )
         ],
       ),
     );

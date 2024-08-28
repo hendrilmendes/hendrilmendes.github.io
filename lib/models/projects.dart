@@ -48,4 +48,11 @@ final List<Projeto> projetos = [
         'https://raw.githubusercontent.com/hendrilmendes/Shop/main/assets/img/ic_launcher.png',
     urlProject: 'https://github.com/hendrilmendes/Shop',
   ),
+  Projeto(
+    titulo: 'Shop-Backend',
+    descricao: 'Dashboard do app Shop',
+    imagemUrl:
+        'https://raw.githubusercontent.com/hendrilmendes/Shop-Backend/main/screenshots/preview.png',
+    urlProject: 'https://github.com/hendrilmendes/Shop-Backend',
+  ),
 ];

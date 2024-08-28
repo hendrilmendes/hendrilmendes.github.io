@@ -1,9 +1,9 @@
 name: folio
-description: Live portfolio developed in flutter 3.0.
+description: Devfolio escrito no flutter.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.14+16
+version: 1.0.15+17
 
 environment:
   sdk: '>=3.5.0 <4.0.0'

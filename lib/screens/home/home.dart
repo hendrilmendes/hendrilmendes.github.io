@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -18,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   int _currentTitleIndex = 0;
+  Timer? _timer;
 
   @override
   void initState() {
@@ -25,12 +27,17 @@ class _HomeScreenState extends State<HomeScreen> {
     _startTitleRotation();
   }
 
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   void _startTitleRotation() {
-    Future.delayed(const Duration(seconds: 5), () {
+    _timer = Timer.periodic(const Duration(seconds: 5), (Timer timer) {
       setState(() {
         _currentTitleIndex = (_currentTitleIndex + 1) % _titles.length;
       });
-      _startTitleRotation();
     });
   }
 
@@ -124,6 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
             // Bio Section
             Container(
               padding: const EdgeInsets.all(16.0),
+              constraints: const BoxConstraints(
+                maxWidth: 600,
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(12),
                 color: Colors.grey[800],
@@ -157,6 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
+
             const SizedBox(height: 32),
 
             // Curriculum Button
