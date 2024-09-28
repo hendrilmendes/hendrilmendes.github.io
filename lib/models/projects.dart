@@ -55,4 +55,11 @@ final List<Projeto> projetos = [
         'https://raw.githubusercontent.com/hendrilmendes/Shop-Backend/main/screenshots/preview.png',
     urlProject: 'https://github.com/hendrilmendes/Shop-Backend',
   ),
+  Projeto(
+    titulo: 'Pulse Messenger',
+    descricao: 'Uma rede social criada no flutter',
+    imagemUrl:
+        'https://raw.githubusercontent.com/hendrilmendes/Pulse-Messenger/main/assets/img/logo.png',
+    urlProject: 'https://github.com/hendrilmendes/Pulse-Messenger',
+  ),
 ];

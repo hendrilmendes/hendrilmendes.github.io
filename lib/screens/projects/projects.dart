@@ -21,7 +21,7 @@ class ProjectsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 4,
-                childAspectRatio: 4 / 3,
+                childAspectRatio: 5 / 3,
                 crossAxisSpacing: 16.0,
                 mainAxisSpacing: 16.0,
               ),

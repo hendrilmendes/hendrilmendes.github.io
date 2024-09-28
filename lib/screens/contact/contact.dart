@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -11,7 +12,9 @@ class ContactScreen extends StatelessWidget {
       scheme: 'mailto',
       path: 'hendrilmendes2015@gmail.com',
       query: Uri.encodeFull(
-          'subject=Olá Hendril, tudo bem? Vi seu portfolio e tenho interesse em...'),
+        'subject=Olá Hendril, tudo bem?'
+        '&body= Vi seu portfolio e tenho interesse em...',
+      ),
     );
 
     if (await canLaunchUrl(emailUri)) {
@@ -32,6 +35,19 @@ class ContactScreen extends StatelessWidget {
       await launchUrl(phoneUri);
     } else {
       throw 'Não foi possível fazer a ligação.';
+    }
+  }
+
+  void _whatsappOpen() async {
+    final String phoneNumber = '+5565993611847';
+    final String message = 'Olá Hendril! Vi seu portfolio e gostaria de ...';
+    final Uri whatsappUri = Uri.parse(
+        'https://api.whatsapp.com/send?phone=$phoneNumber&text=${Uri.encodeComponent(message)}');
+
+    if (await canLaunchUrl(whatsappUri)) {
+      await launchUrl(whatsappUri);
+    } else {
+      throw 'Não foi possível abrir o WhatsApp.';
     }
   }
 
@@ -101,6 +117,21 @@ class ContactScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 16),
+                      ElevatedButton.icon(
+                        onPressed: _whatsappOpen,
+                        icon: const Icon(MdiIcons.whatsapp),
+                        label: const Text('Whatsapp'),
+                        style: ElevatedButton.styleFrom(
+                          foregroundColor: Colors.white,
+                          backgroundColor: Colors.green,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 24, vertical: 12),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -117,21 +148,21 @@ class ContactScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(12),
               ),
               child: AspectRatio(
-                aspectRatio: 16 / 9,
+                aspectRatio: 2 / 1,
                 child: GoogleMap(
                   initialCameraPosition: const CameraPosition(
-                    target: LatLng(-15.3412659, -58.8829381),
+                    target: LatLng(-15.3391487, -58.8738707),
                     zoom: 10,
                   ),
                   markers: {
                     const Marker(
                       markerId: MarkerId('jauru'),
-                      position: LatLng(-15.3412659, -58.8829381),
+                      position: LatLng(-15.3391487, -58.8738707),
                       infoWindow: InfoWindow(title: 'Jauru'),
                     ),
                   },
                   myLocationButtonEnabled: false,
-                  zoomControlsEnabled: false,
+                  zoomControlsEnabled: true,
                 ),
               ),
             ),

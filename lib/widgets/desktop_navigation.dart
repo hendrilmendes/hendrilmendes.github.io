@@ -38,28 +38,31 @@ class _DesktopNavigationContainerState
     return Scaffold(
       appBar: AppBar(
         actions: [
-          ElevatedButton(
+          FilledButton.tonal(
             onPressed: () => _onItemTapped(0),
             style: ElevatedButton.styleFrom(
               backgroundColor: _currentIndex == 0 ? Colors.blue : null,
             ),
             child: const Text('Home'),
           ),
-          ElevatedButton(
+          SizedBox(width: 10,),
+          FilledButton.tonal(
             onPressed: () => _onItemTapped(1),
             style: ElevatedButton.styleFrom(
               backgroundColor: _currentIndex == 1 ? Colors.blue : null,
             ),
             child: const Text('Projetos'),
           ),
-          ElevatedButton(
+          SizedBox(width: 10,),
+          FilledButton.tonal(
             onPressed: () => _onItemTapped(2),
             style: ElevatedButton.styleFrom(
               backgroundColor: _currentIndex == 2 ? Colors.blue : null,
             ),
             child: const Text('Skills'),
           ),
-          ElevatedButton(
+          SizedBox(width: 10,),
+          FilledButton.tonal(
             onPressed: () => _onItemTapped(3),
             style: ElevatedButton.styleFrom(
                 backgroundColor: _currentIndex == 3 ? Colors.blue : null),

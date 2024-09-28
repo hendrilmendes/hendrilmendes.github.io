@@ -30,7 +30,7 @@ class SkillsScreen extends StatelessWidget {
                         crossAxisCount: 4,
                         crossAxisSpacing: 16.0,
                         mainAxisSpacing: 16.0,
-                        childAspectRatio: 3 / 2,
+                        childAspectRatio: 2 / 1,
                       ),
                       itemCount: habilidades.length,
                       itemBuilder: (context, index) {

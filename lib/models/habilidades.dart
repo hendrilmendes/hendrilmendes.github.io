@@ -32,26 +32,26 @@ final List<Habilidade> habilidades = [
       icone: Icons.code),
   Habilidade(
       nome: 'JavaScript',
-      nivel: 0.60,
+      nivel: 0.10,
       descricao:
           'JavaScript é uma linguagem de programação essencial para o desenvolvimento web, '
           'permitindo a criação de interatividade e dinamismo em páginas e aplicativos.',
       icone: Icons.web),
   Habilidade(
       nome: 'HTML',
-      nivel: 0.85,
+      nivel: 0.50,
       descricao:
           'HTML é uma linguagem de marcação usada para estruturar e criar o conteúdo de páginas web.',
       icone: Icons.language),
   Habilidade(
       nome: 'CSS',
-      nivel: 0.85,
+      nivel: 0.50,
       descricao:
           'CSS é uma linguagem de estilo usada para definir a aparência e o layout de páginas web.',
       icone: Icons.palette),
   Habilidade(
       nome: 'Python',
-      nivel: 0.60,
+      nivel: 0.10,
       descricao:
           'Python é uma linguagem de programação de alto nível conhecida por sua sintaxe simples e legibilidade,'
           'amplamente usada para desenvolvimento web, análise de dados e automação.',

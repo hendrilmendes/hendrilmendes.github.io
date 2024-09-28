@@ -91,9 +91,40 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
 
+            // Social Media Buttons
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                  iconSize: 40,
+                  icon: const Icon(MdiIcons.github),
+                  onPressed: () =>
+                      _launchURL('https://github.com/hendrilmendes'),
+                ),
+                IconButton(
+                  iconSize: 40,
+                  icon: const Icon(MdiIcons.telegram),
+                  onPressed: () => _launchURL('https://t.me/hendril_mendes'),
+                ),
+                IconButton(
+                  iconSize: 40,
+                  icon: const Icon(MdiIcons.linkedin),
+                  onPressed: () =>
+                      _launchURL('https://linkedin.com/in/hendril-mendes'),
+                ),
+                IconButton(
+                  iconSize: 40,
+                  icon: const Icon(MdiIcons.instagram),
+                  onPressed: () =>
+                      _launchURL('https://instagram.com/hendril_mendes'),
+                ),
+              ],
+            ),
+            const SizedBox(height: 32),
+
             // Name
             Text(
-              'Olá, me chamo Hendril Mendes Ribeiro',
+              'Oi, eu sou o Hendril',
               style: Theme.of(context)
                   .textTheme
                   .headlineMedium
@@ -167,8 +198,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-
-            const SizedBox(height: 32),
+            const SizedBox(height: 16),
 
             // Curriculum Button
             FilledButton.tonal(
@@ -179,37 +209,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   'CURRICULUM',
                 ),
               ),
-            ),
-            const SizedBox(height: 32),
-
-            // Social Media Buttons
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  iconSize: 40,
-                  icon: const Icon(MdiIcons.github),
-                  onPressed: () =>
-                      _launchURL('https://github.com/hendrilmendes'),
-                ),
-                IconButton(
-                  iconSize: 40,
-                  icon: const Icon(MdiIcons.telegram),
-                  onPressed: () => _launchURL('https://t.me/hendril_mendes'),
-                ),
-                IconButton(
-                  iconSize: 40,
-                  icon: const Icon(MdiIcons.linkedin),
-                  onPressed: () =>
-                      _launchURL('https://linkedin.com/in/hendril-mendes'),
-                ),
-                IconButton(
-                  iconSize: 40,
-                  icon: const Icon(MdiIcons.instagram),
-                  onPressed: () =>
-                      _launchURL('https://instagram.com/hendril_mendes'),
-                ),
-              ],
             ),
             const SizedBox(height: 32),
           ],
