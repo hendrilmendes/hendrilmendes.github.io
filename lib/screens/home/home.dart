@@ -76,6 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 IconButton(
                   iconSize: 30,
+                  tooltip: "GitHub",
                   icon: const Icon(MdiIcons.github),
                   onPressed: () =>
                       _launchURL('https://github.com/hendrilmendes'),
@@ -83,12 +84,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 16),
                 IconButton(
                   iconSize: 30,
+                  tooltip: "Telegram",
                   icon: const Icon(MdiIcons.telegram),
                   onPressed: () => _launchURL('https://t.me/hendril_mendes'),
                 ),
                 const SizedBox(height: 16),
                 IconButton(
                   iconSize: 30,
+                  tooltip: "LinkedIn",
                   icon: const Icon(MdiIcons.linkedin),
                   onPressed: () =>
                       _launchURL('https://linkedin.com/in/hendril-mendes'),
@@ -96,6 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 16),
                 IconButton(
                   iconSize: 30,
+                  tooltip: "Instagram",
                   icon: const Icon(MdiIcons.instagram),
                   onPressed: () =>
                       _launchURL('https://instagram.com/hendril_mendes'),
