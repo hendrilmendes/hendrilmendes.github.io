@@ -7,12 +7,6 @@ class SkillsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Minhas Skills',
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
-      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -85,7 +79,10 @@ class SkillCard extends StatelessWidget {
                 Expanded(
                   child: Text(
                     habilidade.nome,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ],
@@ -93,7 +90,10 @@ class SkillCard extends StatelessWidget {
             const SizedBox(height: 8),
             Text(
               habilidade.descricao,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 14,
+              ),
             ),
             const SizedBox(height: 16),
             SkillProgress(habilidade: habilidade),
@@ -142,7 +142,13 @@ class _SkillProgressState extends State<SkillProgress>
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('${(_animation.value * 100).round()}%'),
+                Text(
+                  '${(_animation.value * 100).round()}%',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold),
+                ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: LinearProgressIndicator(

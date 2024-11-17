@@ -9,10 +9,6 @@ class ProjectsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Meus Projetos',
-            style: Theme.of(context).textTheme.headlineMedium),
-      ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth > 600) {
@@ -67,56 +63,57 @@ class ProjetoCard extends StatelessWidget {
     return Card(
       elevation: 5,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(16.0),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
-            borderRadius: const BorderRadius.vertical(
-              top: Radius.circular(10.0),
-            ),
-            child: CachedNetworkImage(
-              imageUrl: projeto.imagemUrl,
-              width: double.infinity,
-              height: 120.0,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => const Center(
-                child: CircularProgressIndicator.adaptive(),
+      child: InkWell(
+        onTap: () => _abrirProjeto(projeto.urlProject),
+        borderRadius: BorderRadius.circular(16.0),
+        splashColor: Colors.blueAccent.withOpacity(0.5),
+        highlightColor: Colors.blueAccent.withOpacity(0.2),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(16.0),
               ),
-              errorWidget: (context, url, error) => const Icon(Icons.error),
+              child: CachedNetworkImage(
+                imageUrl: projeto.imagemUrl,
+                width: double.infinity,
+                height: 120.0,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => const Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+                errorWidget: (context, url, error) => const Icon(Icons.error),
+                fadeInDuration: const Duration(milliseconds: 300),
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  projeto.titulo,
-                  style: const TextStyle(
-                    fontSize: 20.0,
-                    fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    projeto.titulo,
+                    style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold),
                   ),
-                ),
-                const SizedBox(height: 8.0),
-                Text(
-                  projeto.descricao,
-                  maxLines: 3,
-                  style: TextStyle(fontSize: 16.0, color: Colors.grey[600]),
-                ),
-                const SizedBox(height: 8.0),
-                Center(
-                  child: FilledButton(
-                    onPressed: () => _abrirProjeto(projeto.urlProject),
-                    child: const Text('Ver Projeto'),
+                  const SizedBox(height: 8.0),
+                  Text(
+                    projeto.descricao,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 16.0, color: Colors.white),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          )
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -3,10 +3,10 @@ description: Devfolio escrito no flutter.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.16+18
+version: 1.0.18+20
 
 environment:
-  sdk: '>=3.5.0 <4.0.0'
+  sdk:  ^3.5.0
 
 dependencies:
   flutter:
@@ -18,20 +18,23 @@ dependencies:
 # Cached Network
   cached_network_image: ^3.4.0    
 
+# Google Fonts
+  google_fonts: ^6.2.1
+
 # Google Maps
-  google_maps_flutter: ^2.9.0
+  google_maps_flutter: ^2.10.0
 
 # Material Icons
   material_design_icons_flutter: 5.0.5955-rc.1
 
 # Shared Preferences
-  shared_preferences: ^2.2.2
+  shared_preferences: ^2.3.3
 
 # Shimer
   shimmer: ^3.0.0
 
 # Url Launcher
-  url_launcher: ^6.3.0
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:

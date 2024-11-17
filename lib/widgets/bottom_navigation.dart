@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
 import 'package:folio/screens/contact/contact.dart';
+import 'package:folio/screens/education/education.dart';
 import 'package:folio/screens/home/home.dart';
 import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
@@ -19,6 +20,7 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
 
   final List<Widget> screens = const [
     HomeScreen(),
+    EducationScreen(),
     ProjectsScreen(),
     SkillsScreen(),
     ContactScreen(),
@@ -45,8 +47,7 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
           return SharedAxisTransition(
             animation: animation,
             secondaryAnimation: secondaryAnimation,
-            transitionType: SharedAxisTransitionType
-                .horizontal,
+            transitionType: SharedAxisTransitionType.horizontal,
             child: child,
           );
         },
@@ -59,7 +60,8 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
           backgroundColor:
               Theme.of(context).bottomNavigationBarTheme.backgroundColor,
           labelTextStyle: WidgetStateProperty.all(
-            const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+            const TextStyle(
+                color: Colors.white, fontSize: 14, fontWeight: FontWeight.w400),
           ),
         ),
         child: NavigationBar(
@@ -70,6 +72,10 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
             NavigationDestination(
               icon: Icon(Icons.home_filled),
               label: "Home",
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.menu_book),
+              label: "Formação",
             ),
             NavigationDestination(
               icon: Icon(Icons.work),

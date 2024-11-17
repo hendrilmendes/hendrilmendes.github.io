@@ -55,8 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
     final Uri url = Uri.parse(
         'https://1drv.ms/b/s!Ahw1Ik4ugCxajaI09DxcBh5vPl99hg?e=wAOiLK');
     // ignore: deprecated_member_use
-    if (await canLaunchUrl(url)) {
-      await launchUrl(url);
+    if (await canLaunch(url.toString())) {
+      // ignore: deprecated_member_use
+      await launch(url.toString());
     } else {
       throw 'Could not launch $url';
     }
@@ -65,154 +66,160 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Profile Picture
-            Container(
-              margin: const EdgeInsets.only(bottom: 24.0),
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    offset: const Offset(0, 4),
-                    blurRadius: 8,
-                  ),
-                ],
-              ),
-              child: const CircleAvatar(
-                radius: 80,
-                backgroundImage: NetworkImage(
-                  'https://avatars.githubusercontent.com/u/28198780?v=4',
-                ),
-              ),
-            ),
-
-            // Social Media Buttons
-            Row(
+      body: Row(
+        children: [
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            width: 60,
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 30,
                   icon: const Icon(MdiIcons.github),
                   onPressed: () =>
                       _launchURL('https://github.com/hendrilmendes'),
                 ),
+                const SizedBox(height: 16),
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 30,
                   icon: const Icon(MdiIcons.telegram),
                   onPressed: () => _launchURL('https://t.me/hendril_mendes'),
                 ),
+                const SizedBox(height: 16),
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 30,
                   icon: const Icon(MdiIcons.linkedin),
                   onPressed: () =>
                       _launchURL('https://linkedin.com/in/hendril-mendes'),
                 ),
+                const SizedBox(height: 16),
                 IconButton(
-                  iconSize: 40,
+                  iconSize: 30,
                   icon: const Icon(MdiIcons.instagram),
                   onPressed: () =>
                       _launchURL('https://instagram.com/hendril_mendes'),
                 ),
+                Divider(),
+                IconButton(
+                  iconSize: 30,
+                  tooltip: "Curriculum",
+                  icon: const Icon(MdiIcons.fileDocument),
+                  onPressed: () => _launchUrlPDF(),
+                ),
               ],
             ),
-            const SizedBox(height: 32),
-
-            // Name
-            Text(
-              'Oi, eu sou o Hendril',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium
-                  ?.copyWith(fontWeight: FontWeight.bold),
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 24),
-
-            // Rotating Titles
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 800),
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return FadeTransition(
-                  opacity: animation,
-                  child: SlideTransition(
-                    position: Tween<Offset>(
-                      begin: const Offset(0, 0.5),
-                      end: const Offset(0, 0),
-                    ).animate(animation),
-                    child: child,
-                  ),
-                );
-              },
-              child: Text(
-                _titles[_currentTitleIndex],
-                key: ValueKey<int>(_currentTitleIndex),
-                style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                    ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            const SizedBox(height: 24),
-
-            // Bio Section
-            Container(
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               padding: const EdgeInsets.all(16.0),
-              constraints: const BoxConstraints(
-                maxWidth: 600,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey[800],
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
-                    offset: const Offset(0, 2),
-                    blurRadius: 6,
-                  ),
-                ],
-              ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text(
-                    'Sobre Mim',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineSmall
-                        ?.copyWith(fontWeight: FontWeight.bold),
+                  // Profile Picture
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 24.0),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset: const Offset(0, 4),
+                          blurRadius: 8,
+                        ),
+                      ],
+                    ),
+                    child: const CircleAvatar(
+                      radius: 80,
+                      backgroundImage: NetworkImage(
+                        'https://avatars.githubusercontent.com/u/28198780?v=4',
+                      ),
+                    ),
                   ),
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Nascido em Minaçu-GO, desde criança, fui apaixonado por tecnologia e me encantei com cada detalhe dela. '
-                    'Essa paixão surgiu instantaneamente e ao longo dos anos, me dediquei a adquirir as habilidades e conhecimentos necessários para me tornar um profissional altamente qualificado. '
-                    'Desde cedo, tenho um amor pela área da tecnologia e estou sempre em busca de aprender e expandir meu conhecimento em todas as direções. '
-                    'Cada aprendizado e conquista em minha carreira são valorizados e apreciados.',
-                    textAlign: TextAlign.justify,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  )
+
+                  // Name
+                  Text(
+                    'Oi, eu sou o Hendril',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Rotating Titles
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 800),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      return FadeTransition(
+                        opacity: animation,
+                        child: SlideTransition(
+                          position: Tween<Offset>(
+                            begin: const Offset(0, 0.5),
+                            end: const Offset(0, 0),
+                          ).animate(animation),
+                          child: child,
+                        ),
+                      );
+                    },
+                    child: Text(
+                      _titles[_currentTitleIndex],
+                      key: ValueKey<int>(_currentTitleIndex),
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+
+                  // Bio Section
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    constraints: const BoxConstraints(
+                      maxWidth: 600,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.grey[800],
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          offset: const Offset(0, 2),
+                          blurRadius: 6,
+                        ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Sobre Mim',
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Nascido em Minaçu-GO, desde criança, fui apaixonado por tecnologia e me encantei com cada detalhe dela. '
+                          'Essa paixão surgiu instantaneamente e ao longo dos anos, me dediquei a adquirir as habilidades e conhecimentos necessários para me tornar um profissional altamente qualificado. '
+                          'Desde cedo, tenho um amor pela área da tecnologia e estou sempre em busca de aprender e expandir meu conhecimento em todas as direções. '
+                          'Cada aprendizado e conquista em minha carreira são valorizados e apreciados.',
+                          textAlign: TextAlign.justify,
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
-            const SizedBox(height: 16),
-
-            // Curriculum Button
-            FilledButton.tonal(
-              onPressed: _launchUrlPDF,
-              child: const Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Text(
-                  'CURRICULUM',
-                ),
-              ),
-            ),
-            const SizedBox(height: 32),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

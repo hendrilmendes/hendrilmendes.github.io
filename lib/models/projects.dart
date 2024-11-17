@@ -22,7 +22,7 @@ final List<Projeto> projetos = [
   ),
   Projeto(
     titulo: 'Tarefas',
-    descricao: 'Um app para você salvar suas tarefas e anotações do dia a dia',
+    descricao: 'Organize suas tarefas e anotações diárias',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Tarefas/main/assets/img/ic_launcher.png',
     urlProject: 'https://github.com/hendrilmendes/Tarefas',

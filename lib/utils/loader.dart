@@ -27,13 +27,15 @@ class AnimatedLoadingText extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                   shadows: [
                     Shadow(
-                        color: Colors.pink,
-                        blurRadius: 10,
-                        offset: Offset(2, 2)),
+                      color: Colors.pink,
+                      blurRadius: 10,
+                      offset: Offset(2, 2),
+                    ),
                     Shadow(
-                        color: Colors.blue,
-                        blurRadius: 10,
-                        offset: Offset(-2, -2)),
+                      color: Colors.blue,
+                      blurRadius: 10,
+                      offset: Offset(-2, -2),
+                    ),
                   ]),
             )
           ],

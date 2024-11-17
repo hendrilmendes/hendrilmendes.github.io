@@ -13,7 +13,7 @@ class ContactScreen extends StatelessWidget {
       path: 'hendrilmendes2015@gmail.com',
       query: Uri.encodeFull(
         'subject=Olá Hendril, tudo bem?'
-        '&body= Vi seu portfolio e tenho interesse em...',
+        '&body=Vi seu portfólio e tenho interesse em...',
       ),
     );
 
@@ -40,7 +40,7 @@ class ContactScreen extends StatelessWidget {
 
   void _whatsappOpen() async {
     final String phoneNumber = '+5565993611847';
-    final String message = 'Olá Hendril! Vi seu portfolio e gostaria de ...';
+    final String message = 'Olá Hendril! Vi seu portfólio e gostaria de...';
     final Uri whatsappUri = Uri.parse(
         'https://api.whatsapp.com/send?phone=$phoneNumber&text=${Uri.encodeComponent(message)}');
 
@@ -58,79 +58,55 @@ class ContactScreen extends StatelessWidget {
         child: Column(
           children: [
             // Card para o contato
-            Container(
-              constraints: const BoxConstraints(maxWidth: 600),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
               child: Card(
-                elevation: 5,
+                elevation: 8,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+                  borderRadius: BorderRadius.circular(16),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(24.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         'Entre em Contato',
-                        style:
-                            Theme.of(context).textTheme.headlineSmall?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.blueAccent,
-                                ),
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
                       Text(
-                        'Você pode entrar em contato comigo através dos botões abaixo:',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                              color: Colors.grey[700],
-                            ),
+                        'Escolha uma das opções abaixo para entrar em contato:',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 32),
-                      ElevatedButton.icon(
+                      // Botões de contato
+                      ContactButton(
                         onPressed: _sendEmail,
-                        icon: const Icon(Icons.email),
-                        label: const Text('Enviar E-mail'),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.blueAccent,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
+                        icon: Icons.email,
+                        label: 'Enviar E-mail',
+                        color: Colors.blueAccent,
                       ),
                       const SizedBox(height: 16),
-                      ElevatedButton.icon(
+                      ContactButton(
                         onPressed: _makePhoneCall,
-                        icon: const Icon(Icons.phone),
-                        label: const Text('Ligar para o Telefone'),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.green,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
+                        icon: Icons.phone,
+                        label: 'Ligar para o Telefone',
+                        color: Colors.green,
                       ),
                       const SizedBox(height: 16),
-                      ElevatedButton.icon(
+                      ContactButton(
                         onPressed: _whatsappOpen,
-                        icon: const Icon(MdiIcons.whatsapp),
-                        label: const Text('Whatsapp'),
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.green,
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 24, vertical: 12),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
+                        icon: MdiIcons.whatsapp,
+                        label: 'WhatsApp',
+                        color: Colors.green,
                       ),
                     ],
                   ),
@@ -142,31 +118,66 @@ class ContactScreen extends StatelessWidget {
             Divider(height: 1, color: Colors.grey[300]),
             const SizedBox(height: 32),
             // Card para o mapa
-            Card(
-              elevation: 5,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: AspectRatio(
-                aspectRatio: 2 / 1,
-                child: GoogleMap(
-                  initialCameraPosition: const CameraPosition(
-                    target: LatLng(-15.3391487, -58.8738707),
-                    zoom: 10,
-                  ),
-                  markers: {
-                    const Marker(
-                      markerId: MarkerId('jauru'),
-                      position: LatLng(-15.3391487, -58.8738707),
-                      infoWindow: InfoWindow(title: 'Jauru'),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                elevation: 8,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: AspectRatio(
+                  aspectRatio: 2 / 1,
+                  child: GoogleMap(
+                    initialCameraPosition: const CameraPosition(
+                      target: LatLng(-15.3391487, -58.8738707),
+                      zoom: 10,
                     ),
-                  },
-                  myLocationButtonEnabled: false,
-                  zoomControlsEnabled: true,
+                    markers: {
+                      const Marker(
+                        markerId: MarkerId('jauru'),
+                        position: LatLng(-15.3391487, -58.8738707),
+                        infoWindow: InfoWindow(title: 'Jauru'),
+                      ),
+                    },
+                    myLocationButtonEnabled: false,
+                    zoomControlsEnabled: true,
+                  ),
                 ),
               ),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class ContactButton extends StatelessWidget {
+  final VoidCallback onPressed;
+  final IconData icon;
+  final String label;
+  final Color color;
+
+  const ContactButton({
+    super.key,
+    required this.onPressed,
+    required this.icon,
+    required this.label,
+    required this.color,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ElevatedButton.icon(
+      onPressed: onPressed,
+      icon: Icon(icon),
+      label: Text(label),
+      style: ElevatedButton.styleFrom(
+        foregroundColor: Colors.white,
+        backgroundColor: color,
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
         ),
       ),
     );
