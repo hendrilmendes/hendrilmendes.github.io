@@ -41219,13 +41219,11 @@ A.MM.prototype={}
 A.afl.prototype={
 H(){return"_IconButtonVariant."+this.b}}
 A.FX.prototype={
-K(a){var s,r,q,p,o=this,n=null
+K(a){var s,r,q=this,p=null
 A.ag(a)
-s=A.ar_(n,n,n,n,n,n,n,n,n,o.c,n,n,n,n)
-r=o.w
-q=o.cx
-p=q!=null?A.at7(r,n,q,n,n):r
-return new A.Bl(n,s,n,B.Rv,!1,o.ax,p,n)}}
+s=A.ar_(p,p,p,p,p,p,p,p,p,q.c,p,p,p,p)
+r=A.at7(q.w,p,q.cx,p,p)
+return new A.Bl(p,s,p,B.Rv,!1,q.ax,r,p)}}
 A.Bl.prototype={
 ad(){return new A.PP()}}
 A.PP.prototype={
@@ -67326,7 +67324,7 @@ break
 case 4:throw A.d("Could not launch "+q.j(0))
 case 3:return A.y(null,r)}})
 return A.z($async$pK,r)},
-K(a){var s,r=this,q=null,p=t.p,o=A.j1(q,A.eS(A.b([A.FY(B.C2,30,new A.afc(r),q),B.bQ,A.FY(B.BZ,30,new A.afd(r),q),B.bQ,A.FY(B.C0,30,new A.afe(r),q),B.bQ,A.FY(B.C_,30,new A.aff(r),q),A.aqa(q,q),A.FY(B.BY,30,new A.afg(r),"Curriculum")],p),B.au,B.ht,B.R),B.v,q,q,q,q,q,B.B1,q,q,60),n=t.sq,m=A.j1(q,B.yV,B.v,q,new A.eb(q,q,q,q,A.b([new A.dZ(0,B.fh,A.a0(B.c.a7(76.5),0,0,0),B.Hq,8)],n),q,B.cE),q,q,B.B0,q,q,q,q),l=A.dV("Oi, eu sou o Hendril",q,q,q,A.dF(q,q,B.i,q,q,q,q,q,q,q,q,24,q,q,B.ah,q,q,!0,q,q,q,q,q,q,q,q),B.bS),k=r.e
+K(a){var s,r=this,q=null,p=t.p,o=A.j1(q,A.eS(A.b([A.FY(B.C2,30,new A.afc(r),"GitHub"),B.bQ,A.FY(B.BZ,30,new A.afd(r),"Telegram"),B.bQ,A.FY(B.C0,30,new A.afe(r),"LinkedIn"),B.bQ,A.FY(B.C_,30,new A.aff(r),"Instagram"),A.aqa(q,q),A.FY(B.BY,30,new A.afg(r),"Curriculum")],p),B.au,B.ht,B.R),B.v,q,q,q,q,q,B.B1,q,q,60),n=t.sq,m=A.j1(q,B.yV,B.v,q,new A.eb(q,q,q,q,A.b([new A.dZ(0,B.fh,A.a0(B.c.a7(76.5),0,0,0),B.Hq,8)],n),q,B.cE),q,q,B.B0,q,q,q,q),l=A.dV("Oi, eu sou o Hendril",q,q,q,A.dF(q,q,B.i,q,q,q,q,q,q,q,q,24,q,q,B.ah,q,q,!0,q,q,q,q,q,q,q,q),B.bS),k=r.e
 k=A.dV(r.d[k],new A.dm(k,t.f3),q,q,A.dF(q,q,B.i,q,q,q,q,q,q,q,q,20,q,q,B.ah,q,q,!0,q,q,q,q,q,q,q,q),B.bS)
 s=A.i5(12)
 n=A.b([new A.dZ(0,B.fh,A.a0(B.c.a7(25.5),0,0,0),B.Hp,6)],n)
