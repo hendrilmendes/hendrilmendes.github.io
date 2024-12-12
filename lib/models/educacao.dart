@@ -14,11 +14,37 @@ class Education {
 
 final List<Education> educationData = [
   Education(
-    title: 'Manutenção e Reparação de Microcomputadores e Redes',
-    institution: 'Brasil Treinamentos',
-    year: '2015',
+    title: 'Engenharia da Computação',
+    institution: 'Universidade Cruzeiro do Sul, Jauru-MT',
+    year: 'Conclusão: 2027 (previsto)',
+  ),
+  Education(
+    title: 'Criação de apps com Flutter',
+    institution: 'Startto.dev',
+    year: '2023',
     certificateUrl:
-        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFrSrAEAAAABowEAHCZEmt3biIhivBSOFQ?e=mQ7gHA',
+        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFpgjQMAAAABFEPQTFExq_ag-xzNH02Eqw?e=8YxnVl',
+  ),
+  Education(
+    title: 'Python',
+    institution: 'Didática Tech',
+    year: '2022',
+    certificateUrl:
+        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFo0eAEAAAABVMcfqk81helNxOWdjqoH-A?e=jmhwLs',
+  ),
+  Education(
+    title: 'HTML, CSS, JavaScript',
+    institution: 'Microsoft',
+    year: '2022',
+    certificateUrl:
+        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFqLawEAAAABEtoBwh-xFp31xjPQdoozVA?e=vEGDTd',
+  ),
+  Education(
+    title: 'Tecnologia da Informação e Comunicação',
+    institution: 'SENAI',
+    year: '2022',
+    certificateUrl:
+        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFrydAEAAAABAm7gqQqUkwWXUDQr2T7kHQ?e=XfmUpG',
   ),
   Education(
     title: 'Windows 7 e Windows 8',
@@ -49,36 +75,10 @@ final List<Education> educationData = [
         'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFrTrAEAAAAB1FPShsDh89Dos-PT0rwWdQ?e=USCI9g',
   ),
   Education(
-    title: 'Tecnologia da Informação e Comunicação',
-    institution: 'SENAI',
-    year: '2022',
+    title: 'Manutenção e Reparação de Microcomputadores e Redes',
+    institution: 'Brasil Treinamentos',
+    year: '2015',
     certificateUrl:
-        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFrydAEAAAABAm7gqQqUkwWXUDQr2T7kHQ?e=XfmUpG',
-  ),
-  Education(
-    title: 'HTML, CSS, JavaScript',
-    institution: 'Microsoft',
-    year: '2022',
-    certificateUrl:
-        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFqLawEAAAABEtoBwh-xFp31xjPQdoozVA?e=vEGDTd',
-  ),
-  Education(
-    title: 'Python',
-    institution: 'Didática Tech',
-    year: '2022',
-    certificateUrl:
-        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFo0eAEAAAABVMcfqk81helNxOWdjqoH-A?e=jmhwLs',
-  ),
-  Education(
-    title: 'Criação de apps com Flutter',
-    institution: 'Startto.dev',
-    year: '2023',
-    certificateUrl:
-        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFpgjQMAAAABFEPQTFExq_ag-xzNH02Eqw?e=8YxnVl',
-  ),
-  Education(
-    title: 'Engenharia da Computação',
-    institution: 'Universidade Cruzeiro do Sul, Jauru-MT',
-    year: 'Conclusão: 2027 (previsto)',
+        'https://1drv.ms/b/c/5a2c802e4e22351c/ERw1Ik4ugCwggFrSrAEAAAABowEAHCZEmt3biIhivBSOFQ?e=mQ7gHA',
   ),
 ];

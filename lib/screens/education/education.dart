@@ -59,8 +59,8 @@ class EducationCard extends StatelessWidget {
           }
         },
         borderRadius: BorderRadius.circular(8.0),
-        splashColor: Colors.blueAccent.withOpacity(0.5),
-        highlightColor: Colors.blueAccent.withOpacity(0.2),
+        splashColor: Colors.blueAccent.withValues(),
+        highlightColor: Colors.blueAccent.withValues(),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(

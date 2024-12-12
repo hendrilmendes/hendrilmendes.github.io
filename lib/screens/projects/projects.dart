@@ -68,8 +68,8 @@ class ProjetoCard extends StatelessWidget {
       child: InkWell(
         onTap: () => _abrirProjeto(projeto.urlProject),
         borderRadius: BorderRadius.circular(16.0),
-        splashColor: Colors.blueAccent.withOpacity(0.5),
-        highlightColor: Colors.blueAccent.withOpacity(0.2),
+        splashColor: Colors.blueAccent.withValues(),
+        highlightColor: Colors.blueAccent.withValues(),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -98,9 +98,9 @@ class ProjetoCard extends StatelessWidget {
                   Text(
                     projeto.titulo,
                     style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 22,
-                    fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(height: 8.0),
                   Text(
