@@ -13,10 +13,7 @@ dependencies:
     sdk: flutter
 
 # Animations
-  animations: ^2.0.11
-
-# Cached Network
-  cached_network_image: ^3.4.0    
+  animations: ^2.0.11   
 
 # Google Fonts
   google_fonts: ^6.2.1

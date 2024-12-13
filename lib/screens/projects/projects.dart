@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:folio/models/projects.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -74,21 +73,21 @@ class ProjetoCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(
-                top: Radius.circular(16.0),
-              ),
-              child: CachedNetworkImage(
-                imageUrl: projeto.imagemUrl,
-                width: double.infinity,
-                height: 120.0,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => const Center(
-                  child: CircularProgressIndicator.adaptive(),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(16.0),
                 ),
-                errorWidget: (context, url, error) => const Icon(Icons.error),
-                fadeInDuration: const Duration(milliseconds: 300),
-              ),
-            ),
+                child: Image.network(
+                  projeto.imagemUrl,
+                  width: double.infinity,
+                  height: 120.0,
+                  fit: BoxFit.cover,
+                  loadingBuilder: (context, child, progress) {
+                    if (progress == null) return child;
+                    return const Center(child: CircularProgressIndicator.adaptive());
+                  },
+                  errorBuilder: (context, error, stackTrace) =>
+                      const Icon(Icons.error),
+                )),
             Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
