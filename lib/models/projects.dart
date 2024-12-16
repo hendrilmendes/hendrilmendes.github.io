@@ -49,11 +49,11 @@ final List<Projeto> projetos = [
     urlProject: 'https://github.com/hendrilmendes/Shop',
   ),
   Projeto(
-    titulo: 'Shop-Backend',
+    titulo: 'Shop Dashboard',
     descricao: 'Dashboard do app Shop',
     imagemUrl:
-        'https://raw.githubusercontent.com/hendrilmendes/Shop-Backend/main/screenshots/preview.png',
-    urlProject: 'https://github.com/hendrilmendes/Shop-Backend',
+        'https://raw.githubusercontent.com/hendrilmendes/Shop-Dashboard/main/screenshots/preview.png',
+    urlProject: 'https://github.com/hendrilmendes/Shop-Dashboard',
   ),
   Projeto(
     titulo: 'Pulse Messenger',
