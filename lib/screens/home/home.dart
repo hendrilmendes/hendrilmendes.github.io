@@ -209,7 +209,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                         const SizedBox(height: 12),
                         const Text(
-                          'Nascido em Minaçu-GO, desde criança, fui apaixonado por tecnologia e me encantei com cada detalhe dela. '
+                          'Nascido em Minaçu-GO, desde criança, sempre fui apaixonado por tecnologia e me encantei com cada detalhe dela. '
                           'Essa paixão surgiu instantaneamente e ao longo dos anos, me dediquei a adquirir as habilidades e conhecimentos necessários para me tornar um profissional altamente qualificado. '
                           'Desde cedo, tenho um amor pela área da tecnologia e estou sempre em busca de aprender e expandir meu conhecimento em todas as direções. '
                           'Cada aprendizado e conquista em minha carreira são valorizados e apreciados.',
