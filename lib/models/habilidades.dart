@@ -17,14 +17,14 @@ class Habilidade {
 final List<Habilidade> habilidades = [
   Habilidade(
     nome: 'Flutter',
-    nivel: 0.50,
+    nivel: 0.20,
     descricao:
         'Framework da Google para criar apps nativos de alta performance em várias plataformas.',
     icone: Icons.phone_android,
   ),
   Habilidade(
     nome: 'Dart',
-    nivel: 0.50,
+    nivel: 0.20,
     descricao:
         'Linguagem de programação para apps móveis, desktop e web, com execução rápida.',
     icone: Icons.code,
@@ -38,14 +38,14 @@ final List<Habilidade> habilidades = [
   ),
   Habilidade(
     nome: 'HTML',
-    nivel: 0.50,
+    nivel: 0.30,
     descricao:
         'Linguagem de marcação para estruturar o conteúdo de páginas web.',
     icone: Icons.language,
   ),
   Habilidade(
     nome: 'CSS',
-    nivel: 0.50,
+    nivel: 0.30,
     descricao:
         'Linguagem de estilo para definir a aparência e layout de páginas web.',
     icone: Icons.palette,

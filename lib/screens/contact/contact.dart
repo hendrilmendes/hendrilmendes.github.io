@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -26,28 +25,12 @@ class ContactScreen extends StatelessWidget {
 
   // Função para fazer uma ligação
   void _makePhoneCall() async {
-    final Uri phoneUri = Uri(
-      scheme: 'tel',
-      path: '+5565993611847',
-    );
+    final Uri phoneUri = Uri(scheme: 'tel', path: '+5565993611847');
 
     if (await canLaunchUrl(phoneUri)) {
       await launchUrl(phoneUri);
     } else {
       throw 'Não foi possível fazer a ligação.';
-    }
-  }
-
-  void _whatsappOpen() async {
-    final String phoneNumber = '+5565993611847';
-    final String message = 'Olá Hendril! Vi seu portfólio e gostaria de...';
-    final Uri whatsappUri = Uri.parse(
-        'https://api.whatsapp.com/send?phone=$phoneNumber&text=${Uri.encodeComponent(message)}');
-
-    if (await canLaunchUrl(whatsappUri)) {
-      await launchUrl(whatsappUri);
-    } else {
-      throw 'Não foi possível abrir o WhatsApp.';
     }
   }
 
@@ -72,18 +55,16 @@ class ContactScreen extends StatelessWidget {
                       Text(
                         'Entre em Contato',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 16),
                       Text(
                         'Escolha uma das opções abaixo para entrar em contato:',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
+                        style: TextStyle(color: Colors.white, fontSize: 16),
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 32),
@@ -99,13 +80,6 @@ class ContactScreen extends StatelessWidget {
                         onPressed: _makePhoneCall,
                         icon: Icons.phone,
                         label: 'Ligar para o Telefone',
-                        color: Colors.green,
-                      ),
-                      const SizedBox(height: 16),
-                      ContactButton(
-                        onPressed: _whatsappOpen,
-                        icon: MdiIcons.whatsapp,
-                        label: 'WhatsApp',
                         color: Colors.green,
                       ),
                     ],
@@ -176,9 +150,7 @@ class ContactButton extends StatelessWidget {
         foregroundColor: Colors.white,
         backgroundColor: color,
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:folio/screens/curriculum/curriculum.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,18 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Future<void> _launchUrlPDF() async {
-    final Uri url = Uri.parse(
-        'https://1drv.ms/b/s!Ahw1Ik4ugCxajaI09DxcBh5vPl99hg?e=wAOiLK');
-    // ignore: deprecated_member_use
-    if (await canLaunch(url.toString())) {
-      // ignore: deprecated_member_use
-      await launch(url.toString());
-    } else {
-      throw 'Could not launch $url';
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,8 +67,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconSize: 30,
                   tooltip: "GitHub",
                   icon: const Icon(MdiIcons.github),
-                  onPressed: () =>
-                      _launchURL('https://github.com/hendrilmendes'),
+                  onPressed:
+                      () => _launchURL('https://github.com/hendrilmendes'),
                 ),
                 const SizedBox(height: 16),
                 IconButton(
@@ -93,23 +82,43 @@ class _HomeScreenState extends State<HomeScreen> {
                   iconSize: 30,
                   tooltip: "LinkedIn",
                   icon: const Icon(MdiIcons.linkedin),
-                  onPressed: () =>
-                      _launchURL('https://linkedin.com/in/hendril-mendes'),
+                  onPressed:
+                      () =>
+                          _launchURL('https://linkedin.com/in/hendril-mendes'),
                 ),
                 const SizedBox(height: 16),
                 IconButton(
                   iconSize: 30,
                   tooltip: "Instagram",
                   icon: const Icon(MdiIcons.instagram),
-                  onPressed: () =>
-                      _launchURL('https://instagram.com/hendril_mendes'),
+                  onPressed:
+                      () => _launchURL('https://instagram.com/hendril_mendes'),
                 ),
                 Divider(),
                 IconButton(
                   iconSize: 30,
                   tooltip: "Curriculum",
                   icon: const Icon(MdiIcons.fileDocument),
-                  onPressed: () => _launchUrlPDF(),
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Dialog(
+                          insetPadding: const EdgeInsets.all(16),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            constraints: const BoxConstraints(
+                              maxWidth: 900,
+                              maxHeight: 600,
+                            ),
+                            child: CurriculumScreen(),
+                          ),
+                        );
+                      },
+                    );
+                  },
                 ),
               ],
             ),
@@ -145,9 +154,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   Text(
                     'Oi, eu sou o Hendril',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold),
+                      color: Colors.white,
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 24),
@@ -155,8 +165,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Rotating Titles
                   AnimatedSwitcher(
                     duration: const Duration(milliseconds: 800),
-                    transitionBuilder:
-                        (Widget child, Animation<double> animation) {
+                    transitionBuilder: (
+                      Widget child,
+                      Animation<double> animation,
+                    ) {
                       return FadeTransition(
                         opacity: animation,
                         child: SlideTransition(
@@ -172,9 +184,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       _titles[_currentTitleIndex],
                       key: ValueKey<int>(_currentTitleIndex),
                       style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
                       textAlign: TextAlign.center,
                     ),
                   ),
@@ -183,9 +196,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   // Bio Section
                   Container(
                     padding: const EdgeInsets.all(16.0),
-                    constraints: const BoxConstraints(
-                      maxWidth: 600,
-                    ),
+                    constraints: const BoxConstraints(maxWidth: 600),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       color: Colors.grey[800],
@@ -203,9 +214,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Sobre Mim',
                           style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 12),
                         const Text(
@@ -215,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           'Cada aprendizado e conquista em minha carreira são valorizados e apreciados.',
                           textAlign: TextAlign.justify,
                           style: TextStyle(color: Colors.white, fontSize: 16),
-                        )
+                        ),
                       ],
                     ),
                   ),
