@@ -17,17 +17,31 @@ Bem-vindo ao meu mundo de desenvolvimento! Este é meu portfólio pessoal, const
 - 📄 **Gerador de PDF** - Exportação do currículo em formato profissional
 - 🎯 **Navegação Fluida** - Transições suaves entre seções
 
-## 🛠 Tecnologias Utilizadas
+## 📦 Arquitetura e Dependências
 
-**Frontend:**
-- [Flutter](https://flutter.dev/) (Framework principal)
-- [Dart](https://dart.dev/) (Linguagem base)
-- [Provider](https://pub.dev/packages/provider) (Gerenciamento de estado)
-- [PDF Printing](https://pub.dev/packages/printing) (Geração de PDF)
+O projeto utiliza um conjunto moderno de pacotes mantidos pela comunidade Flutter, seguindo as melhores práticas de desenvolvimento:
 
-**Infra:**
-- GitHub Pages (Hosting)
-- GitHub Actions (CI/CD)
+### **Core Flutter**
+- `flutter/material` - Base do projeto com Material Design 3
+- `flutter_lints` - Análise estática de código (v5.0.0)
+
+### **UI/UX Avançado**
+- `animations` - Transições fluidas entre telas
+- `shimmer` - Efeitos de loading skeleton
+- `google_fonts` - Tipografia personalizada
+- `material_design_icons_flutter` - +5,000 ícones
+
+### **Integrações Externas**
+- `google_maps_flutter` - Mapas interativos
+- `url_launcher` - Abertura de links externos
+
+### **Persistência e PDF**
+- `shared_preferences` - Armazenamento local
+- `pdf` - Geração de documentos PDF
+- `printing` - Impressão/exportação de PDF
+
+### **Infraestrutura**
+- GitHub Actions - CI/CD automatizado
 
 ## 🚀 Como Usar
 
