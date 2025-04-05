@@ -42,7 +42,7 @@ final List<Projeto> projetos = [
     urlProject: 'https://github.com/hendrilmendes/Wally',
   ),
   Projeto(
-    titulo: 'Shop',
+    titulo: 'ShopTem',
     descricao: 'Sua Loja',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Shop/main/assets/img/ic_launcher.png',
@@ -50,14 +50,14 @@ final List<Projeto> projetos = [
   ),
   Projeto(
     titulo: 'Dashboard ShopTem',
-    descricao: 'Dashboard do app Shop',
+    descricao: 'Dashboard do app ShopTem',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Shop-Dashboard/main/screenshots/preview.png',
     urlProject: 'https://github.com/hendrilmendes/Shop-Dashboard',
   ),
   Projeto(
     titulo: 'Pulse Messenger',
-    descricao: 'Uma rede social criada no flutter',
+    descricao: 'Conecte-se com o ritmo do mundo',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Pulse-Messenger/main/assets/img/logo.png',
     urlProject: 'https://github.com/hendrilmendes/Pulse-Messenger',
