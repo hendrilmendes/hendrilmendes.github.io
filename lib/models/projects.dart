@@ -21,7 +21,7 @@ final List<Projeto> projetos = [
     urlProject: 'https://github.com/hendrilmendes/News-Droid',
   ),
   Projeto(
-    titulo: 'Tarefas',
+    titulo: 'Tá na Lista',
     descricao: 'Organize suas tarefas e anotações diárias',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Tarefas/main/assets/img/ic_launcher.png',
@@ -49,7 +49,7 @@ final List<Projeto> projetos = [
     urlProject: 'https://github.com/hendrilmendes/Shop',
   ),
   Projeto(
-    titulo: 'Shop Dashboard',
+    titulo: 'Dashboard ShopTem',
     descricao: 'Dashboard do app Shop',
     imagemUrl:
         'https://raw.githubusercontent.com/hendrilmendes/Shop-Dashboard/main/screenshots/preview.png',

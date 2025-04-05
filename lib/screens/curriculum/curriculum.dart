@@ -99,9 +99,9 @@ class CurriculumScreen extends StatelessWidget {
                       'title':
                           'Técnico em Informática – NetSYS Internet & Informática (2018 – Atual)',
                       'subitems': [
-                        'Realização de manutenções e reparos em microcomputadores.',
-                        'Suporte a sistemas de automação.',
-                        'Administração de redes e servidores.',
+                        'Análise e otimização de sistemas, realizando diagnóstico e reparo de hardware e software para maximizar a performance e a confiabilidade.\n',
+                        'Infraestrutura de redes, incluindo implantação, configuração e manutenção para ambientes empresariais, garantindo segurança e alta disponibilidade.\n',
+                        'Suporte técnico especializado, oferecendo atendimento ágil e soluções eficazes para clientes, assegurando a continuidade e eficiência operacional',
                       ],
                     },
                   ],
@@ -245,12 +245,11 @@ Future<Uint8List> _generatePdf(pw.PdfPageFormat format) async {
           _buildSectionTitle('Experiência Profissional'),
           pw.SizedBox(height: 8),
           _buildBulletListWithSub({
-            'Técnico em Informática – NetSYS Internet & Informática (2018 – Atual)':
-                [
-                  'Realização de manutenções e reparos em microcomputadores.',
-                  'Suporte a sistemas de automação.',
-                  'Administração de redes e servidores.',
-                ],
+            'Técnico em Informática – NetSYS Internet & Informática (2018 – Atual)': [
+              'Análise e otimização de sistemas, realizando diagnóstico e reparo de hardware e software para maximizar a performance e a confiabilidade.\n',
+              'Infraestrutura de redes, incluindo implantação, configuração e manutenção para ambientes empresariais, garantindo segurança e alta disponibilidade.\n',
+              'Suporte técnico especializado, oferecendo atendimento ágil e soluções eficazes para clientes, assegurando a continuidade e eficiência operacional\n',
+            ],
           }),
           _buildSectionTitle('Cursos e Certificações'),
           pw.SizedBox(height: 8),

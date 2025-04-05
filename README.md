@@ -26,7 +26,7 @@ O projeto utiliza um conjunto moderno de pacotes mantidos pela comunidade Flutte
 - `flutter_lints` - Análise estática de código (v5.0.0)
 
 ### **UI/UX Avançado**
-- `animations` - Transições fluidas entre telas
+- `animations e flutter_animate` - Transições fluidas entre telas
 - `shimmer` - Efeitos de loading skeleton
 - `google_fonts` - Tipografia personalizada
 - `material_design_icons_flutter` - +5,000 ícones
