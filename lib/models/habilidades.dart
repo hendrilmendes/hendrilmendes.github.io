@@ -25,7 +25,7 @@ final List<Habilidade> habilidades = [
     nome: 'Flutter',
     nivel: 0.50,
     descricao:
-        'Desenvolvimento de aplicativos multiplataforma com widgets customizáveis e alto desempenho.',
+        'Desenvolvimento de apps multiplataforma com widgets customizáveis e alto desempenho.',
     icone: Icons.phone_android,
     categoria: 'Frameworks',
     destaque: true,
