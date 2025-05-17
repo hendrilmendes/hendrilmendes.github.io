@@ -164,10 +164,6 @@ class _NavigationDestination extends StatelessWidget {
       label: label,
       selectedIcon: Container(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.blueAccent.withOpacity(0.3),
-        ),
         child: Icon(icon, color: Colors.blueAccent),
       ),
     );
