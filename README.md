@@ -47,4 +47,4 @@ O projeto utiliza um conjunto moderno de pacotes mantidos pela comunidade Flutte
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/hendrilmendes/devfolio.git
+git clone https://github.com/hendrilmendes/hendrilmendes.github.io.git
