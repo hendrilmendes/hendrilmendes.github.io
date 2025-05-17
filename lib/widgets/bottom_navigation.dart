@@ -156,13 +156,6 @@ class _NavigationDestination extends StatelessWidget {
     return NavigationDestination(
       icon: Container(
         padding: const EdgeInsets.all(8),
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color:
-              isActive
-                  ? Colors.blueAccent.withOpacity(0.2)
-                  : Colors.transparent,
-        ),
         child: Icon(
           icon,
           color: isActive ? Colors.blueAccent : Colors.grey[400],
