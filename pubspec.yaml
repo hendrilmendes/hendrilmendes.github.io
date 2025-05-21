@@ -3,10 +3,10 @@ description: Devfolio escrito no flutter.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.1.6+116
+version: 1.1.7+117
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.8.0
 
 dependencies:
   flutter:
