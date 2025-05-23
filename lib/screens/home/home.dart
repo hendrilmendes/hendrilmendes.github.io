@@ -352,7 +352,7 @@ class _HomeScreenState extends State<HomeScreen> {
             _buildSocialIcon(
               MdiIcons.linkedin,
               'LinkedIn',
-              'https://linkedin.com/in/hendrilmendes',
+              'https://linkedin.com/in/hendril-mendes',
             ),
             const SizedBox(width: 20),
             _buildSocialIcon(
