@@ -218,7 +218,7 @@ class _ContactScreenState extends State<ContactScreen> {
               icon: Icons.link,
               label: 'LinkedIn',
               color: Colors.blueAccent,
-              url: 'https://linkedin.com/in/hendrilmendes',
+              url: 'https://linkedin.com/in/hendril-mendes',
             ),
           ],
         ),
