@@ -18,7 +18,7 @@ final List<Education> educationData = [
   Education(
     title: 'Engenharia da Computação',
     institution: 'Universidade Cruzeiro do Sul, Jauru-MT',
-    year: 'Conclusão: 2027 (previsto)',
+    year: '2027',
     type: 'graduação',
   ),
   Education(

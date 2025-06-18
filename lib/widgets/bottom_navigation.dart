@@ -1,13 +1,15 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:math';
+import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:animations/animations.dart';
+import 'package:flutter/services.dart';
 import 'package:folio/screens/contact/contact.dart';
 import 'package:folio/screens/education/education.dart';
 import 'package:folio/screens/home/home.dart';
 import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
-import 'package:flutter_animate/flutter_animate.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class BottomNavigationContainer extends StatefulWidget {
   const BottomNavigationContainer({super.key});
@@ -19,7 +21,7 @@ class BottomNavigationContainer extends StatefulWidget {
 
 class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   int _currentIndex = 0;
-  bool _extendedNavigation = true;
+  final PageController _pageController = PageController();
 
   final List<Widget> _screens = const [
     HomeScreen(),
@@ -29,107 +31,104 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
     ContactScreen(),
   ];
 
+  final List<Map<String, dynamic>> _navItems = [
+    {'icon': MdiIcons.homeVariant, 'label': 'Home'},
+    {'icon': MdiIcons.school, 'label': 'Formação'},
+    {'icon': MdiIcons.folderStar, 'label': 'Projetos'},
+    {'icon': MdiIcons.starCircle, 'label': 'Skills'},
+    {'icon': MdiIcons.email, 'label': 'Contato'},
+  ];
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
+  }
+
   void _onTabTapped(int index) {
-    if (_currentIndex == index) {
-      setState(() => _extendedNavigation = !_extendedNavigation);
-      return;
-    }
+    if (_currentIndex == index) return;
+
+    HapticFeedback.lightImpact();
 
     setState(() => _currentIndex = index);
+
+    _pageController.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 400),
+      curve: Curves.easeOutCubic,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[900],
-      body: PageTransitionSwitcher(
-        duration: 500.ms,
-        transitionBuilder: (
-          Widget child,
-          Animation<double> animation,
-          Animation<double> secondaryAnimation,
-        ) {
-          return FadeThroughTransition(
-            animation: animation,
-            secondaryAnimation: secondaryAnimation,
-            child: child,
-          );
-        },
-        child: _screens[_currentIndex],
+      backgroundColor: const Color(0xff0a192f),
+      body: Stack(
+        children: [
+          PageView(
+            controller: _pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            children: _screens,
+          ),
+
+          _buildFloatingNavBar(),
+        ],
       ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.3),
-              blurRadius: 10,
-              spreadRadius: 2,
-            ),
-          ],
-        ),
-        child: ClipRRect(
-          borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
-          child: AnimatedContainer(
-            duration: 300.ms,
+    );
+  }
+
+  Widget _buildFloatingNavBar() {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final navBarWidth = min(screenWidth * 0.9, 500.0);
+    final itemWidth = navBarWidth / _navItems.length;
+
+    return Positioned(
+      bottom: 20,
+      left: (screenWidth - navBarWidth) / 2,
+      right: (screenWidth - navBarWidth) / 2,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(50),
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 15.0, sigmaY: 15.0),
+          child: Container(
+            height: 65,
             decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(50),
               gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.grey[850]!, Colors.grey[900]!],
+                colors: [
+                  Colors.white.withOpacity(0.1),
+                  Colors.white.withOpacity(0.05),
+                ],
               ),
-              border: Border(
-                top: BorderSide(
-                  color: Colors.blueAccent.withOpacity(0.3),
-                  width: 1,
-                ),
-              ),
+              border: Border.all(color: Colors.white.withOpacity(0.2)),
             ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
+            child: Stack(
               children: [
-                AnimatedOpacity(
-                  opacity: _extendedNavigation ? 1.0 : 0.0,
-                  duration: 300.ms,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 8,
+                AnimatedPositioned(
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeOutCubic,
+                  left: itemWidth * _currentIndex,
+                  width: itemWidth,
+                  height: 65,
+                  child: Container(
+                    margin: const EdgeInsets.all(6.0),
+                    decoration: BoxDecoration(
+                      color: Colors.blueAccent.withOpacity(0.5),
+                      borderRadius: BorderRadius.circular(50),
                     ),
                   ),
                 ),
-                NavigationBar(
-                  onDestinationSelected: _onTabTapped,
-                  selectedIndex: _currentIndex,
-                  labelBehavior: NavigationDestinationLabelBehavior.alwaysShow,
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  destinations: [
-                    _NavigationDestination(
-                      icon: Icons.home_filled,
-                      label: "Home",
-                      isActive: _currentIndex == 0,
-                    ),
-                    _NavigationDestination(
-                      icon: Icons.school,
-                      label: "Formação",
-                      isActive: _currentIndex == 1,
-                    ),
-                    _NavigationDestination(
-                      icon: Icons.work,
-                      label: "Projetos",
-                      isActive: _currentIndex == 2,
-                    ),
-                    _NavigationDestination(
-                      icon: Icons.star,
-                      label: "Skills",
-                      isActive: _currentIndex == 3,
-                    ),
-                    _NavigationDestination(
-                      icon: Icons.contacts,
-                      label: "Contato",
-                      isActive: _currentIndex == 4,
-                    ),
-                  ],
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: List.generate(_navItems.length, (index) {
+                    final item = _navItems[index];
+                    return _NavItem(
+                      icon: item['icon'],
+                      label: item['label'],
+                      isSelected: _currentIndex == index,
+                      onTap: () => _onTabTapped(index),
+                    );
+                  }),
                 ),
               ],
             ),
@@ -140,31 +139,52 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   }
 }
 
-class _NavigationDestination extends StatelessWidget {
+class _NavItem extends StatelessWidget {
   final IconData icon;
   final String label;
-  final bool isActive;
+  final bool isSelected;
+  final VoidCallback onTap;
 
-  const _NavigationDestination({
+  const _NavItem({
     required this.icon,
     required this.label,
-    required this.isActive,
+    required this.isSelected,
+    required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    return NavigationDestination(
-      icon: Container(
-        padding: const EdgeInsets.all(8),
-        child: Icon(
-          icon,
-          color: isActive ? Colors.blueAccent : Colors.grey[400],
+    return Expanded(
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              color: isSelected ? Colors.white : Colors.grey[400],
+              size: 24,
+            ),
+            AnimatedOpacity(
+              opacity: isSelected ? 1.0 : 0.0,
+              duration: const Duration(milliseconds: 200),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                height: isSelected ? 16 : 0,
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ),
+            ),
+          ],
         ),
-      ),
-      label: label,
-      selectedIcon: Container(
-        padding: const EdgeInsets.all(8),
-        child: Icon(icon, color: Colors.blueAccent),
       ),
     );
   }

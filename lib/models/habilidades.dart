@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Habilidade {
   final String nome;
-  final double nivel; // 0.0 a 1.0
+  final double nivel;
   final String descricao;
   final IconData icone;
   final String categoria;
@@ -106,15 +106,6 @@ final List<Habilidade> habilidades = [
     categoria: 'Design',
     destaque: true,
     tags: ['Figma', 'Prototipagem', 'Wireframes'],
-  ),
-  Habilidade(
-    nome: 'Clean Architecture',
-    nivel: 0.50,
-    descricao: 'Organização de código em camadas independentes e testáveis.',
-    icone: Icons.architecture,
-    categoria: 'Padrões',
-    destaque: true,
-    tags: ['SOLID', 'TDD', 'DDD'],
   ),
   Habilidade(
     nome: 'Responsive Design',

@@ -1,13 +1,227 @@
 // ignore_for_file: deprecated_member_use
 
+import 'dart:ui';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:folio/configs/app_theme.dart';
 import 'package:folio/models/projects.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
+class AuroraBackground extends StatefulWidget {
+  const AuroraBackground({super.key});
+  @override
+  State<AuroraBackground> createState() => _AuroraBackgroundState();
+}
+
+class _AuroraBackgroundState extends State<AuroraBackground>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<Alignment> _topAlignmentAnimation;
+  late Animation<Alignment> _bottomAlignmentAnimation;
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 20),
+    );
+    _topAlignmentAnimation = TweenSequence<Alignment>([
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topLeft,
+        ),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+    _bottomAlignmentAnimation = TweenSequence<Alignment>([
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomRight,
+          end: Alignment.bottomLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.bottomLeft,
+          end: Alignment.topLeft,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topLeft,
+          end: Alignment.topRight,
+        ),
+        weight: 1,
+      ),
+      TweenSequenceItem(
+        tween: AlignmentTween(
+          begin: Alignment.topRight,
+          end: Alignment.bottomRight,
+        ),
+        weight: 1,
+      ),
+    ]).animate(_controller);
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) => Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: const [Color(0xFF0D47A1), Color(0xFF4A148C)],
+            begin: _topAlignmentAnimation.value,
+            end: _bottomAlignmentAnimation.value,
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Particle {
+  Offset position;
+  Offset speed;
+  Particle({required this.position, required this.speed});
+}
+
+class AnimatedParticleBackground extends StatefulWidget {
+  const AnimatedParticleBackground({super.key});
+  @override
+  State<AnimatedParticleBackground> createState() =>
+      _AnimatedParticleBackgroundState();
+}
+
+class _AnimatedParticleBackgroundState extends State<AnimatedParticleBackground>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  List<Particle> particles = [];
+  final Random _random = Random();
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10),
+    )..repeat();
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initializeParticles());
+  }
+
+  void _initializeParticles() {
+    if (!mounted) return;
+    final size = MediaQuery.of(context).size;
+    const particleCount = 35;
+    particles = List.generate(
+      particleCount,
+      (index) => Particle(
+        position: Offset(
+          _random.nextDouble() * size.width,
+          _random.nextDouble() * size.height,
+        ),
+        speed: Offset(
+          (_random.nextDouble() - 0.5) * 0.4,
+          (_random.nextDouble() - 0.5) * 0.4,
+        ),
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _updateParticles() {
+    if (!mounted) return;
+    final size = MediaQuery.of(context).size;
+    for (var p in particles) {
+      p.position += p.speed;
+      if (p.position.dx < 0 || p.position.dx > size.width) {
+        p.speed = Offset(-p.speed.dx, p.speed.dy);
+      }
+      if (p.position.dy < 0 || p.position.dy > size.height) {
+        p.speed = Offset(p.speed.dx, -p.speed.dy);
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        _updateParticles();
+        return CustomPaint(
+          painter: _ParticlePainter(particles: particles),
+          child: Container(),
+        );
+      },
+    );
+  }
+}
+
+class _ParticlePainter extends CustomPainter {
+  final List<Particle> particles;
+  final Paint _paint = Paint()..strokeWidth = 0.5;
+  _ParticlePainter({required this.particles});
+  @override
+  void paint(Canvas canvas, Size size) {
+    const connectionDistance = 100.0;
+    for (var p in particles) {
+      _paint.color = Colors.white.withOpacity(0.8);
+      canvas.drawCircle(p.position, 1.5, _paint);
+      for (var other in particles) {
+        final distance = (p.position - other.position).distance;
+        if (distance < connectionDistance) {
+          _paint.color = Colors.white.withOpacity(
+            1.0 - (distance / connectionDistance),
+          );
+          canvas.drawLine(p.position, other.position, _paint);
+        }
+      }
+    }
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
+}
+
 class ProjectsScreen extends StatefulWidget {
   const ProjectsScreen({super.key});
-
   @override
   State<ProjectsScreen> createState() => _ProjectsScreenState();
 }
@@ -24,140 +238,163 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final filteredProjects =
-        _selectedCategory == 'Todos'
-            ? projetos
-            : projetos.where((proj) {
-              if (_selectedCategory == 'Aplicativos') {
-                return proj.titulo == 'Shop' || proj.titulo == 'News-Droid';
-              } else if (_selectedCategory == 'Redes Sociais') {
-                return proj.titulo == 'Pulse Messenger';
-              } else if (_selectedCategory == 'Ferramentas') {
-                return proj.titulo == 'Calculadora' || proj.titulo == 'Tarefas';
-              } else if (_selectedCategory == 'Dashboards') {
-                return proj.titulo == 'Shop Dashboard';
-              }
-              return false;
-            }).toList();
+    final filteredProjects = _selectedCategory == 'Todos'
+        ? projetos
+        : projetos.where((p) => p.categoria == _selectedCategory).toList();
 
     return Scaffold(
-      backgroundColor: Colors.grey[900],
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            flexibleSpace: FlexibleSpaceBar(
-              title: const Text(
-                'Meus Projetos',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
+      backgroundColor: AppTheme.cBackground,
+      body: Stack(
+        children: [
+          const Positioned.fill(child: AuroraBackground()),
+          const Positioned.fill(child: AnimatedParticleBackground()),
+          CustomScrollView(
+            slivers: [
+              SliverToBoxAdapter(child: _buildHeader(context)),
+              SliverToBoxAdapter(child: _buildFilters()),
+              SliverPadding(
+                padding: const EdgeInsets.all(24.0),
+                sliver: SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 380,
+                    crossAxisSpacing: 24,
+                    mainAxisSpacing: 24,
+                    childAspectRatio: 1.2,
+                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    final projeto = filteredProjects[index];
+                    return _ProjectCard(projeto: projeto)
+                        .animate()
+                        .fadeIn(duration: 600.ms, delay: (100 * (index % 4)).ms)
+                        .slideY(begin: 0.2, curve: Curves.easeOutCubic);
+                  }, childCount: filteredProjects.length),
                 ),
               ),
-              centerTitle: true,
-              background: Image.network(
-                'https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2069&q=80',
-                fit: BoxFit.cover,
-              ),
-            ),
-            pinned: true,
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(24.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'Portfólio Criativo',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    'Explore meus trabalhos e projetos desenvolvidos com dedicação e inovação',
-                    style: TextStyle(color: Colors.grey[400], fontSize: 16),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Filtros por categoria
-                  SizedBox(
-                    height: 60,
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: _categories.length,
-                      itemBuilder: (context, index) {
-                        final category = _categories[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ChoiceChip(
-                            label: Text(
-                              category,
-                              style: TextStyle(
-                                color:
-                                    _selectedCategory == category
-                                        ? Colors.white
-                                        : Colors.grey[300],
-                              ),
-                            ),
-                            selected: _selectedCategory == category,
-                            selectedColor: Colors.blueAccent,
-                            backgroundColor: Colors.grey[800],
-                            onSelected: (selected) {
-                              setState(() {
-                                _selectedCategory =
-                                    selected ? category : 'Todos';
-                              });
-                            },
-                          ),
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 24),
-
-                  // Grid de projetos
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      return LayoutBuilder(
-                        builder: (context, constraints) {
-                          return GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 24,
-                            ),
-                            gridDelegate:
-                                SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 400,
-                                  crossAxisSpacing: 24,
-                                  mainAxisSpacing: 24,
-                                  childAspectRatio:
-                                      constraints.maxWidth > 1000 ? 0.95 : 1.1,
-                                ),
-                            itemCount: filteredProjects.length,
-                            itemBuilder: (context, index) {
-                              final projeto = filteredProjects[index];
-                              return _ProjectCard(projeto: projeto)
-                                  .animate()
-                                  .fadeIn(delay: (100 * index).ms)
-                                  .slideY(begin: 0.1, duration: 500.ms);
-                            },
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              ),
-            ),
+              const SliverToBoxAdapter(child: SizedBox(height: 80)),
+            ],
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        24,
+        MediaQuery.of(context).padding.top + 80,
+        24,
+        24,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ShaderMask(
+                shaderCallback: (bounds) => const LinearGradient(
+                  colors: [AppTheme.cPrimary, AppTheme.cSecondary],
+                ).createShader(bounds),
+                child: const Text(
+                  'Portfólio de Projetos',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 42,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                  ),
+                ),
+              )
+              .animate()
+              .fadeIn(duration: 500.ms)
+              .slideY(begin: 0.5, curve: Curves.easeOutCubic),
+          const SizedBox(height: 16),
+          Text(
+            'Explore uma seleção dos meus trabalhos, cada um com seus próprios desafios e aprendizados.',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.grey[400],
+              fontSize: 18,
+              height: 1.5,
+            ),
+          ).animate(delay: 200.ms).fadeIn(),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilters() {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 24.0),
+      child: SizedBox(
+        height: 45,
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          itemCount: _categories.length,
+          itemBuilder: (context, index) {
+            final category = _categories[index];
+            return _HoveringFilterChip(
+              label: category,
+              isSelected: _selectedCategory == category,
+              onSelected: (_) => setState(() => _selectedCategory = category),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class _HoveringFilterChip extends StatefulWidget {
+  final String label;
+  final bool isSelected;
+  final ValueChanged<bool> onSelected;
+
+  const _HoveringFilterChip({
+    required this.label,
+    required this.isSelected,
+    required this.onSelected,
+  });
+
+  @override
+  State<_HoveringFilterChip> createState() => __HoveringFilterChipState();
+}
+
+class __HoveringFilterChipState extends State<_HoveringFilterChip> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        transform: Matrix4.identity()
+          ..translate(0, _isHovered && !widget.isSelected ? -3.0 : 0.0),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 12),
+          child: ChoiceChip(
+            label: Text(widget.label),
+            labelStyle: TextStyle(
+              color: widget.isSelected ? Colors.black : AppTheme.cSecondary,
+              fontWeight: FontWeight.w500,
+            ),
+            selected: widget.isSelected,
+            onSelected: widget.onSelected,
+            backgroundColor: Colors.white.withOpacity(0.1),
+            selectedColor: AppTheme.cPrimary,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                color: widget.isSelected
+                    ? AppTheme.cPrimary
+                    : Colors.white.withOpacity(0.2),
+              ),
+            ),
+            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+          ),
+        ),
       ),
     );
   }
@@ -165,7 +402,6 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
 
 class _ProjectCard extends StatefulWidget {
   final Projeto projeto;
-
   const _ProjectCard({required this.projeto});
 
   @override
@@ -175,195 +411,53 @@ class _ProjectCard extends StatefulWidget {
 class _ProjectCardState extends State<_ProjectCard> {
   bool _isHovered = false;
 
+  Future<void> _abrirProjeto(String url) async {
+    final uri = Uri.parse(url);
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      throw 'Não foi possível abrir a URL: $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    bool isFeatured =
-        widget.projeto.titulo == 'News-Droid' ||
-        widget.projeto.titulo == 'Tá na Lista';
-
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: GestureDetector(
         onTap: () => _abrirProjeto(widget.projeto.urlProject),
-        child: AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          transform: Matrix4.identity()..scale(_isHovered ? 1.03 : 1.0),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            color: Colors.grey[850],
-            boxShadow:
-                _isHovered
-                    ? [
-                      BoxShadow(
-                        color: Colors.blueAccent.withOpacity(0.4),
-                        blurRadius: 15,
-                        spreadRadius: 2,
-                        offset: const Offset(0, 5),
-                      ),
-                    ]
-                    : [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        blurRadius: 10,
-                        offset: const Offset(0, 5),
-                      ),
-                    ],
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(16),
+          child: Stack(
+            fit: StackFit.expand,
             children: [
-              // Imagem do projeto
-              Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: const BorderRadius.vertical(
-                      top: Radius.circular(16),
-                    ),
-                    child: Image.network(
-                      widget.projeto.imagemUrl,
-                      width: double.infinity,
-                      height: 180,
-                      fit: BoxFit.cover,
-                      loadingBuilder: (context, child, progress) {
-                        if (progress == null) return child;
-                        return Container(
-                          height: 180,
-                          color: Colors.grey[800],
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              value:
-                                  progress.expectedTotalBytes != null
-                                      ? progress.cumulativeBytesLoaded /
-                                          progress.expectedTotalBytes!
-                                      : null,
-                            ),
-                          ),
-                        );
-                      },
-                      errorBuilder:
-                          (context, error, stackTrace) => Container(
-                            height: 180,
-                            color: Colors.grey[800],
-                            child: const Center(
-                              child: Icon(
-                                Icons.broken_image,
-                                color: Colors.grey,
-                                size: 40,
-                              ),
-                            ),
-                          ),
-                    ),
-                  ),
-                  if (isFeatured)
-                    Positioned(
-                      top: 10,
-                      left: 10,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 6,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Colors.amber.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: const Text(
-                          'DESTAQUE',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                  if (_isHovered)
-                    Container(
-                      height: 180,
-                      decoration: BoxDecoration(
-                        color: Colors.black.withOpacity(0.5),
-                        borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(16),
-                        ),
-                      ),
-                      child: Center(
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                            vertical: 8,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: const Text(
-                            'VISUALIZAR PROJETO',
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-              Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.projeto.titulo,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.open_in_new,
-                            color: Colors.blueAccent,
-                            size: 20,
-                          ),
-                          onPressed:
-                              () => _abrirProjeto(widget.projeto.urlProject),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Text(
-                      widget.projeto.descricao,
-                      style: TextStyle(color: Colors.grey[400], fontSize: 14),
-                    ),
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 8,
-                      runSpacing: 8,
-                      children:
-                          _getTechTags(widget.projeto.titulo)
-                              .map(
-                                (tech) => Chip(
-                                  label: Text(
-                                    tech,
-                                    style: const TextStyle(fontSize: 12),
-                                  ),
-                                  backgroundColor: Colors.blueAccent
-                                      .withOpacity(0.1),
-                                  visualDensity: VisualDensity.compact,
-                                ),
-                              )
-                              .toList(),
-                    ),
-                  ],
+              AnimatedScale(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeOut,
+                scale: _isHovered ? 1.05 : 1.0,
+                child: Image.network(
+                  widget.projeto.imagemUrl,
+                  fit: BoxFit.cover,
                 ),
               ),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [Colors.transparent, Colors.black.withOpacity(0.8)],
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: const [0.5, 1.0],
+                  ),
+                ),
+              ),
+              AnimatedOpacity(
+                duration: const Duration(milliseconds: 300),
+                opacity: _isHovered ? 1.0 : 0.0,
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                  child: Container(color: Colors.black.withOpacity(0.3)),
+                ),
+              ),
+              _buildCardContent(),
             ],
           ),
         ),
@@ -371,33 +465,60 @@ class _ProjectCardState extends State<_ProjectCard> {
     );
   }
 
-  List<String> _getTechTags(String projectTitle) {
-    switch (projectTitle) {
-      case 'Pulse Messenger':
-        return ['Flutter', 'Firebase', 'Chat'];
-      case 'Shop Dashboard':
-        return ['Flutter', 'Admin', 'Analytics'];
-      case 'News-Droid':
-        return ['Flutter', 'Blogger API', 'Android'];
-      case 'Tarefas':
-        return ['Flutter', 'Firebase', 'Produtividade'];
-      case 'Calculadora':
-        return ['Flutter', 'Dart', 'Matemática'];
-      case 'Wally':
-        return ['Flutter', 'IA', 'Assistente'];
-      case 'Shop':
-        return ['Flutter', 'E-commerce', 'Firebase'];
-      default:
-        return ['Flutter', 'Mobile'];
-    }
-  }
-
-  Future<void> _abrirProjeto(String url) async {
-    final Uri uri = Uri.parse(url);
-    if (await canLaunchUrl(uri)) {
-      await launchUrl(uri, mode: LaunchMode.externalApplication);
-    } else {
-      throw 'Não foi possível abrir a URL: $url';
-    }
+  Widget _buildCardContent() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Expanded(
+            child: AnimatedOpacity(
+              duration: const Duration(milliseconds: 400),
+              opacity: _isHovered ? 1.0 : 0.0,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    widget.projeto.descricao,
+                    style: const TextStyle(color: Colors.white, height: 1.5),
+                  ),
+                  const SizedBox(height: 12),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: widget.projeto.tags
+                        .map(
+                          (tag) => Chip(
+                            label: Text(
+                              tag,
+                              style: const TextStyle(fontSize: 12),
+                            ),
+                            backgroundColor: AppTheme.cPrimary.withOpacity(0.8),
+                            labelStyle: const TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Text(
+            widget.projeto.titulo,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              shadows: [Shadow(blurRadius: 10, color: Colors.black)],
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
