@@ -698,10 +698,6 @@ class _HomeScreenState extends State<HomeScreen> {
           'https://linkedin.com/in/hendril-mendes',
         ),
         _buildSocialIcon(MdiIcons.telegram, 'https://t.me/hendril_mendes'),
-        _buildSocialIcon(
-          MdiIcons.instagram,
-          'https://instagram.com/hendril_mendes',
-        ),
       ],
     );
   }
