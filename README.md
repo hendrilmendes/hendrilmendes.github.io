@@ -1,6 +1,6 @@
 # Devfolio - Portfólio Profissional
 
-[![Flutter 3.32+](https://img.shields.io/badge/Flutter-3.19%2B-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
+[![Flutter 3.32+](https://img.shields.io/badge/Flutter-3.32%2B-02569B?style=for-the-badge&logo=flutter&logoColor=white)](https://flutter.dev)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 ### ➡️ [Acesse a versão ao vivo aqui](https://hendrilmendes.github.io/) ⬅️
