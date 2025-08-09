@@ -1,19 +1,31 @@
 // ignore_for_file: deprecated_member_use, library_private_types_in_public_api
 
+import 'dart:async';
 import 'dart:ui';
-import 'package:flutter/material.dart';
 import 'package:animations/animations.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:folio/configs/app_theme.dart';
 import 'package:folio/screens/contact/contact.dart';
 import 'package:folio/screens/education/education.dart';
 import 'package:folio/screens/home/home.dart';
 import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
-import 'package:flutter_animate/flutter_animate.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'dart:async';
 import 'package:intl/intl.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+class NavigationItem {
+  final String label;
+  final IconData icon;
+  final Widget screen;
+
+  const NavigationItem({
+    required this.label,
+    required this.icon,
+    required this.screen,
+  });
+}
 
 class DesktopNavigationContainer extends StatefulWidget {
   const DesktopNavigationContainer({super.key});
@@ -26,26 +38,46 @@ class DesktopNavigationContainer extends StatefulWidget {
 class _DesktopNavigationContainerState
     extends State<DesktopNavigationContainer> {
   int _currentIndex = 0;
-  final int _currentYear = DateTime.now().year;
+  final List<NavigationItem> _navItems = const [
+    NavigationItem(
+      label: 'Home',
+      icon: MdiIcons.homeVariant,
+      screen: HomeScreen(),
+    ),
+    NavigationItem(
+      label: 'Formação',
+      icon: MdiIcons.school,
+      screen: EducationScreen(),
+    ),
+    NavigationItem(
+      label: 'Projetos',
+      icon: MdiIcons.folderStar,
+      screen: ProjectsScreen(),
+    ),
+    NavigationItem(
+      label: 'Skills',
+      icon: MdiIcons.starCircle,
+      screen: SkillsScreen(),
+    ),
+    NavigationItem(
+      label: 'Contato',
+      icon: MdiIcons.email,
+      screen: ContactScreen(),
+    ),
+  ];
 
   final GlobalKey _navBarKey = GlobalKey();
-  final List<GlobalKey> _navItemKeys = List.generate(5, (_) => GlobalKey());
+  late final List<GlobalKey> _navItemKeys;
 
   Offset _indicatorPosition = Offset.zero;
   Size _indicatorSize = Size.zero;
   bool _isIndicatorReady = false;
 
-  final List<Widget> _pages = const [
-    HomeScreen(),
-    EducationScreen(),
-    ProjectsScreen(),
-    SkillsScreen(),
-    ContactScreen(),
-  ];
-
   @override
   void initState() {
     super.initState();
+    _navItemKeys = List.generate(_navItems.length, (_) => GlobalKey());
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         _updateIndicatorPosition(0, isInitial: true);
@@ -82,22 +114,30 @@ class _DesktopNavigationContainerState
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppTheme.cBackground,
-      body: Stack(
-        children: [
-          PageTransitionSwitcher(
-            duration: 500.ms,
-            transitionBuilder: (child, primary, secondary) =>
-                FadeThroughTransition(
-                  animation: primary,
-                  secondaryAnimation: secondary,
-                  child: child,
-                ),
-            child: _pages[_currentIndex],
-          ),
-
-          _buildFloatingTopBar(),
-          _buildProfessionalFooter(),
-        ],
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            if (mounted) {
+              _updateIndicatorPosition(_currentIndex);
+            }
+          });
+          return Stack(
+            children: [
+              PageTransitionSwitcher(
+                duration: 500.ms,
+                transitionBuilder: (child, primary, secondary) =>
+                    FadeThroughTransition(
+                      animation: primary,
+                      secondaryAnimation: secondary,
+                      child: child,
+                    ),
+                child: _navItems[_currentIndex].screen,
+              ),
+              _buildFloatingTopBar(),
+              _buildProfessionalFooter(),
+            ],
+          );
+        },
       ),
     );
   }
@@ -133,23 +173,11 @@ class _DesktopNavigationContainerState
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: List.generate(
-                      5,
+                      _navItems.length,
                       (index) => _NavItem(
                         key: _navItemKeys[index],
-                        icon: [
-                          MdiIcons.homeVariant,
-                          MdiIcons.school,
-                          MdiIcons.folderStar,
-                          MdiIcons.starCircle,
-                          MdiIcons.email,
-                        ][index],
-                        label: [
-                          'Home',
-                          'Formação',
-                          'Projetos',
-                          'Skills',
-                          'Contato',
-                        ][index],
+                        icon: _navItems[index].icon,
+                        label: _navItems[index].label,
                         isActive: _currentIndex == index,
                         onTap: () => _onItemTapped(index),
                       ),
@@ -215,30 +243,9 @@ class _DesktopNavigationContainerState
                 color: Colors.white.withOpacity(0.05),
                 border: Border.all(color: Colors.white.withOpacity(0.2)),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _buildStatusIndicator(),
-                  Row(
-                    children: [
-                      _ClockWidget(),
-                      VerticalDivider(
-                        color: AppTheme.cSecondary.withOpacity(0.3),
-                        indent: 12,
-                        endIndent: 12,
-                        width: 30,
-                      ),
-                      _FooterSocialButton(
-                        icon: MdiIcons.github,
-                        url: 'https://github.com/hendrilmendes',
-                      ),
-                      _FooterSocialButton(
-                        icon: MdiIcons.linkedin,
-                        url: 'https://linkedin.com/in/hendril-mendes',
-                      ),
-                    ],
-                  ),
-                ],
+                children: [_StatusIndicator(), _ClockWidget()],
               ),
             ),
           ),
@@ -246,8 +253,14 @@ class _DesktopNavigationContainerState
       ),
     );
   }
+}
 
-  Widget _buildStatusIndicator() {
+class _StatusIndicator extends StatelessWidget {
+  const _StatusIndicator();
+
+  @override
+  Widget build(BuildContext context) {
+    final int currentYear = DateTime.now().year;
     return Row(
       children: [
         Container(
@@ -266,7 +279,7 @@ class _DesktopNavigationContainerState
         ).animate(onPlay: (c) => c.repeat(reverse: true)),
         const SizedBox(width: 12),
         Text(
-          'Disponível para trabalho | © $_currentYear Hendril Mendes',
+          'Disponível para trabalho | © $currentYear Hendril Mendes',
           style: TextStyle(color: AppTheme.cSecondary, fontSize: 12),
         ),
       ],
@@ -346,6 +359,39 @@ class _NavItemState extends State<_NavItem> {
   }
 }
 
+class _ClockWidget extends StatelessWidget {
+  const _ClockWidget();
+
+  Stream<String> _getTimeStream() {
+    return Stream.periodic(const Duration(seconds: 1), (_) {
+      return DateFormat('HH:mm:ss').format(DateTime.now());
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<String>(
+      stream: _getTimeStream(),
+      builder: (context, snapshot) {
+        final timeString =
+            snapshot.data ?? DateFormat('HH:mm:ss').format(DateTime.now());
+
+        return Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(MdiIcons.clockOutline, color: AppTheme.cSecondary, size: 16),
+            const SizedBox(width: 8),
+            Text(
+              timeString,
+              style: TextStyle(color: AppTheme.cSecondary, fontSize: 12),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _FooterSocialButton extends StatefulWidget {
   final IconData icon;
   final String url;
@@ -375,55 +421,6 @@ class _FooterSocialButtonState extends State<_FooterSocialButton> {
         splashRadius: 20,
         tooltip: widget.url.contains('github') ? 'GitHub' : 'LinkedIn',
       ),
-    );
-  }
-}
-
-class _ClockWidget extends StatefulWidget {
-  @override
-  _ClockWidgetState createState() => _ClockWidgetState();
-}
-
-class _ClockWidgetState extends State<_ClockWidget> {
-  String _timeString = "";
-  late Timer _timer;
-
-  @override
-  void initState() {
-    _timeString = DateFormat('HH:mm:ss').format(DateTime.now());
-    _timer = Timer.periodic(
-      const Duration(seconds: 1),
-      (Timer t) => _getTime(),
-    );
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _timer.cancel();
-    super.dispose();
-  }
-
-  void _getTime() {
-    if (mounted) {
-      setState(
-        () => _timeString = DateFormat('HH:mm:ss').format(DateTime.now()),
-      );
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Icon(MdiIcons.clockOutline, color: AppTheme.cSecondary, size: 16),
-        const SizedBox(width: 8),
-        Text(
-          _timeString,
-          style: TextStyle(color: AppTheme.cSecondary, fontSize: 12),
-        ),
-      ],
     );
   }
 }

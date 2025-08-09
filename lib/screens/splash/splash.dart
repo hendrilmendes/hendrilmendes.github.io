@@ -14,23 +14,26 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  void _navigateToHome() {
+    if (!mounted) return;
+
+    bool isMobile = MediaQuery.of(context).size.width < 600;
+
+    Navigator.of(context).pushReplacement(
+      PageRouteBuilder(
+        pageBuilder: (_, _, _) => isMobile
+            ? const BottomNavigationContainer()
+            : const DesktopNavigationContainer(),
+        transitionsBuilder: (_, anim, _, child) =>
+            FadeTransition(opacity: anim, child: child),
+        transitionDuration: const Duration(milliseconds: 800),
+      ),
+    );
+  }
+
   @override
   void initState() {
     super.initState();
-    Timer(const Duration(milliseconds: 4500), () {
-      if (!mounted) return;
-      bool isMobile = MediaQuery.of(context).size.width < 600;
-      Navigator.of(context).pushReplacement(
-        PageRouteBuilder(
-          pageBuilder: (_, __, ___) => isMobile
-              ? const BottomNavigationContainer()
-              : const DesktopNavigationContainer(),
-          transitionsBuilder: (_, anim, __, child) =>
-              FadeTransition(opacity: anim, child: child),
-          transitionDuration: const Duration(milliseconds: 800),
-        ),
-      );
-    });
   }
 
   @override
@@ -40,9 +43,9 @@ class _SplashViewState extends State<SplashView> {
       body: Center(
         child: ConstrainedBox(
           constraints: const BoxConstraints(maxWidth: 600),
-          child: const Padding(
-            padding: EdgeInsets.all(24.0),
-            child: _TerminalView(),
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: _TerminalView(onComplete: _navigateToHome),
           ),
         ),
       ),
@@ -51,7 +54,8 @@ class _SplashViewState extends State<SplashView> {
 }
 
 class _TerminalView extends StatelessWidget {
-  const _TerminalView();
+  final VoidCallback onComplete;
+  const _TerminalView({required this.onComplete});
 
   @override
   Widget build(BuildContext context) {
@@ -74,7 +78,6 @@ class _TerminalView extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 24),
-
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -98,20 +101,24 @@ class _TerminalView extends StatelessWidget {
             _LogLine(
               prefix: '[OKAY] ',
               text: 'Design imersivo carregado.',
-              accentColor: Colors.greenAccent[400]!,
+              accentColor: AppTheme.cPrimary,
               delay: 3000.ms,
             ),
             _LogLine(
               prefix: '[OKAY] ',
               text: 'Pronto para iniciar.',
-              accentColor: Colors.greenAccent[400]!,
+              accentColor: AppTheme.cPrimary,
               delay: 3500.ms,
             ),
+
             _LogLine(
-              prefix: '[SUCESSO] ',
+              prefix: '[SUCESS] ',
               text: 'Bem vindo',
-              accentColor: AppTheme.cPrimary,
+              accentColor: Colors.greenAccent[400]!,
               delay: 4000.ms,
+            ).animate().callback(
+              duration: 4300.ms,
+              callback: (_) => onComplete(),
             ),
           ],
         ),

@@ -1,338 +1,19 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
-import 'dart:async';
-import 'dart:math';
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:folio/configs/app_theme.dart';
 import 'package:folio/models/educacao.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:folio/widgets/animated_particle_background.dart';
+import 'package:folio/widgets/aurora_background.dart';
+import 'package:folio/widgets/glassmorphic_card.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class AuroraBackground extends StatefulWidget {
-  const AuroraBackground({super.key});
-  @override
-  State<AuroraBackground> createState() => _AuroraBackgroundState();
-}
-
-class _AuroraBackgroundState extends State<AuroraBackground>
-    with TickerProviderStateMixin {
-  late AnimationController _controller;
-  late Animation<Alignment> _topAlignmentAnimation;
-  late Animation<Alignment> _bottomAlignmentAnimation;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 20),
-    );
-    _topAlignmentAnimation = TweenSequence<Alignment>([
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.topRight,
-          end: Alignment.bottomRight,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.bottomRight,
-          end: Alignment.bottomLeft,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topLeft,
-        ),
-        weight: 1,
-      ),
-    ]).animate(_controller);
-    _bottomAlignmentAnimation = TweenSequence<Alignment>([
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.bottomRight,
-          end: Alignment.bottomLeft,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.bottomLeft,
-          end: Alignment.topLeft,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.topLeft,
-          end: Alignment.topRight,
-        ),
-        weight: 1,
-      ),
-      TweenSequenceItem(
-        tween: AlignmentTween(
-          begin: Alignment.topRight,
-          end: Alignment.bottomRight,
-        ),
-        weight: 1,
-      ),
-    ]).animate(_controller);
-    _controller.repeat();
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) => Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: const [Color(0xFF0D47A1), Color(0xFF4A148C)],
-            begin: _topAlignmentAnimation.value,
-            end: _bottomAlignmentAnimation.value,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class Particle {
-  Offset position;
-  Offset speed;
-  Particle({required this.position, required this.speed});
-}
-
-class AnimatedParticleBackground extends StatefulWidget {
-  const AnimatedParticleBackground({super.key});
-  @override
-  State<AnimatedParticleBackground> createState() =>
-      _AnimatedParticleBackgroundState();
-}
-
-class _AnimatedParticleBackgroundState extends State<AnimatedParticleBackground>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  List<Particle> particles = [];
-  final Random _random = Random();
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(seconds: 10),
-    )..repeat();
-    WidgetsBinding.instance.addPostFrameCallback((_) => _initializeParticles());
-  }
-
-  void _initializeParticles() {
-    if (!mounted) return;
-    final size = MediaQuery.of(context).size;
-    const particleCount = 35;
-    particles = List.generate(
-      particleCount,
-      (index) => Particle(
-        position: Offset(
-          _random.nextDouble() * size.width,
-          _random.nextDouble() * size.height,
-        ),
-        speed: Offset(
-          (_random.nextDouble() - 0.5) * 0.4,
-          (_random.nextDouble() - 0.5) * 0.4,
-        ),
-      ),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  void _updateParticles() {
-    if (!mounted) return;
-    final size = MediaQuery.of(context).size;
-    for (var p in particles) {
-      p.position += p.speed;
-      if (p.position.dx < 0 || p.position.dx > size.width) {
-        p.speed = Offset(-p.speed.dx, p.speed.dy);
-      }
-      if (p.position.dy < 0 || p.position.dy > size.height) {
-        p.speed = Offset(p.speed.dx, -p.speed.dy);
-      }
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return AnimatedBuilder(
-      animation: _controller,
-      builder: (context, child) {
-        _updateParticles();
-        return CustomPaint(
-          painter: _ParticlePainter(particles: particles),
-          child: Container(),
-        );
-      },
-    );
-  }
-}
-
-class _ParticlePainter extends CustomPainter {
-  final List<Particle> particles;
-  final Paint _paint = Paint()..strokeWidth = 0.5;
-
-  _ParticlePainter({required this.particles});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    const connectionDistance = 100.0;
-    for (var p in particles) {
-      _paint.color = Colors.white.withOpacity(0.8);
-      canvas.drawCircle(p.position, 1.5, _paint);
-      for (var other in particles) {
-        final distance = (p.position - other.position).distance;
-        if (distance < connectionDistance) {
-          _paint.color = Colors.white.withOpacity(
-            1.0 - (distance / connectionDistance),
-          );
-          canvas.drawLine(p.position, other.position, _paint);
-        }
-      }
-    }
-  }
-
-  @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => true;
-}
-
-class GlassmorphicCard extends StatefulWidget {
-  final Widget child;
-  const GlassmorphicCard({super.key, required this.child});
-
-  @override
-  State<GlassmorphicCard> createState() => _GlassmorphicCardState();
-}
-
-class _GlassmorphicCardState extends State<GlassmorphicCard>
-    with SingleTickerProviderStateMixin {
-  late AnimationController _controller;
-  double _dx = 0;
-  double _dy = 0;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-      reverseDuration: const Duration(milliseconds: 500),
-    );
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return MouseRegion(
-      onEnter: (_) => _controller.forward(),
-      onExit: (_) => _controller.reverse(),
-      onHover: (event) {
-        final containerSize = context.size;
-        if (containerSize != null) {
-          setState(() {
-            _dx =
-                (event.localPosition.dx - containerSize.width / 2) /
-                (containerSize.width / 2);
-            _dy =
-                (event.localPosition.dy - containerSize.height / 2) /
-                (containerSize.height / 2);
-          });
-        }
-      },
-      child: AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          final rotationValue = _controller.value * 0.05;
-          final transform = Matrix4.identity()
-            ..setEntry(3, 2, 0.001)
-            ..rotateY(_dx * rotationValue)
-            ..rotateX(-_dy * rotationValue);
-          return Transform(
-            transform: transform,
-            alignment: FractionalOffset.center,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
-              child: BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
-                child: Container(
-                  padding: const EdgeInsets.all(24),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(16),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.white.withOpacity(0.1),
-                        Colors.white.withOpacity(0.05),
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                    border: Border.all(color: Colors.white.withOpacity(0.2)),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(
-                          _controller.value * 0.1,
-                        ),
-                        blurRadius: 10,
-                        spreadRadius: 2,
-                      ),
-                    ],
-                  ),
-                  child: widget.child,
-                ),
-              ),
-            ),
-          );
-        },
-      ),
-    );
-  }
-}
 
 class EducationScreen extends StatelessWidget {
   const EducationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    educationData.sort((a, b) {
-      final yearA = int.tryParse(a.year.split(' ').first) ?? 0;
-      final yearB = int.tryParse(b.year.split(' ').first) ?? 0;
-      return yearB.compareTo(yearA);
-    });
-
     return Scaffold(
       backgroundColor: AppTheme.cBackground,
       body: Stack(
@@ -466,20 +147,29 @@ class _TimelineNode extends StatelessWidget {
       children: [
         Container(width: 2, color: Colors.white24),
         Container(
-          padding: const EdgeInsets.all(4),
-          decoration: const BoxDecoration(
-            color: AppTheme.cBackground,
-            shape: BoxShape.circle,
-            border: Border.fromBorderSide(
-              BorderSide(color: AppTheme.cPrimary, width: 2),
+              padding: const EdgeInsets.all(4),
+              decoration: const BoxDecoration(
+                color: AppTheme.cBackground,
+                shape: BoxShape.circle,
+                border: Border.fromBorderSide(
+                  BorderSide(color: AppTheme.cPrimary, width: 2),
+                ),
+              ),
+              child: Icon(
+                _getEducationIcon(type),
+                color: AppTheme.cPrimary,
+                size: 24,
+              ),
+            )
+            // --- ANIMAÇÃO CORRIGIDA ---
+            // Adicionado um efeito de 'scale' para criar um pulso.
+            .animate(onPlay: (c) => c.repeat(reverse: true))
+            .scale(
+              duration: 800.ms,
+              curve: Curves.easeInOut,
+              begin: const Offset(1, 1),
+              end: const Offset(1.15, 1.15),
             ),
-          ),
-          child: Icon(
-            _getEducationIcon(type),
-            color: AppTheme.cPrimary,
-            size: 24,
-          ),
-        ).animate(onPlay: (c) => c.repeat(period: 1.seconds)),
       ],
     );
   }
@@ -552,6 +242,7 @@ class EducationCard extends StatelessWidget {
   }
 }
 
+// Funções auxiliares movidas para o final para melhor organização
 Future<void> _launchURL(String url) async {
   final uri = Uri.parse(url);
   if (!await launchUrl(uri)) throw 'Não foi possível abrir o link: $url';

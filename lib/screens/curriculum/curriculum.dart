@@ -5,69 +5,13 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:folio/configs/app_theme.dart';
-import 'package:folio/screens/contact/contact.dart'; // Remova se 'AuroraBackground' e 'AnimatedParticleBackground' estiverem em outro lugar
+import 'package:folio/data/curriculum_data.dart';
+import 'package:folio/widgets/animated_particle_background.dart';
+import 'package:folio/widgets/aurora_background.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:pdf/pdf.dart' as pw;
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
-
-class CurriculumData {
-  static const String nome = 'Hendril Mendes Ribeiro';
-  static const String titulo =
-      'Desenvolvedor de Software | Técnico em Informática';
-
-  static const Map<String, String> contato = {
-    'E-mail': 'hendrilmendes2015@gmail.com',
-    'Telefone': '+55 65 99361-1847',
-    'Local': 'Jauru, MT, Brasil',
-    'Portfólio': 'hendrilmendes.github.io',
-    'LinkedIn': 'linkedin.com/in/hendril-mendes',
-  };
-
-  static const String objetivo =
-      'Atuar na área de Tecnologia da Informação, contribuindo com minhas habilidades em manutenção de sistemas, suporte técnico, administração de redes e desenvolvimento de soluções (web e mobile), agregando valor à equipe e à empresa.';
-
-  static const List<String> formacao = [
-    'Engenharia da Computação: Universidade Cruzeiro do Sul, Jauru-MT (Em andamento)',
-  ];
-
-  static const List<Map<String, dynamic>> experiencia = [
-    {
-      'title':
-          'Técnico em Informática – NetSYS Internet & Informática (2018 – Atual)',
-      'subitems': [
-        'Análise e otimização de sistemas, realizando diagnóstico e reparo de hardware e software para maximizar a performance e a confiabilidade.',
-        'Infraestrutura de redes, incluindo implantação, configuração e manutenção para ambientes empresariais, garantindo segurança e alta disponibilidade.',
-        'Suporte técnico especializado, oferecendo atendimento ágil e soluções eficazes para clientes, assegurando a continuidade e eficiência operacional',
-      ],
-    },
-  ];
-
-  static const List<String> cursos = [
-    'Startto.dev (2023) - Criação de apps utilizando Flutter.',
-    'SENAI (2022) - Tecnologia da Informação e Comunicação.',
-    'Microsoft (2022) - HTML, CSS, JavaScript.',
-    'Didática Tech (2022) - Python.',
-    'NetSYS Internet & Informática (2017) - Windows 7 e Windows 8, Microsoft Office, CorelDraw X7, Photoshop CC.',
-    'Brasil Treinamentos (2015) - Manutenção e Reparação de Microcomputadores e Redes.',
-  ];
-
-  static const List<String> habilidades = [
-    'Suporte Técnico e Atendimento: Atendimento ao cliente e resolução de problemas técnicos.',
-    'Manutenção de Hardware: Reparação e manutenção de microcomputadores.',
-    'Administração de Redes: Configuração e gerenciamento de redes e servidores.',
-    'Desenvolvimento: HTML, CSS, JavaScript, Python e desenvolvimento de apps com Flutter/Dart.',
-    'Ferramentas: Microsoft Office, VMWare, CorelDraw, Photoshop; familiaridade com Windows, macOS e Linux.',
-  ];
-
-  static const List<String> idiomas = [
-    'Inglês: Intermediário para leitura técnica e comunicação.',
-    'Espanhol: Intermediário para leitura técnica e comunicação.',
-  ];
-
-  static const String infoAdicional =
-      'Tenho 24 anos e busco constante evolução pessoal e profissional, com facilidade de aprendizado e adaptação a novas tecnologias.';
-}
 
 class CurriculumScreen extends StatelessWidget {
   const CurriculumScreen({super.key});
@@ -146,16 +90,14 @@ class _CurriculumContent extends StatelessWidget {
       children: [
         _buildHeader(),
         const SizedBox(height: 40),
-
         const _SectionTitle(title: 'Contato'),
         const SizedBox(height: 16),
         _ContactInfo(),
         const SizedBox(height: 30),
-
-        const _SectionTitle(title: 'Objetivo Profissional'),
+        const _SectionTitle(title: 'Resumo Profissional'),
         const SizedBox(height: 16),
         const Text(
-          CurriculumData.objetivo,
+          CurriculumData.resumoProfissional,
           style: TextStyle(
             fontSize: 16,
             height: 1.6,
@@ -163,32 +105,26 @@ class _CurriculumContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Formação Acadêmica'),
         const SizedBox(height: 16),
         const _BulletList(items: CurriculumData.formacao),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Experiência Profissional'),
         const SizedBox(height: 16),
         const _BulletListWithSub(items: CurriculumData.experiencia),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Cursos e Certificações'),
         const SizedBox(height: 16),
         const _BulletList(items: CurriculumData.cursos),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Habilidades Técnicas'),
         const SizedBox(height: 16),
-        const _BulletList(items: CurriculumData.habilidades),
+        const _CategorizedSkills(skillsMap: CurriculumData.habilidades),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Idiomas'),
         const SizedBox(height: 16),
         const _BulletList(items: CurriculumData.idiomas),
         const SizedBox(height: 30),
-
         const _SectionTitle(title: 'Informações Adicionais'),
         const SizedBox(height: 16),
         const Text(
@@ -393,6 +329,45 @@ class _BulletListWithSub extends StatelessWidget {
   }
 }
 
+class _CategorizedSkills extends StatelessWidget {
+  final Map<String, List<String>> skillsMap;
+  const _CategorizedSkills({required this.skillsMap});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: skillsMap.entries.map((entry) {
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                '${entry.key}:',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                entry.value.join(' • '),
+                style: const TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: AppTheme.cSecondary,
+                ),
+              ),
+            ],
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
+
 class CurriculumOptionButton extends StatelessWidget {
   const CurriculumOptionButton({super.key});
 
@@ -405,7 +380,7 @@ class CurriculumOptionButton extends StatelessWidget {
       onPressed: () {
         showDialog(
           context: context,
-          builder: (BuildContext context) {
+          builder: (BuildContext dialogContext) {
             return AlertDialog(
               backgroundColor: const Color(0xff1a2b47).withOpacity(0.95),
               shape: RoundedRectangleBorder(
@@ -426,12 +401,16 @@ class CurriculumOptionButton extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: () async {
+                      Navigator.of(dialogContext).pop();
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Gerando PDF...')),
+                      );
                       final pdfBytes = await _generatePdf(pw.PdfPageFormat.a4);
+                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       await Printing.sharePdf(
                         bytes: pdfBytes,
                         filename: 'curriculo_hendril_mendes.pdf',
                       );
-                      Navigator.of(context).pop();
                     },
                   ),
                   const Divider(color: Colors.white24, height: 1),
@@ -445,10 +424,10 @@ class CurriculumOptionButton extends StatelessWidget {
                       style: TextStyle(color: Colors.white),
                     ),
                     onTap: () async {
+                      Navigator.of(dialogContext).pop();
                       await Printing.layoutPdf(
                         onLayout: (format) => _generatePdf(format),
                       );
-                      Navigator.of(context).pop();
                     },
                   ),
                 ],
@@ -463,7 +442,6 @@ class CurriculumOptionButton extends StatelessWidget {
 
 Future<Uint8List> _generatePdf(pw.PdfPageFormat format) async {
   final pdf = pw.Document();
-
   pdf.addPage(
     pw.MultiPage(
       pageFormat: format,
@@ -478,31 +456,24 @@ Future<Uint8List> _generatePdf(pw.PdfPageFormat format) async {
           _buildPdfSectionTitle('Contato'),
           _buildPdfContactInfo(),
           pw.SizedBox(height: 15),
-
-          _buildPdfSectionTitle('Objetivo Profissional'),
-          _buildPdfParagraph(CurriculumData.objetivo),
+          _buildPdfSectionTitle('Resumo Profissional'),
+          _buildPdfParagraph(CurriculumData.resumoProfissional),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Formação Acadêmica'),
           _buildPdfBulletList(CurriculumData.formacao),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Experiência Profissional'),
           _buildPdfBulletListWithSub(CurriculumData.experiencia),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Cursos e Certificações'),
           _buildPdfBulletList(CurriculumData.cursos),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Habilidades Técnicas'),
-          _buildPdfBulletList(CurriculumData.habilidades),
+          _buildPdfCategorizedSkills(CurriculumData.habilidades),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Idiomas'),
           _buildPdfBulletList(CurriculumData.idiomas),
           pw.SizedBox(height: 15),
-
           _buildPdfSectionTitle('Informações Adicionais'),
           _buildPdfParagraph(CurriculumData.infoAdicional),
         ];
@@ -512,7 +483,6 @@ Future<Uint8List> _generatePdf(pw.PdfPageFormat format) async {
   return pdf.save();
 }
 
-// Funções auxiliares para construir o PDF
 pw.Widget _buildPdfHeader() {
   return pw.Container(
     width: double.infinity,
@@ -528,7 +498,7 @@ pw.Widget _buildPdfHeader() {
         pw.Text(
           CurriculumData.titulo,
           textAlign: pw.TextAlign.center,
-          style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.normal),
+          style: pw.TextStyle(fontSize: 16),
         ),
       ],
     ),
@@ -544,7 +514,7 @@ pw.Widget _buildPdfSectionTitle(String title) {
         style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
       ),
       pw.Divider(thickness: 1, color: pw.PdfColors.grey800),
-      pw.SizedBox(height: 8),
+      pw.SizedBox(height: 6),
     ],
   );
 }
@@ -578,6 +548,7 @@ pw.Widget _buildPdfParagraph(String text) {
     child: pw.Text(
       text,
       style: const pw.TextStyle(fontSize: 12, lineSpacing: 2),
+      textAlign: pw.TextAlign.justify,
     ),
   );
 }
@@ -635,6 +606,7 @@ pw.Widget _buildPdfBulletListWithSub(List<Map<String, dynamic>> items) {
                     child: pw.Text(
                       subitem,
                       style: const pw.TextStyle(fontSize: 12, height: 1.5),
+                      textAlign: pw.TextAlign.justify,
                     ),
                   ),
                 ],
@@ -642,6 +614,38 @@ pw.Widget _buildPdfBulletListWithSub(List<Map<String, dynamic>> items) {
             ),
           ),
         ],
+      );
+    }).toList(),
+  );
+}
+
+pw.Widget _buildPdfCategorizedSkills(Map<String, List<String>> skillsMap) {
+  return pw.Column(
+    crossAxisAlignment: pw.CrossAxisAlignment.start,
+    children: skillsMap.entries.map((entry) {
+      return pw.Padding(
+        padding: const pw.EdgeInsets.only(bottom: 6),
+        child: pw.Row(
+          crossAxisAlignment: pw.CrossAxisAlignment.start,
+          children: [
+            pw.SizedBox(
+              width: 140,
+              child: pw.Text(
+                '${entry.key}:',
+                style: pw.TextStyle(
+                  fontWeight: pw.FontWeight.bold,
+                  fontSize: 12,
+                ),
+              ),
+            ),
+            pw.Expanded(
+              child: pw.Text(
+                entry.value.join(' • '),
+                style: const pw.TextStyle(fontSize: 12),
+              ),
+            ),
+          ],
+        ),
       );
     }).toList(),
   );

@@ -11,6 +11,18 @@ import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+class BottomNavItem {
+  final IconData icon;
+  final String label;
+  final Widget screen;
+
+  const BottomNavItem({
+    required this.icon,
+    required this.label,
+    required this.screen,
+  });
+}
+
 class BottomNavigationContainer extends StatefulWidget {
   const BottomNavigationContainer({super.key});
 
@@ -23,20 +35,32 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   int _currentIndex = 0;
   final PageController _pageController = PageController();
 
-  final List<Widget> _screens = const [
-    HomeScreen(),
-    EducationScreen(),
-    ProjectsScreen(),
-    SkillsScreen(),
-    ContactScreen(),
-  ];
-
-  final List<Map<String, dynamic>> _navItems = [
-    {'icon': MdiIcons.homeVariant, 'label': 'Home'},
-    {'icon': MdiIcons.school, 'label': 'Formação'},
-    {'icon': MdiIcons.folderStar, 'label': 'Projetos'},
-    {'icon': MdiIcons.starCircle, 'label': 'Skills'},
-    {'icon': MdiIcons.email, 'label': 'Contato'},
+  final List<BottomNavItem> _navigationItems = const [
+    BottomNavItem(
+      icon: MdiIcons.homeVariant,
+      label: 'Home',
+      screen: HomeScreen(),
+    ),
+    BottomNavItem(
+      icon: MdiIcons.school,
+      label: 'Formação',
+      screen: EducationScreen(),
+    ),
+    BottomNavItem(
+      icon: MdiIcons.folderStar,
+      label: 'Projetos',
+      screen: ProjectsScreen(),
+    ),
+    BottomNavItem(
+      icon: MdiIcons.starCircle,
+      label: 'Skills',
+      screen: SkillsScreen(),
+    ),
+    BottomNavItem(
+      icon: MdiIcons.email,
+      label: 'Contato',
+      screen: ContactScreen(),
+    ),
   ];
 
   @override
@@ -49,8 +73,6 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
     if (_currentIndex == index) return;
 
     HapticFeedback.lightImpact();
-
-    setState(() => _currentIndex = index);
 
     _pageController.animateToPage(
       index,
@@ -67,10 +89,14 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
         children: [
           PageView(
             controller: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                _currentIndex = index;
+              });
+            },
             physics: const NeverScrollableScrollPhysics(),
-            children: _screens,
+            children: _navigationItems.map((item) => item.screen).toList(),
           ),
-
           _buildFloatingNavBar(),
         ],
       ),
@@ -80,7 +106,7 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   Widget _buildFloatingNavBar() {
     final screenWidth = MediaQuery.of(context).size.width;
     final navBarWidth = min(screenWidth * 0.9, 500.0);
-    final itemWidth = navBarWidth / _navItems.length;
+    final itemWidth = navBarWidth / _navigationItems.length;
 
     return Positioned(
       bottom: 20,
@@ -120,11 +146,11 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: List.generate(_navItems.length, (index) {
-                    final item = _navItems[index];
+                  children: List.generate(_navigationItems.length, (index) {
+                    final item = _navigationItems[index];
                     return _NavItem(
-                      icon: item['icon'],
-                      label: item['label'],
+                      icon: item.icon,
+                      label: item.label,
                       isSelected: _currentIndex == index,
                       onTap: () => _onTabTapped(index),
                     );
