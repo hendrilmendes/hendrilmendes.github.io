@@ -172,5 +172,4 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE.md) para
 - [LinkedIn](https://linkedin.com/in/hendril-mendes)  
 - [GitHub](https://github.com/hendrilmendes)  
 - **E-mail:** hendrilmendes2015@gmail.com
-```
 
