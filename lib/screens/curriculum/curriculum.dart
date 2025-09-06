@@ -1,8 +1,8 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
-import 'dart:typed_data';
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:folio/configs/app_theme.dart';
 import 'package:folio/data/curriculum_data.dart';
@@ -107,29 +107,29 @@ class _CurriculumContent extends StatelessWidget {
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Formação Acadêmica'),
         const SizedBox(height: 16),
-        const _BulletList(items: CurriculumData.formacao),
+        _BulletList(items: CurriculumData.formacao),
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Experiência Profissional'),
         const SizedBox(height: 16),
-        const _BulletListWithSub(items: CurriculumData.experiencia),
+        _BulletListWithSub(items: CurriculumData.experiencia),
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Cursos e Certificações'),
         const SizedBox(height: 16),
-        const _BulletList(items: CurriculumData.cursos),
+        _BulletList(items: CurriculumData.cursos),
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Habilidades Técnicas'),
         const SizedBox(height: 16),
-        const _CategorizedSkills(skillsMap: CurriculumData.habilidades),
+        _CategorizedSkills(skillsMap: CurriculumData.habilidades),
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Idiomas'),
         const SizedBox(height: 16),
-        const _BulletList(items: CurriculumData.idiomas),
+        _BulletList(items: CurriculumData.idiomas),
         const SizedBox(height: 30),
         const _SectionTitle(title: 'Informações Adicionais'),
         const SizedBox(height: 16),
-        const Text(
+        Text(
           CurriculumData.infoAdicional,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 16,
             height: 1.6,
             color: AppTheme.cSecondary,
@@ -158,10 +158,10 @@ class _CurriculumContent extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 5),
-        const Text(
+        Text(
           CurriculumData.titulo,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w300,
             color: AppTheme.cSecondary,
@@ -402,15 +402,33 @@ class CurriculumOptionButton extends StatelessWidget {
                     ),
                     onTap: () async {
                       Navigator.of(dialogContext).pop();
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Gerando PDF...')),
-                      );
-                      final pdfBytes = await _generatePdf(pw.PdfPageFormat.a4);
-                      ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                      await Printing.sharePdf(
-                        bytes: pdfBytes,
-                        filename: 'curriculo_hendril_mendes.pdf',
-                      );
+                      final messenger = ScaffoldMessenger.of(context);
+
+                      try {
+                        messenger.showSnackBar(
+                          const SnackBar(content: Text('Gerando PDF...')),
+                        );
+
+                        final pdfBytes = await _generatePdf(
+                          pw.PdfPageFormat.a4,
+                        );
+
+                        messenger.hideCurrentSnackBar();
+
+                        await Printing.sharePdf(
+                          bytes: pdfBytes,
+                          filename: 'curriculo_hendril_mendes.pdf',
+                        );
+                      } catch (e) {
+                        messenger.hideCurrentSnackBar();
+                        messenger.showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 10),
+                            backgroundColor: Colors.red.shade800,
+                            content: Text('ERRO AO GERAR PDF: $e'),
+                          ),
+                        );
+                      }
                     },
                   ),
                   const Divider(color: Colors.white24, height: 1),
@@ -425,9 +443,19 @@ class CurriculumOptionButton extends StatelessWidget {
                     ),
                     onTap: () async {
                       Navigator.of(dialogContext).pop();
-                      await Printing.layoutPdf(
-                        onLayout: (format) => _generatePdf(format),
-                      );
+                      try {
+                        await Printing.layoutPdf(
+                          onLayout: (format) => _generatePdf(format),
+                        );
+                      } catch (e) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            duration: const Duration(seconds: 10),
+                            backgroundColor: Colors.red.shade800,
+                            content: Text('ERRO AO IMPRIMIR: $e'),
+                          ),
+                        );
+                      }
                     },
                   ),
                 ],
@@ -440,213 +468,328 @@ class CurriculumOptionButton extends StatelessWidget {
   }
 }
 
+const pw.PdfColor darkColor = pw.PdfColor.fromInt(0xFF2C3E50);
+const pw.PdfColor lightColor = pw.PdfColor.fromInt(0xFFFFFFFF);
+const pw.PdfColor accentColor = pw.PdfColor.fromInt(0xFF3498DB);
+const pw.PdfColor textColor = pw.PdfColor.fromInt(0xFF34495E);
+const pw.PdfColor lightTextColor = pw.PdfColor.fromInt(0xFFBDC3C7);
+
+const double _leftColumnWidth = 180.0;
+
 Future<Uint8List> _generatePdf(pw.PdfPageFormat format) async {
-  final pdf = pw.Document();
+  final pdf = pw.Document(version: pw.PdfVersion.pdf_1_5, compress: true);
+
+  final profileImageBytes = await rootBundle.load('assets/profile.jpeg');
+  final profileImage = pw.MemoryImage(profileImageBytes.buffer.asUint8List());
+  final font = await PdfGoogleFonts.openSansRegular();
+  final boldFont = await PdfGoogleFonts.openSansBold();
+
   pdf.addPage(
     pw.MultiPage(
-      pageFormat: format,
-      theme: pw.ThemeData.withFont(
-        base: await PdfGoogleFonts.openSansRegular(),
-        bold: await PdfGoogleFonts.openSansBold(),
+      pageTheme: pw.PageTheme(
+        pageFormat: format,
+        margin: pw.EdgeInsets.zero,
+        theme: pw.ThemeData.withFont(base: font, bold: boldFont),
+        buildBackground: (context) {
+          return pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              // Este é o conteúdo que antes estava no `header`
+              _buildLeftColumnContent(profileImage),
+              // Deixa o resto da página com fundo branco
+              pw.Expanded(child: pw.Container(color: pw.PdfColors.white)),
+            ],
+          );
+        },
       ),
-      build: (pw.Context context) {
-        return [
-          _buildPdfHeader(),
-          pw.SizedBox(height: 20),
-          _buildPdfSectionTitle('Contato'),
-          _buildPdfContactInfo(),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Resumo Profissional'),
-          _buildPdfParagraph(CurriculumData.resumoProfissional),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Formação Acadêmica'),
-          _buildPdfBulletList(CurriculumData.formacao),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Experiência Profissional'),
-          _buildPdfBulletListWithSub(CurriculumData.experiencia),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Cursos e Certificações'),
-          _buildPdfBulletList(CurriculumData.cursos),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Habilidades Técnicas'),
-          _buildPdfCategorizedSkills(CurriculumData.habilidades),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Idiomas'),
-          _buildPdfBulletList(CurriculumData.idiomas),
-          pw.SizedBox(height: 15),
-          _buildPdfSectionTitle('Informações Adicionais'),
-          _buildPdfParagraph(CurriculumData.infoAdicional),
-        ];
-      },
+
+      build: (context) => [
+        pw.Padding(
+          padding: const pw.EdgeInsets.only(
+            left: _leftColumnWidth + 30,
+            right: 30,
+            top: 40,
+            bottom: 40,
+          ),
+          child: pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: _buildRightColumnContent(),
+          ),
+        ),
+      ],
     ),
   );
+
   return pdf.save();
 }
 
-pw.Widget _buildPdfHeader() {
+pw.Widget _buildLeftColumnContent(pw.MemoryImage profileImage) {
   return pw.Container(
-    width: double.infinity,
-    padding: const pw.EdgeInsets.symmetric(vertical: 20),
+    width: _leftColumnWidth,
+    height: pw.PdfPageFormat.a4.height,
+    color: darkColor,
+    padding: const pw.EdgeInsets.all(20),
     child: pw.Column(
-      crossAxisAlignment: pw.CrossAxisAlignment.center,
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
       children: [
-        pw.Text(
-          CurriculumData.nome,
-          style: pw.TextStyle(fontSize: 28, fontWeight: pw.FontWeight.bold),
+        pw.Center(
+          child: pw.ClipOval(
+            child: pw.Container(
+              width: 120,
+              height: 120,
+              child: pw.Image(profileImage, fit: pw.BoxFit.cover),
+            ),
+          ),
         ),
-        pw.SizedBox(height: 5),
-        pw.Text(
-          CurriculumData.titulo,
-          textAlign: pw.TextAlign.center,
-          style: pw.TextStyle(fontSize: 16),
+        pw.SizedBox(height: 30),
+
+        _buildSectionTitleLeft('CONTATO'),
+        ...CurriculumData.contato.entries.map(
+          (e) => _buildContactRow(e.key, e.value),
+        ),
+        pw.SizedBox(height: 20),
+
+        _buildSectionTitleLeft('IDIOMAS'),
+        ...CurriculumData.idiomas.map(
+          (lang) => pw.Padding(
+            padding: const pw.EdgeInsets.only(bottom: 5),
+            child: pw.Text(
+              lang,
+              style: const pw.TextStyle(color: lightTextColor, fontSize: 10),
+            ),
+          ),
         ),
       ],
     ),
   );
 }
 
-pw.Widget _buildPdfSectionTitle(String title) {
+List<pw.Widget> _buildRightColumnContent() {
+  return [
+    pw.Text(
+      CurriculumData.nome,
+      style: pw.TextStyle(
+        fontWeight: pw.FontWeight.bold,
+        fontSize: 28,
+        color: darkColor,
+      ),
+    ),
+    pw.SizedBox(height: 4),
+    pw.Text(
+      CurriculumData.titulo,
+      style: pw.TextStyle(
+        fontSize: 16,
+        color: textColor,
+        fontStyle: pw.FontStyle.italic,
+      ),
+    ),
+    pw.SizedBox(height: 30),
+
+    _buildSectionTitleRight('RESUMO PROFISSIONAL'),
+    pw.Text(
+      '${CurriculumData.resumoProfissional}\n\n${CurriculumData.infoAdicional}',
+      textAlign: pw.TextAlign.justify,
+      style: const pw.TextStyle(
+        fontSize: 10,
+        color: textColor,
+        lineSpacing: 2.5,
+      ),
+    ),
+    pw.SizedBox(height: 25),
+
+    _buildSectionTitleRight('EXPERIÊNCIA PROFISSIONAL'),
+    ...CurriculumData.experiencia.map((e) => _buildExperienceItem(e)),
+    pw.SizedBox(height: 25),
+
+    _buildSectionTitleRight('HABILIDADES TÉCNICAS'),
+    ...CurriculumData.habilidades.entries.map(
+      (e) => _buildSkillCategoryRight(e.key, e.value),
+    ),
+    pw.SizedBox(height: 25),
+
+    _buildSectionTitleRight('FORMAÇÃO ACADÊMICA'),
+    ...CurriculumData.formacao.map((e) => _buildEducationItem(e)),
+    pw.SizedBox(height: 25),
+
+    _buildSectionTitleRight('CURSOS E CERTIFICAÇÕES'),
+    ...CurriculumData.cursos.map((e) => _buildCourseItem(e)),
+  ];
+}
+
+pw.Widget _buildSectionTitleLeft(String title) {
   return pw.Column(
     crossAxisAlignment: pw.CrossAxisAlignment.start,
     children: [
       pw.Text(
-        title.toUpperCase(),
-        style: pw.TextStyle(fontSize: 16, fontWeight: pw.FontWeight.bold),
+        title,
+        style: pw.TextStyle(
+          color: lightColor,
+          fontWeight: pw.FontWeight.bold,
+          fontSize: 12,
+        ),
       ),
-      pw.Divider(thickness: 1, color: pw.PdfColors.grey800),
-      pw.SizedBox(height: 6),
+      pw.Container(
+        margin: const pw.EdgeInsets.only(top: 4, bottom: 12),
+        height: 2,
+        width: 30,
+        color: accentColor,
+      ),
     ],
   );
 }
 
-pw.Widget _buildPdfContactInfo() {
-  return pw.Column(
-    crossAxisAlignment: pw.CrossAxisAlignment.start,
-    children: CurriculumData.contato.entries.map((entry) {
-      return pw.Padding(
-        padding: const pw.EdgeInsets.only(bottom: 2),
-        child: pw.RichText(
-          text: pw.TextSpan(
-            text: '${entry.key}: ',
-            style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 12),
-            children: [
-              pw.TextSpan(
-                text: entry.value,
-                style: const pw.TextStyle(fontSize: 12),
-              ),
-            ],
+pw.Widget _buildContactRow(String title, String value) {
+  return pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 6),
+    child: pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          title,
+          style: pw.TextStyle(
+            color: lightColor,
+            fontWeight: pw.FontWeight.bold,
+            fontSize: 10,
           ),
         ),
-      );
-    }).toList(),
-  );
-}
-
-pw.Widget _buildPdfParagraph(String text) {
-  return pw.Padding(
-    padding: const pw.EdgeInsets.only(bottom: 10),
-    child: pw.Text(
-      text,
-      style: const pw.TextStyle(fontSize: 12, lineSpacing: 2),
-      textAlign: pw.TextAlign.justify,
+        pw.Text(
+          value,
+          style: const pw.TextStyle(color: lightTextColor, fontSize: 10),
+        ),
+      ],
     ),
   );
 }
 
-pw.Widget _buildPdfBulletList(List<String> items) {
+pw.Widget _buildSectionTitleRight(String title) {
   return pw.Column(
     crossAxisAlignment: pw.CrossAxisAlignment.start,
-    children: items
-        .map(
-          (item) => pw.Row(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            children: [
-              pw.Text(
-                '• ',
-                style: pw.TextStyle(
-                  fontSize: 12,
-                  fontWeight: pw.FontWeight.bold,
-                ),
-              ),
-              pw.Expanded(
-                child: pw.Text(
-                  item,
-                  style: const pw.TextStyle(fontSize: 12, height: 1.5),
-                ),
-              ),
-            ],
-          ),
-        )
-        .toList(),
-  );
-}
-
-pw.Widget _buildPdfBulletListWithSub(List<Map<String, dynamic>> items) {
-  return pw.Column(
-    crossAxisAlignment: pw.CrossAxisAlignment.start,
-    children: items.map((map) {
-      final title = map['title'] as String;
-      final subitems = List<String>.from(map['subitems'] ?? []);
-      return pw.Column(
-        crossAxisAlignment: pw.CrossAxisAlignment.start,
-        children: [
-          pw.Text(
-            title,
-            style: pw.TextStyle(fontSize: 12, fontWeight: pw.FontWeight.bold),
-          ),
-          pw.SizedBox(height: 5),
-          ...subitems.map(
-            (subitem) => pw.Padding(
-              padding: const pw.EdgeInsets.only(left: 15, bottom: 5),
-              child: pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text('– ', style: const pw.TextStyle(fontSize: 12)),
-                  pw.Expanded(
-                    child: pw.Text(
-                      subitem,
-                      style: const pw.TextStyle(fontSize: 12, height: 1.5),
-                      textAlign: pw.TextAlign.justify,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      );
-    }).toList(),
-  );
-}
-
-pw.Widget _buildPdfCategorizedSkills(Map<String, List<String>> skillsMap) {
-  return pw.Column(
-    crossAxisAlignment: pw.CrossAxisAlignment.start,
-    children: skillsMap.entries.map((entry) {
-      return pw.Padding(
-        padding: const pw.EdgeInsets.only(bottom: 6),
-        child: pw.Row(
-          crossAxisAlignment: pw.CrossAxisAlignment.start,
-          children: [
-            pw.SizedBox(
-              width: 140,
-              child: pw.Text(
-                '${entry.key}:',
-                style: pw.TextStyle(
-                  fontWeight: pw.FontWeight.bold,
-                  fontSize: 12,
-                ),
-              ),
-            ),
-            pw.Expanded(
-              child: pw.Text(
-                entry.value.join(' • '),
-                style: const pw.TextStyle(fontSize: 12),
-              ),
-            ),
-          ],
+    children: [
+      pw.Text(
+        title,
+        style: pw.TextStyle(
+          color: darkColor,
+          fontWeight: pw.FontWeight.bold,
+          fontSize: 14,
         ),
-      );
-    }).toList(),
+      ),
+      pw.Container(
+        margin: const pw.EdgeInsets.only(top: 4, bottom: 12),
+        height: 2,
+        width: 40,
+        color: accentColor,
+      ),
+    ],
+  );
+}
+
+pw.Widget _buildExperienceItem(Map<String, dynamic> item) {
+  return pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 15),
+    child: pw.Column(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          item['title'],
+          style: pw.TextStyle(
+            fontWeight: pw.FontWeight.bold,
+            fontSize: 11,
+            color: textColor,
+          ),
+        ),
+        pw.SizedBox(height: 6),
+        ...List<String>.from(item['subitems']).map(
+          (sub) => pw.Padding(
+            padding: const pw.EdgeInsets.only(left: 8, bottom: 3),
+            child: pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              children: [
+                pw.Text(
+                  '• ',
+                  style: const pw.TextStyle(color: accentColor, fontSize: 11),
+                ),
+                pw.Expanded(
+                  child: pw.Text(
+                    sub,
+                    textAlign: pw.TextAlign.justify,
+                    style: const pw.TextStyle(fontSize: 10, color: textColor),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+pw.Widget _buildSkillCategoryRight(String category, List<String> skills) {
+  return pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 10),
+    child: pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.SizedBox(
+          width: 90,
+          child: pw.Text(
+            '$category:',
+            style: pw.TextStyle(
+              fontSize: 10,
+              fontWeight: pw.FontWeight.bold,
+              color: textColor,
+            ),
+          ),
+        ),
+        pw.Expanded(
+          child: pw.Text(
+            skills.join(' • '),
+            style: const pw.TextStyle(fontSize: 10, color: textColor),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+pw.Widget _buildEducationItem(String item) {
+  return pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 5),
+    child: pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          '• ',
+          style: const pw.TextStyle(color: accentColor, fontSize: 11),
+        ),
+        pw.Expanded(
+          child: pw.Text(
+            item,
+            style: const pw.TextStyle(fontSize: 10, color: textColor),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+pw.Widget _buildCourseItem(String item) {
+  return pw.Padding(
+    padding: const pw.EdgeInsets.only(bottom: 5),
+    child: pw.Row(
+      crossAxisAlignment: pw.CrossAxisAlignment.start,
+      children: [
+        pw.Text(
+          '• ',
+          style: const pw.TextStyle(color: accentColor, fontSize: 11),
+        ),
+        pw.Expanded(
+          child: pw.Text(
+            item,
+            style: const pw.TextStyle(fontSize: 10, color: textColor),
+          ),
+        ),
+      ],
+    ),
   );
 }

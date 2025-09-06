@@ -15,7 +15,7 @@ class CurriculumData {
       'Técnico em Informática com mais de 7 anos de experiência consolidada em infraestrutura de redes, hardware e suporte ao cliente. Atualmente com foco em Desenvolvimento de Software, aplicando conhecimentos em Flutter e Dart para criar aplicações mobile. Minha base técnica me proporciona uma visão completa do ciclo de vida de um produto, desde a infraestrutura até a experiência do usuário. Busco uma oportunidade para integrar minhas habilidades e contribuir em projetos de desenvolvimento de software.';
 
   static const List<String> formacao = [
-    'Engenharia da Computação: Universidade Cruzeiro do Sul, Jauru-MT (Em andamento)',
+    'Engenharia de Computação: Universidade Cruzeiro do Sul, Jauru-MT (Em andamento)',
   ];
 
   static const List<Map<String, dynamic>> experiencia = [
