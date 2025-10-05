@@ -72,8 +72,8 @@ class CurriculumData {
   };
 
   static const List<String> idiomas = [
-    'Inglês: Intermediário para leitura técnica e comunicação.',
-    'Espanhol: Intermediário para leitura técnica e comunicação.',
+    'Inglês: Básico para leitura técnica e comunicação.',
+    'Espanhol: Básico para leitura técnica e comunicação.',
   ];
 
   static const String infoAdicional =

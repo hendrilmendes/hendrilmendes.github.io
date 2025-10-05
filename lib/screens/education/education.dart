@@ -7,7 +7,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
 import 'package:folio/widgets/glassmorphic_card.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class EducationScreen extends StatelessWidget {
   const EducationScreen({super.key});
@@ -181,9 +180,7 @@ class EducationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isClickable = education.certificateUrl != null;
     return InkWell(
-      onTap: isClickable ? () => _launchURL(education.certificateUrl!) : null,
       borderRadius: BorderRadius.circular(16),
       hoverColor: Colors.transparent,
       child: GlassmorphicCard(
@@ -213,39 +210,12 @@ class EducationCard extends StatelessWidget {
                 fontSize: 15,
               ),
             ),
-            if (isClickable) ...[
-              const SizedBox(height: 12),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text(
-                    'Ver Certificado',
-                    style: TextStyle(
-                      color: AppTheme.cPrimary,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(
-                    Icons.open_in_new_rounded,
-                    color: AppTheme.cPrimary,
-                    size: 16,
-                  ),
-                ],
-              ),
-            ],
+            const SizedBox(height: 12),
           ],
         ),
       ),
     );
   }
-}
-
-// Funções auxiliares movidas para o final para melhor organização
-Future<void> _launchURL(String url) async {
-  final uri = Uri.parse(url);
-  if (!await launchUrl(uri)) throw 'Não foi possível abrir o link: $url';
 }
 
 IconData _getEducationIcon(String type) {
