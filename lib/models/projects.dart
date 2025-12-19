@@ -20,17 +20,6 @@ class Projeto {
 
 final List<Projeto> projetos = [
   Projeto(
-    titulo: 'Pulse Messenger',
-    descricao:
-        'Um app de mensagens em tempo real com Flutter e Firebase, focando em performance e UI limpa.',
-    imagemUrl:
-        'https://raw.githubusercontent.com/hendrilmendes/Pulse-Messenger/main/assets/img/logo.png',
-    urlProject: 'https://github.com/hendrilmendes/Pulse-Messenger',
-    categoria: 'Redes Sociais',
-    tags: ['Flutter', 'Firebase', 'Realtime Chat', 'UI/UX'],
-    destaque: true,
-  ),
-  Projeto(
     titulo: 'Dashboard ShopTem',
     descricao:
         'Painel administrativo para a plataforma de e-commerce ShopTem, construído com Flutter Web.',
