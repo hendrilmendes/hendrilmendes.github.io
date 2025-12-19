@@ -24,7 +24,7 @@ final List<Projeto> projetos = [
     descricao:
         'Uma rede social com foco em conexões significativas e compartilhamento de momentos especiais, sem qualquer interferência de algoritmos.',
     imagemUrl:
-        'https://redeorbit.com/assets/logo.png',
+        'https://play-lh.googleusercontent.com/mULJQWKJ7KGHGSsG8mdk_dSVFZj0RD2KwOaT6Fo1uShR6vXtko6QCVTe-htGoOygyykN_DlnxSALOM9TckkBmFY=w240-h480-rw',
     urlProject: 'https://redeorbit.com/',
     categoria: 'Redes Sociais',
     tags: ['Flutter', 'API', 'Node.js', 'UI/UX'],
