@@ -20,6 +20,17 @@ class Projeto {
 
 final List<Projeto> projetos = [
   Projeto(
+    titulo: 'Orbit',
+    descricao:
+        'Uma rede social com foco em conexões significativas e compartilhamento de momentos especiais, sem qualquer interferência de algoritmos.',
+    imagemUrl:
+        'https://redeorbit.com/assets/logo.png',
+    urlProject: 'https://redeorbit.com/',
+    categoria: 'Redes Sociais',
+    tags: ['Flutter', 'API', 'Node.js', 'UI/UX'],
+    destaque: true,
+  ),
+  Projeto(
     titulo: 'Dashboard ShopTem',
     descricao:
         'Painel administrativo para a plataforma de e-commerce ShopTem, construído com Flutter Web.',
