@@ -74,26 +74,4 @@ final List<Projeto> projetos = [
     tags: ['Flutter', 'E-commerce', 'Firebase'],
     destaque: false,
   ),
-  Projeto(
-    titulo: 'Calculadora',
-    descricao:
-        'Uma calculadora com design moderno e funcionalidades básicas, ótima para praticar a lógica de UI.',
-    imagemUrl:
-        'https://raw.githubusercontent.com/hendrilmendes/Calculadora/main/assets/img/ic_launcher.png',
-    urlProject: 'https://github.com/hendrilmendes/Calculadora',
-    categoria: 'Ferramentas',
-    tags: ['Flutter', 'Dart', 'UI'],
-    destaque: false,
-  ),
-  Projeto(
-    titulo: 'Wally',
-    descricao:
-        'Um protótipo de assistente virtual para explorar interações de voz e processamento de linguagem.',
-    imagemUrl:
-        'https://raw.githubusercontent.com/hendrilmendes/Wally/main/assets/img/robot_photo.png',
-    urlProject: 'https://github.com/hendrilmendes/Wally',
-    categoria: 'Aplicativos', // Pode ser 'Ferramentas' também
-    tags: ['Flutter', 'IA', 'Assistente Virtual'],
-    destaque: false,
-  ),
 ];
