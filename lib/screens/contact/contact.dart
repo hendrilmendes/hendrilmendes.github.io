@@ -37,7 +37,6 @@ class _ContactScreenState extends State<ContactScreen> {
   Future<void> _sendEmail() async => await _launchURL(
     'mailto:hendrilmendes2015@gmail.com?subject=Contato%20via%20Portfólio&body=Olá,%20Hendril.%0D%0A%0D%0A',
   );
-  Future<void> _makePhoneCall() async => await _launchURL('tel:+5565993611847');
 
   @override
   Widget build(BuildContext context) {
@@ -124,12 +123,6 @@ class _ContactScreenState extends State<ContactScreen> {
           title: 'E-mail',
           subtitle: 'hendrilmendes2015@gmail.com',
           onTap: _sendEmail,
-        ),
-        _ContactInfoCard(
-          icon: Icons.phone_rounded,
-          title: 'Telefone',
-          subtitle: '+55 65 99361-1847',
-          onTap: _makePhoneCall,
         ),
         _ContactInfoCard(
           icon: MdiIcons.github,

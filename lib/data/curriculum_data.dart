@@ -5,7 +5,6 @@ class CurriculumData {
 
   static const Map<String, String> contato = {
     'E-mail': 'hendrilmendes2015@gmail.com',
-    'Telefone': '+55 65 99361-1847',
     'Local': 'Jauru, MT, Brasil',
     'Portfólio': 'hendrilmendes.github.io',
     'LinkedIn': 'linkedin.com/in/hendril-mendes',
@@ -47,18 +46,18 @@ class CurriculumData {
       'JavaScript',
       'HTML',
       'CSS',
-      'SQL'
+      'SQL',
     ],
     'Infraestrutura & Redes': [
       'Administração de Redes',
       'Servidores Windows/Linux',
       'Segurança de Redes',
-      'Diagnóstico de Conectividade'
+      'Diagnóstico de Conectividade',
     ],
     'Hardware & Suporte': [
       'Manutenção e Reparação de Computadores',
       'Diagnóstico de Hardware/Software',
-      'Atendimento ao Cliente e Resolução de Problemas'
+      'Atendimento ao Cliente e Resolução de Problemas',
     ],
     'Ferramentas & Plataformas': [
       'Git',
@@ -66,7 +65,7 @@ class CurriculumData {
       'VMWare',
       'Microsoft Office',
       'Adobe Photoshop',
-      'CorelDraw'
+      'CorelDraw',
     ],
     'Sistemas Operacionais': ['Windows', 'macOS', 'Linux'],
   };
