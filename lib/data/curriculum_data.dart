@@ -11,7 +11,7 @@ class CurriculumData {
   };
 
   static const String resumoProfissional =
-      'Técnico em Informática com mais de 7 anos de experiência consolidada em infraestrutura de redes, hardware e suporte ao cliente. Atualmente com foco em Desenvolvimento de Software, aplicando conhecimentos em Flutter e Dart para criar aplicações mobile. Minha base técnica me proporciona uma visão completa do ciclo de vida de um produto, desde a infraestrutura até a experiência do usuário. Busco uma oportunidade para integrar minhas habilidades e contribuir em projetos de desenvolvimento de software.';
+      'Técnico em Informática com mais de 8 anos de experiência consolidada em infraestrutura de redes, hardware e suporte ao cliente. Atualmente com foco em Desenvolvimento de Software, aplicando conhecimentos em Flutter e Dart para criar aplicações mobile. Minha base técnica me proporciona uma visão completa do ciclo de vida de um produto, desde a infraestrutura até a experiência do usuário. Busco uma oportunidade para integrar minhas habilidades e contribuir em projetos de desenvolvimento de software.';
 
   static const List<String> formacao = [
     'Engenharia de Computação: Universidade Cruzeiro do Sul, Jauru-MT (Em andamento)',
@@ -30,6 +30,7 @@ class CurriculumData {
   ];
 
   static const List<String> cursos = [
+    'Udemy (2026) - Criação de Apps Android/iOS/Web com Flutter - 5 cursos em 1',
     'Startto.dev (2023) - Criação de apps utilizando Flutter.',
     'SENAI (2022) - Tecnologia da Informação e Comunicação.',
     'Microsoft (2022) - HTML, CSS, JavaScript.',

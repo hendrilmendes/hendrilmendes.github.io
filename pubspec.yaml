@@ -6,7 +6,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 2.0.10+20251218
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.12.0
 
 dependencies:
   flutter:
@@ -17,7 +17,7 @@ dependencies:
   flutter_animate: ^4.5.2
 
 # Google Fonts
-  google_fonts: ^6.3.2
+  google_fonts: ^8.2.0
 
 # Google Maps
   google_maps_flutter: ^2.13.1
