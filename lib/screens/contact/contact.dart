@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
 import 'package:folio/widgets/glassmorphic_card.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -16,7 +16,7 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-  final LatLng _location = const LatLng(-15.3391487, -58.8738707);
+
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _messageController = TextEditingController();
@@ -135,76 +135,14 @@ class _ContactScreenState extends State<ContactScreen> {
   }
 
   Widget _buildMapAndFormSection() {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        if (constraints.maxWidth > 950) {
-          return Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Expanded(flex: 2, child: _buildContactForm()),
-              const SizedBox(width: 40),
-              Expanded(flex: 3, child: _buildMapSection()),
-            ],
-          );
-        } else {
-          return Column(
-            children: [
-              _buildContactForm(),
-              const SizedBox(height: 40),
-              _buildMapSection(),
-            ],
-          );
-        }
-      },
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 800),
+        child: _buildContactForm(),
+      ),
     ).animate(delay: 600.ms).fadeIn();
   }
 
-  Widget _buildMapSection() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Text(
-          'Minha Localização',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        const SizedBox(height: 12),
-        Text(
-          'Atualmente baseado em Jauru, Mato Grosso - Brasil',
-          style: TextStyle(color: Colors.grey[400], fontSize: 16),
-        ),
-        const SizedBox(height: 24),
-        GlassmorphicCard(
-          child: AspectRatio(
-            aspectRatio: 16 / 9,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(12),
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: _location,
-                  zoom: 14,
-                ),
-                markers: {
-                  Marker(
-                    markerId: const MarkerId('my_location'),
-                    position: _location,
-                    icon: BitmapDescriptor.defaultMarkerWithHue(
-                      BitmapDescriptor.hueAzure,
-                    ),
-                  ),
-                },
-                zoomControlsEnabled: false,
-                myLocationButtonEnabled: false,
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildContactForm() {
     return GlassmorphicCard(
