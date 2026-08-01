@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use, use_build_context_synchronously
 
+import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
@@ -157,9 +158,26 @@ class _ContactScreenState extends State<ContactScreen> {
 
 
   Widget _buildContactForm() {
-    return GlassmorphicCard(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
+        child: Container(
+          padding: const EdgeInsets.all(28),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            gradient: LinearGradient(
+              colors: [
+                Colors.white.withOpacity(0.1),
+                Colors.white.withOpacity(0.05),
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+            border: Border.all(color: Colors.white.withOpacity(0.2)),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
             'Envie uma Mensagem',
@@ -241,6 +259,8 @@ class _ContactScreenState extends State<ContactScreen> {
             ),
           ),
         ],
+      ),
+        ),
       ),
     );
   }
