@@ -6,41 +6,22 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 2.0.20+20260801
 
 environment:
-  sdk: ^3.8.0
+  sdk: ^3.12.0
 
 dependencies:
   flutter:
     sdk: flutter
 
-# Animations
   animations: ^2.0.11
   flutter_animate: ^4.5.2
-
-# Google Fonts
+  font_awesome_flutter: ^11.0.0
   google_fonts: ^8.2.0
-
-# Google Maps
   google_maps_flutter: ^2.13.1
-
-# Intl
   intl: ^0.20.2
-
-# Material Icons
-  material_design_icons_flutter: 5.0.5955-rc.1
-
-# PDF  
   pdf: ^3.11.3
-
-# Printing  
   printing: ^5.14.2
-
-# Shared Preferences
   shared_preferences: ^2.5.3
-
-# Shimer
   shimmer: ^3.0.0
-
-# Url Launcher
   url_launcher: ^6.3.2
 
 dev_dependencies:

@@ -7,7 +7,7 @@ import 'package:folio/widgets/glassmorphic_card.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContactScreen extends StatefulWidget {
   const ContactScreen({super.key});
@@ -125,7 +125,7 @@ class _ContactScreenState extends State<ContactScreen> {
           onTap: _sendEmail,
         ),
         _ContactInfoCard(
-          icon: MdiIcons.github,
+          icon: FontAwesomeIcons.github,
           title: 'GitHub',
           subtitle: 'github.com/hendrilmendes',
           onTap: () => _launchURL('https://github.com/hendrilmendes'),
@@ -298,7 +298,7 @@ class _ContactScreenState extends State<ContactScreen> {
   Widget _buildGlassTextField({
     required TextEditingController controller,
     required String labelText,
-    required IconData icon,
+    required dynamic icon,
     int maxLines = 1,
     TextInputType? keyboardType,
   }) {
@@ -310,7 +310,7 @@ class _ContactScreenState extends State<ContactScreen> {
       decoration: InputDecoration(
         labelText: labelText,
         labelStyle: const TextStyle(color: Colors.white70),
-        prefixIcon: Icon(icon, color: Colors.white70, size: 20),
+        prefixIcon: FaIcon(icon, color: Colors.white70, size: 20),
         filled: true,
         fillColor: Colors.white.withOpacity(0.1),
         enabledBorder: OutlineInputBorder(
@@ -327,7 +327,7 @@ class _ContactScreenState extends State<ContactScreen> {
 }
 
 class _ContactInfoCard extends StatelessWidget {
-  final IconData icon;
+  final dynamic icon;
   final String title;
   final String subtitle;
   final VoidCallback onTap;
@@ -356,7 +356,7 @@ class _ContactInfoCard extends StatelessWidget {
                   color: Colors.blueAccent.withOpacity(0.2),
                   shape: BoxShape.circle,
                 ),
-                child: Icon(icon, color: Colors.blueAccent, size: 28),
+                child: FaIcon(icon, color: Colors.blueAccent, size: 28),
               ),
               const SizedBox(width: 16),
               Expanded(

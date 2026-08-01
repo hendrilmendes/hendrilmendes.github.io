@@ -6,7 +6,7 @@ import 'package:folio/screens/curriculum/curriculum.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
 import 'package:folio/widgets/glassmorphic_card.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 
@@ -369,19 +369,19 @@ class _HomeScreenState extends State<HomeScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildSocialIcon(MdiIcons.github, 'https://github.com/hendrilmendes'),
+        _buildSocialIcon(FontAwesomeIcons.github, 'https://github.com/hendrilmendes'),
         _buildSocialIcon(
-          MdiIcons.linkedin,
+          FontAwesomeIcons.linkedin,
           'https://linkedin.com/in/hendril-mendes',
         ),
-        _buildSocialIcon(MdiIcons.telegram, 'https://t.me/hendril_mendes'),
+        _buildSocialIcon(FontAwesomeIcons.telegram, 'https://t.me/hendril_mendes'),
       ],
     );
   }
 
-  Widget _buildSocialIcon(IconData icon, String url) {
+  Widget _buildSocialIcon(dynamic icon, String url) {
     return IconButton(
-      icon: Icon(icon),
+      icon: FaIcon(icon),
       color: Colors.grey[400],
       iconSize: 28,
       splashRadius: 25,

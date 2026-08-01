@@ -8,7 +8,7 @@ import 'package:folio/configs/app_theme.dart';
 import 'package:folio/data/curriculum_data.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pdf/pdf.dart' as pw;
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
@@ -376,7 +376,7 @@ class CurriculumOptionButton extends StatelessWidget {
     return IconButton(
       iconSize: 28,
       tooltip: "Opções do Currículo",
-      icon: const Icon(MdiIcons.dotsVertical, color: Colors.white),
+      icon: FaIcon(FontAwesomeIcons.ellipsisVertical, color: Colors.white),
       onPressed: () {
         showDialog(
           context: context,

@@ -12,12 +12,12 @@ import 'package:folio/screens/home/home.dart';
 import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
 import 'package:intl/intl.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class NavigationItem {
   final String label;
-  final IconData icon;
+  final dynamic icon;
   final Widget screen;
 
   const NavigationItem({
@@ -41,27 +41,27 @@ class _DesktopNavigationContainerState
   final List<NavigationItem> _navItems = const [
     NavigationItem(
       label: 'Home',
-      icon: MdiIcons.homeVariant,
+      icon: FontAwesomeIcons.house,
       screen: HomeScreen(),
     ),
     NavigationItem(
       label: 'Formação',
-      icon: MdiIcons.school,
+      icon: FontAwesomeIcons.graduationCap,
       screen: EducationScreen(),
     ),
     NavigationItem(
       label: 'Projetos',
-      icon: MdiIcons.folderStar,
+      icon: FontAwesomeIcons.folderOpen,
       screen: ProjectsScreen(),
     ),
     NavigationItem(
       label: 'Skills',
-      icon: MdiIcons.starCircle,
+      icon: FontAwesomeIcons.star,
       screen: SkillsScreen(),
     ),
     NavigationItem(
       label: 'Contato',
-      icon: MdiIcons.email,
+      icon: FontAwesomeIcons.envelope,
       screen: ContactScreen(),
     ),
   ];
@@ -288,7 +288,7 @@ class _StatusIndicator extends StatelessWidget {
 }
 
 class _NavItem extends StatefulWidget {
-  final IconData icon;
+  final dynamic icon;
   final String label;
   final bool isActive;
   final VoidCallback onTap;
@@ -329,7 +329,7 @@ class _NavItemState extends State<_NavItem> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(
+                  FaIcon(
                     widget.icon,
                     color: widget.isActive
                         ? AppTheme.cPrimary
@@ -379,7 +379,7 @@ class _ClockWidget extends StatelessWidget {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(MdiIcons.clockOutline, color: AppTheme.cSecondary, size: 16),
+            FaIcon(FontAwesomeIcons.clock, color: AppTheme.cSecondary, size: 16),
             const SizedBox(width: 8),
             Text(
               timeString,
@@ -393,7 +393,7 @@ class _ClockWidget extends StatelessWidget {
 }
 
 class _FooterSocialButton extends StatefulWidget {
-  final IconData icon;
+  final dynamic icon;
   final String url;
   const _FooterSocialButton({required this.icon, required this.url});
 
@@ -416,7 +416,7 @@ class _FooterSocialButtonState extends State<_FooterSocialButton> {
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
       child: IconButton(
-        icon: Icon(widget.icon, color: color, size: 20),
+        icon: FaIcon(widget.icon, color: color, size: 20),
         onPressed: () => _launchURL(widget.url),
         splashRadius: 20,
         tooltip: widget.url.contains('github') ? 'GitHub' : 'LinkedIn',

@@ -9,10 +9,10 @@ import 'package:folio/screens/education/education.dart';
 import 'package:folio/screens/home/home.dart';
 import 'package:folio/screens/projects/projects.dart';
 import 'package:folio/screens/skills/skills.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BottomNavItem {
-  final IconData icon;
+  final dynamic icon;
   final String label;
   final Widget screen;
 
@@ -39,29 +39,29 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
   Size _indicatorSize = Size.zero;
   bool _isIndicatorReady = false;
 
-  final List<BottomNavItem> _navigationItems = const [
+  final List<BottomNavItem> _navigationItems = [
     BottomNavItem(
-      icon: MdiIcons.homeVariant,
+      icon: FontAwesomeIcons.house,
       label: 'Home',
       screen: HomeScreen(),
     ),
     BottomNavItem(
-      icon: MdiIcons.school,
+      icon: FontAwesomeIcons.graduationCap,
       label: 'Formação',
       screen: EducationScreen(),
     ),
     BottomNavItem(
-      icon: MdiIcons.folderStar,
+      icon: FontAwesomeIcons.folderOpen,
       label: 'Projetos',
       screen: ProjectsScreen(),
     ),
     BottomNavItem(
-      icon: MdiIcons.starCircle,
+      icon: FontAwesomeIcons.star,
       label: 'Skills',
       screen: SkillsScreen(),
     ),
     BottomNavItem(
-      icon: MdiIcons.email,
+      icon: FontAwesomeIcons.envelope,
       label: 'Contato',
       screen: ContactScreen(),
     ),
@@ -210,7 +210,7 @@ class _BottomNavigationContainerState extends State<BottomNavigationContainer> {
 }
 
 class _NavItem extends StatefulWidget {
-  final IconData icon;
+  final dynamic icon;
   final String label;
   final bool isActive;
   final VoidCallback onTap;
@@ -253,7 +253,7 @@ class _NavItemState extends State<_NavItem> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(
+                FaIcon(
                   widget.icon,
                   color: widget.isActive
                       ? AppTheme.cPrimary
