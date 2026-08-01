@@ -130,6 +130,18 @@ class _ContactScreenState extends State<ContactScreen> {
           subtitle: 'github.com/hendrilmendes',
           onTap: () => _launchURL('https://github.com/hendrilmendes'),
         ),
+        _ContactInfoCard(
+          icon: FontAwesomeIcons.linkedin,
+          title: 'LinkedIn',
+          subtitle: 'linkedin.com/in/hendril-mendes',
+          onTap: () => _launchURL('https://linkedin.com/in/hendril-mendes'),
+        ),
+        _ContactInfoCard(
+          icon: FontAwesomeIcons.telegram,
+          title: 'Telegram',
+          subtitle: 't.me/hendril_mendes',
+          onTap: () => _launchURL('https://t.me/hendril_mendes'),
+        ),
       ],
     ).animate(delay: 400.ms).fadeIn();
   }
