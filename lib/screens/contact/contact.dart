@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use, use_build_context_synchronously
-
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:folio/widgets/animated_particle_background.dart';
 import 'package:folio/widgets/aurora_background.dart';
@@ -17,19 +14,6 @@ class ContactScreen extends StatefulWidget {
 }
 
 class _ContactScreenState extends State<ContactScreen> {
-
-  final _nameController = TextEditingController();
-  final _emailController = TextEditingController();
-  final _messageController = TextEditingController();
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    _emailController.dispose();
-    _messageController.dispose();
-    super.dispose();
-  }
-
   Future<void> _launchURL(String url) async {
     final uri = Uri.parse(url);
     if (!await launchUrl(uri)) throw 'Não foi possível abrir a URL: $url';
@@ -56,13 +40,7 @@ class _ContactScreenState extends State<ContactScreen> {
                   child: Center(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 1200),
-                      child: Column(
-                        children: [
-                          _buildContactInfoSection(),
-                          const SizedBox(height: 60),
-                          _buildMapAndFormSection(),
-                        ],
-                      ),
+                      child: Column(children: [_buildContactInfoSection()]),
                     ),
                   ),
                 ),
@@ -146,154 +124,6 @@ class _ContactScreenState extends State<ContactScreen> {
       ],
     ).animate(delay: 400.ms).fadeIn();
   }
-
-  Widget _buildMapAndFormSection() {
-    return Center(
-      child: ConstrainedBox(
-        constraints: const BoxConstraints(maxWidth: 800),
-        child: _buildContactForm(),
-      ),
-    ).animate(delay: 600.ms).fadeIn();
-  }
-
-
-  Widget _buildContactForm() {
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(16),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 12.0, sigmaY: 12.0),
-        child: Container(
-          padding: const EdgeInsets.all(28),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(16),
-            gradient: LinearGradient(
-              colors: [
-                Colors.white.withOpacity(0.1),
-                Colors.white.withOpacity(0.05),
-              ],
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-            ),
-            border: Border.all(color: Colors.white.withOpacity(0.2)),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Envie uma Mensagem',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 28,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 24),
-          _buildGlassTextField(
-            controller: _nameController,
-            labelText: 'Seu Nome',
-            icon: Icons.person_outline_rounded,
-          ),
-          const SizedBox(height: 16),
-          _buildGlassTextField(
-            controller: _emailController,
-            labelText: 'Seu E-mail',
-            icon: Icons.email_outlined,
-            keyboardType: TextInputType.emailAddress,
-          ),
-          const SizedBox(height: 16),
-          _buildGlassTextField(
-            controller: _messageController,
-            labelText: 'Sua Mensagem',
-            icon: Icons.message_outlined,
-            maxLines: 4,
-          ),
-          const SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () async {
-                final name = _nameController.text.trim();
-                final email = _emailController.text.trim();
-                final message = _messageController.text.trim();
-
-                if (name.isEmpty || email.isEmpty || message.isEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Por favor, preencha todos os campos.'),
-                    ),
-                  );
-                  return;
-                }
-
-                final Uri emailUri = Uri(
-                  scheme: 'mailto',
-                  path: 'hendrilmendes2015@gmail.com',
-                  query: Uri.encodeFull(
-                    'subject=Contato via app de portfólio'
-                    '&body=Nome: $name\nE-mail: $email\n\nMensagem:\n$message',
-                  ),
-                );
-
-                if (await canLaunchUrl(emailUri)) {
-                  await launchUrl(emailUri);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Não foi possível abrir o app de e-mail.'),
-                    ),
-                  );
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white,
-                backgroundColor: Colors.blueAccent,
-                padding: const EdgeInsets.symmetric(vertical: 20),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: const Text(
-                'Enviar Mensagem',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-          ),
-        ],
-      ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildGlassTextField({
-    required TextEditingController controller,
-    required String labelText,
-    required dynamic icon,
-    int maxLines = 1,
-    TextInputType? keyboardType,
-  }) {
-    return TextField(
-      controller: controller,
-      style: const TextStyle(color: Colors.white),
-      maxLines: maxLines,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        labelText: labelText,
-        labelStyle: const TextStyle(color: Colors.white70),
-        prefixIcon: FaIcon(icon, color: Colors.white70, size: 20),
-        filled: true,
-        fillColor: Colors.white.withOpacity(0.1),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: BorderSide(color: Colors.white.withOpacity(0.2)),
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-          borderSide: const BorderSide(color: Colors.blueAccent),
-        ),
-      ),
-    );
-  }
 }
 
 class _ContactInfoCard extends StatelessWidget {
@@ -323,7 +153,7 @@ class _ContactInfoCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.blueAccent.withOpacity(0.2),
+                  color: Colors.blueAccent.withValues(alpha: 0.2),
                   shape: BoxShape.circle,
                 ),
                 child: FaIcon(icon, color: Colors.blueAccent, size: 28),
